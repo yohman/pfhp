@@ -67,6 +67,16 @@
 			font-family: 'Courier New', Courier, monospace;
 			padding: 5px;
 		}
+		.egoMale {
+			background-color: lightblue;
+			margin: 5px;
+			padding: 5px;
+		}
+		.egoFemale {
+			background-color: lightcoral;
+			margin: 5px;
+			padding: 5px;
+		}
 	</style>
 </head>
 <body>
@@ -159,14 +169,29 @@
 						
 						// make ego a number
 						ego = parseInt(ego);
-						egoHeader.innerHTML = egocounter + '. ' + egoData.nsex + ' <b>' + age + ' years old</b> ('+egoData.birthnac+'~'+egoData.death+': '+deathage+')<br>'+'<span class="lifeline">'+createLifeLine(egoData.birthnac, document.getElementById('yearDropdown').value, egoData.death)+'</span>';
+						// if nsex is M, use male emoji, else use female emoji
+						if (egoData.nsex === 'M') {
+							nsexhtml = '<span class="male">㊚</span>';
+						} else {
+							nsexhtml = '<span class="female">㊛</span>';
+						}
+
+						// lifespan html
+						if (egoData.death === 0) {
+							lifespanhtml = 'death year unknown';
+						} else {
+							lifespanhtml = egoData.birthnac + '~' + egoData.death+': '+deathage;
+						}
+						
+						egoHeader.innerHTML = egocounter + '. <b>' + nsexhtml + ' ' + age + ' years old</b> ('+lifespanhtml+')<br>'+'<span class="lifeline">'+createLifeLine(egoData.birthnac, document.getElementById('yearDropdown').value, egoData.death)+'</span>';
 
 						egoDiv.appendChild(egoHeader);
 						
 						// if egoData nsex is M, set the color to blue, else set it to red
 						// calculate age by subtracting the dropdown year from the egoData birthnac
 						// append the age to the egoDiv
-						egoDiv.style.backgroundColor = egoData.nsex === 'M' ? 'lightblue' : 'lightcoral';
+						// egoDiv.style.backgroundColor = egoData.nsex === 'M' ? 'lightblue' : 'lightcoral';
+						egoDiv.className = egoData.nsex ===	'M' ? 'egoMale' : 'egoFemale';
 
 						// append the ego to the household
 						householdDiv.appendChild(egoDiv);
