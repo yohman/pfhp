@@ -33,7 +33,7 @@
 			/* align them to the top */
 			vertical-align: top;
 			/* make the divs the same width */
-			width: 40%;
+			width: 45%;
 
 		}
 		.ego {
@@ -49,13 +49,23 @@
 		}
 		.lifeline {
 			font-size: 0.5rem;
+			font-weight:bolder;
 			font-family: 'Courier New', Courier, monospace;
 		}
 		.currentyear {
 			font-size: 0.6rem;
-			font-weight: 1200;
+			font-weight: bolder;
 			font-family: 'Courier New', Courier, monospace;
 			color: red;
+		}
+		#yearDropdown {
+			font-size: 2rem;
+			padding: 7px;
+		}
+		button {
+			font-size: 1.2rem;
+			font-family: 'Courier New', Courier, monospace;
+			padding: 5px;
 		}
 	</style>
 </head>
@@ -63,9 +73,9 @@
 	<h1>Households Visualization</h1>
 
 	<!-- html dropdown for years with previous and next buttons before and after it -->
-	<button id="previousYear">Previous</button>
+	<button id="previousYear">◀︎ prev</button>
 	<select id="yearDropdown"></select>
-	<button id="nextYear">Next</button>
+	<button id="nextYear">next ▶︎</button>
 	
 	<div id="visualization"></div>	
 
@@ -104,7 +114,7 @@
 				villageDiv.className = 'village';
 				// create a header for the village
 				villageHeader = document.createElement('h2');
-				villageHeader.innerHTML = village;
+				villageHeader.innerHTML = 'Village ID: '+village;
 				villageDiv.appendChild(villageHeader);
 				
 				// ----------------------------------------
@@ -126,6 +136,13 @@
 					// ----------------------------------------
 
 					ego = getThirdLevelItems(data, village, household);
+
+					// order the ego by looking up the birthnac
+					ego.sort((a, b) => {
+						return data[village][household][a].birthnac - data[village][household][b].birthnac;
+					});
+
+					egocounter = 1;
 					ego.forEach(ego => {
 						// get the data for the ego
 						egoData = getFourthLevelItems(data, village, household, ego);
@@ -134,12 +151,15 @@
 						// create a div for the ego
 						egoDiv = document.createElement('div');
 						egoDiv.className = 'ego';
+
 						// create a header for the ego
 						egoHeader = document.createElement('h3');
 						age = document.getElementById('yearDropdown').value - egoData.birthnac;
+						deathage=egoData.death-egoData.birthnac;
+						
 						// make ego a number
 						ego = parseInt(ego);
-						egoHeader.innerHTML = ego+1 + '. ' + egoData.nsex + ' ' + age + ' years old'+'<br>'+'<span class="lifeline">'+createLifeLine(egoData.birthnac, document.getElementById('yearDropdown').value, egoData.death)+'</span>';
+						egoHeader.innerHTML = egocounter + '. ' + egoData.nsex + ' <b>' + age + ' years old</b> ('+egoData.birthnac+'~'+egoData.death+': '+deathage+')<br>'+'<span class="lifeline">'+createLifeLine(egoData.birthnac, document.getElementById('yearDropdown').value, egoData.death)+'</span>';
 
 						egoDiv.appendChild(egoHeader);
 						
@@ -150,6 +170,7 @@
 
 						// append the ego to the household
 						householdDiv.appendChild(egoDiv);
+						egocounter++;
 					});
 					
 					// append the household to the village
