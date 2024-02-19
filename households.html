@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Households Visualization</title>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+
+	<style>
+		body {
+			font-family: 'Courier New', Courier, monospace;
+		}
+		/* Add your CSS styles here */
+		.household {
+			/* border: 1px solid black; */
+			background-color: white;
+			margin: 10px;
+			padding: 10px;
+			border-bottom: 1px solid gainsboro;
+			/* add shadow */
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+		}
+		.year {
+			border: 1px solid black;
+			margin: 10px;
+			padding: 10px;
+		}
+		.village {
+			/* border: 1px solid blue; */
+			background-color: #f0f0f0;
+			margin: 10px;
+			padding: 10px;
+			/* make this div as a side-by-side column */
+			display: inline-block;
+			/* align them to the top */
+			vertical-align: top;
+			/* make the divs the same width */
+			width: 40%;
+
+		}
+		.ego {
+			/* border: 1px dashed gray; */
+			margin: 10px;
+			padding: 10px;
+		}
+		h3 {
+			font-size: 0.8rem;
+			font-weight: normal;
+			font-family: 'Courier New', Courier, monospace;
+			margin: 0;
+		}
+		.lifeline {
+			font-size: 0.5rem;
+			font-family: 'Courier New', Courier, monospace;
+		}
+		.currentyear {
+			font-size: 0.6rem;
+			font-weight: 1200;
+			font-family: 'Courier New', Courier, monospace;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<h1>Households Visualization</h1>
+
+	<!-- html dropdown for years with previous and next buttons before and after it -->
+	<button id="previousYear">Previous</button>
+	<select id="yearDropdown"></select>
+	<button id="nextYear">Next</button>
+	
+	<div id="visualization"></div>	
+
+	<script>
+		// Add your JavaScript code here
+		// import data from households.json
+		var masterdata = 'hello';
+		var temp = 'world';
+		d3.json('households.json').then(data => {
+			masterdata = data;
+			// update the dropdown with the years
+			updateDropdown(masterdata);
+			// filter the data by the first year in the dropdown
+			filteredData = filterByYear(masterdata, document.getElementById('yearDropdown').value);
+			// update the visualization with the filtered data
+			updateVisualization(filteredData);
+
+		});
+
+
+		// function that updates the visualization with the data
+		function updateVisualization(data) {
+			// select the visualization div
+			visualization = document.getElementById('visualization');
+			// clear the visualization
+			visualization.innerHTML = '';
+			
+			// ----------------------------------------
+			// villages
+			// ----------------------------------------
+
+			villages = getTopLevelItems(data);
+			villages.forEach(village => {
+				// create a div for the village
+				villageDiv = document.createElement('div');
+				villageDiv.className = 'village';
+				// create a header for the village
+				villageHeader = document.createElement('h2');
+				villageHeader.innerHTML = village;
+				villageDiv.appendChild(villageHeader);
+				
+				// ----------------------------------------
+				// households
+				// ----------------------------------------
+
+				households = getSecondLevelItems(data, village);
+				households.forEach(household => {
+					// create a div for the household
+					householdDiv = document.createElement('div');
+					householdDiv.className = 'household';
+					// create a header for the household
+					householdHeader = document.createElement('h3');
+					householdHeader.innerHTML = household;
+					householdDiv.appendChild(householdHeader);
+
+					// ----------------------------------------
+					// ego
+					// ----------------------------------------
+
+					ego = getThirdLevelItems(data, village, household);
+					ego.forEach(ego => {
+						// get the data for the ego
+						egoData = getFourthLevelItems(data, village, household, ego);
+						console.log(egoData);
+
+						// create a div for the ego
+						egoDiv = document.createElement('div');
+						egoDiv.className = 'ego';
+						// create a header for the ego
+						egoHeader = document.createElement('h3');
+						age = document.getElementById('yearDropdown').value - egoData.birthnac;
+						// make ego a number
+						ego = parseInt(ego);
+						egoHeader.innerHTML = ego+1 + '. ' + egoData.nsex + ' ' + age + ' years old'+'<br>'+'<span class="lifeline">'+createLifeLine(egoData.birthnac, document.getElementById('yearDropdown').value, egoData.death)+'</span>';
+
+						egoDiv.appendChild(egoHeader);
+						
+						// if egoData nsex is M, set the color to blue, else set it to red
+						// calculate age by subtracting the dropdown year from the egoData birthnac
+						// append the age to the egoDiv
+						egoDiv.style.backgroundColor = egoData.nsex === 'M' ? 'lightblue' : 'lightcoral';
+
+						// append the ego to the household
+						householdDiv.appendChild(egoDiv);
+					});
+					
+					// append the household to the village
+					villageDiv.appendChild(householdDiv);
+				});
+				// append the village to the visualization
+				visualization.appendChild(villageDiv);
+			});
+
+		}
+
+		// function that creates a lifeline for the ego
+		function createLifeLine(birthYear, currentYear, deathYear) {
+			let lifeline = '';
+			const lineLength = deathYear - birthYear + 1;
+			for (let i = 0; i < lineLength; i++) {
+				if (i === currentYear - birthYear) {
+					lifeline += '<span class="currentyear">◯</span>'; // Mark current year with 'C'
+				} else if (i === 0 || i === lineLength - 1) {
+					lifeline += '|'; // Mark birth and death years with '|'
+				} else {
+					lifeline += '-'; // Mark other years with '-'
+				}
+			}
+			lifeline += '\n';
+			return lifeline;
+		}
+		
+		
+		
+
+		// function that updates the dropdown with the years
+		function updateDropdown(data) {
+			// get the years from the data
+			years = getTopLevelItems(data);
+			// select the dropdown
+			dropdown = document.getElementById('yearDropdown');
+			// add the years to the dropdown
+			years.forEach(year => {
+				option = document.createElement('option');
+				option.value = year;
+				option.text = year;
+				dropdown.appendChild(option);
+			});
+			// add an event listener to the dropdown
+			dropdown.addEventListener('change', function() {
+				// filter the data by the selected year
+				filteredData = filterByYear(masterdata, this.value);
+				// update the visualization with the filtered data
+				updateVisualization(filteredData);
+			});
+			// add an event listener to the previous button
+			document.getElementById('previousYear').addEventListener('click', function() {
+				// get the index of the current year in the dropdown
+				index = years.indexOf(document.getElementById('yearDropdown').value);
+				// if the current year is not the first year
+				if (index > 0) {
+					// set the dropdown to the previous year
+					document.getElementById('yearDropdown').value = years[index - 1];
+					// filter the data by the previous year
+					filteredData = filterByYear(masterdata, document.getElementById('yearDropdown').value);
+					// update the visualization with the filtered data
+					updateVisualization(filteredData);
+				}
+			});
+			// add an event listener to the next button
+			document.getElementById('nextYear').addEventListener('click', function() {
+				// get the index of the current year in the dropdown
+				index = years.indexOf(document.getElementById('yearDropdown').value);
+				// if the current year is not the last year
+				if (index < years.length - 1) {
+					// set the dropdown to the next year
+					document.getElementById('yearDropdown').value = years[index + 1];
+					// filter the data by the next year
+					filteredData = filterByYear(masterdata, document.getElementById('yearDropdown').value);
+					// update the visualization with the filtered data
+					updateVisualization(filteredData);
+				}
+			});
+		}
+
+		// function that filters the data by year
+		function filterByYear(data, year) {
+			return data[year];
+		}
+
+		// function that outputs the items at the top level of the data
+		function getTopLevelItems(data) {
+			return Object.keys(data);
+		}
+
+		// function that outputs the items at the second level of the data
+		function getSecondLevelItems(data, topLevelItem) {
+			return Object.keys(data[topLevelItem]);
+		}
+
+		// function that outputs the items at the third level of the data
+		function getThirdLevelItems(data, topLevelItem, secondLevelItem) {
+			return Object.keys(data[topLevelItem][secondLevelItem]);
+		}
+
+		// function that outputs the items at the fourth level of the data
+		function getFourthLevelItems(data, topLevelItem, secondLevelItem, thirdLevelItem) {
+			return data[topLevelItem][secondLevelItem][thirdLevelItem];
+		}
+		
+
+	</script>
+</body>
+</html>
