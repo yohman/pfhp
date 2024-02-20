@@ -291,7 +291,7 @@ function createEgoCard(egoData, egocounter) {
 	// check if birth_vil is different from vil_id
 	bornhtml = '';
 	if (egoData.birth_vil !== egoData.vil_id) {
-		bornhtml += '<br>born in another village: '+getVillageInfo(egoData.birth_vil);
+		bornhtml += '<br>born in another village: '+getVillageInfo(egoData.birth_vil,egoData.vil_id);
 	}
 	// lifespan html
 	if (egoData.death === 0) {
@@ -356,22 +356,32 @@ function createEgoCard(egoData, egocounter) {
 
 
 // function to look up village information by village id
-function getVillageInfo(vil_id) {
-	console.log('village id: '+vil_id);
+function getVillageInfo(from_vil_id,to_vil_id) {
+	console.log('village id: '+from_vil_id);
 	// find and filter the village data by the village id
-	village =  village_df.find(village_df => village_df.vil_id === vil_id);
-	console.log('village info: '+village);
+	from_village =  village_df.find(village_df => village_df.vil_id === from_vil_id);
+	console.log('village info: '+from_village);
 	// return the village data
-	if (village === undefined) {
+	if (from_village === undefined) {
 		return 'village not found';
 	}
 	else
 	{
-		village_map_url = 'https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+555555('+village.Longitude+','+village.Latitude+')/140.1753,37.4844,8.09,0/300x200?access_token=pk.eyJ1IjoieW9obWFuIiwiYSI6IkxuRThfNFkifQ.u2xRJMiChx914U7mOZMiZw'
+		//if to_vil_id is not defined, return village info
+		if (to_vil_id === undefined) {
+			village_map_url = 'https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+ff0000('+from_village.Longitude+','+from_village.Latitude+')/140.1753,37.4844,7,0/300x200?access_token=pk.eyJ1IjoieW9obWFuIiwiYSI6IkxuRThfNFkifQ.u2xRJMiChx914U7mOZMiZw'
+		} else {
+			//if to_vil_id is defined, return village info with path
+			to_village =  village_df.find(village_df => village_df.vil_id === to_vil_id);
+			if (to_village === undefined) {
+				return 'village not found';
+			}
+			village_map_url = 'https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+ff0000('+to_village.Longitude+','+to_village.Latitude+'),pin-s+555555('+from_village.Longitude+','+from_village.Latitude+')/auto/300x200?access_token=pk.eyJ1IjoieW9obWFuIiwiYSI6IkxuRThfNFkifQ.u2xRJMiChx914U7mOZMiZw'
+		}
 		// village_map_url = 'https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+555555('+village.Longitude+','+village.Latitude+')/137.3574,38.5705,2.78,0/300x200?access_token=pk.eyJ1IjoieW9obWFuIiwiYSI6IkxuRThfNFkifQ.u2xRJMiChx914U7mOZMiZw'
 		// create html img tag with village map url
 		village_map_html = '<img class="map" src="'+village_map_url+'">';
-		return village.Mura+' '+village.Gun+' '+village.Kuni+'<br>'+village_map_html;
+		return from_village.Mura+' '+from_village.Gun+' '+from_village.Kuni+'<br>'+village_map_html;
 	}
 }
 
