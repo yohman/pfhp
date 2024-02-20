@@ -18,6 +18,37 @@ At the core of this complex web of inter-related nodes is the ego itself, which 
 
 In this example, the household has five members spanning three generations, all living under a single roof, a typical housing condition in early modern Japan. The grandparents will live well into their 70's, the head of the household, now 39 years old, married a woman from outside his village, but we know that they would both die before they reach 70. Their only daughter, who is 6 years old, will unfortunately only live to be 11 years old.
 
+Iconography for the ego is defined by the following categorization (in javascript):
+
+```js
+	// icon
+	if (age < 4 && egoData.nsex === 'M') {
+		iconhtml = '<span class="icon">👶🏻</span>';
+	} else if (age < 4 && egoData.nsex === 'F') {
+		iconhtml = '<span class="icon">👶🏻</span>';
+
+	} else if (age >= 4 && age < 15 && egoData.nsex === 'M') {
+		iconhtml = '<span class="icon">👦🏻</span>';
+	} else if (age >= 4 && age < 15 && egoData.nsex === 'F') {
+		iconhtml = '<span class="icon">👧🏻</span>';
+
+	} else if (age >= 15 && age<30 && egoData.nsex === 'M') {
+		iconhtml = '<span class="icon">👨🏻</span>';
+	} else if (age >= 15 && age<30 && egoData.nsex === 'F') {
+		iconhtml = '<span class="icon">🧒🏻</span>';
+
+	} else if (age >= 30 && age<55 && egoData.nsex === 'M') {
+		iconhtml = '<span class="icon">🧔🏻</span>';
+	} else if (age >= 30 && age<55 && egoData.nsex === 'F') {
+		iconhtml = '<span class="icon">👩🏻</span>';
+
+	} else if (age >= 55 && egoData.nsex === 'M') {
+		iconhtml = '<span class="icon">👴🏼</span>';
+	} else if (age >= 55 && egoData.nsex === 'F') {
+		iconhtml = '<span class="icon">👵🏼</span>';
+	}
+```
+
 This, and many more narratives are available to witness via this interactive web platform. In doing so, we discover patterns previously not seen through tabular or other forms of data analysis, as the visual narratives convey the human story in an immersive manner.
 
 [https://yohman.github.io/pfhp/households.html](https://yohman.github.io/pfhp/households.html)
