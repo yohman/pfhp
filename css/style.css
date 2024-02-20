@@ -12,10 +12,15 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 .year {
-    border: 1px solid black;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: #f0f0f0;
     margin: 10px;
     padding: 10px;
+    /* make this div as a side-by-side column */
+    display: inline-block;
+    /* align them to the top */
+    vertical-align: top;
+    /* make the divs the same width */
+    width: 200px;
 }
 .village {
     /* border: 1px solid blue; */

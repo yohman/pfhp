@@ -2,7 +2,7 @@
 // Load the data
 // ----------------------------------------
 
-let ego_df, village_df;
+let ego_df, village_df,current_year;
 function loadData(...files) {
 	// Function to load a JSON file
 	function loadJSON(file) {
@@ -31,8 +31,6 @@ loadData('ego.json', 'village.json')
 		// Do something with the loaded data
 		ego_df = ego;
 		village_df = village;
-		// console.log('ego_df:', ego_df);
-		// console.log('village_df:', village_df);
 		// Perform further actions here
 		updateDropdown(ego_df);
 
@@ -81,44 +79,12 @@ function updateVisualization(data) {
 
 		households = getSecondLevelItems(data, village);
 		households.forEach(household => {
-			// create a div for the household
-			householdDiv = document.createElement('div');
-			householdDiv.className = 'household';
-			// create a header for the household
-			householdHeader = document.createElement('h3');
-			householdHeader.innerHTML = household;
-			householdDiv.appendChild(householdHeader);
+			current_year = document.getElementById('yearDropdown').value
 
-			// ----------------------------------------
-			// ego
-			// ----------------------------------------
+			// create household
+			createHousehold(data,current_year,village, household);
 
-			ego = getThirdLevelItems(data, village, household);
 
-			// order the ego by looking up the birthnac
-			ego.sort((a, b) => {
-				return data[village][household][a].birthnac - data[village][household][b].birthnac;
-			});
-
-			
-			
-			egocounter = 1;
-			// get the data for each ego and put it in an array
-			ego_array = [];
-			ego.forEach(ego => {
-				ego_array.push(getFourthLevelItems(data, village, household, ego));
-			})
-			createGridData(ego_array);
-
-			ego.forEach(ego => {
-				// get the data for the ego
-				egoData = getFourthLevelItems(data, village, household, ego);
-
-				// create a div for the ego
-				createEgoCard(egoData, egocounter);
-				
-				egocounter++;
-			});
 			
 			// append the household to the village
 			villageDiv.appendChild(householdDiv);
@@ -154,7 +120,6 @@ function createLifeLine(birthYear, currentYear, deathYear) {
 // ----------------------------------------
 
 function createGridData(ego) {
-	console.log(ego)
 	gridData = [];
 	
 	
@@ -210,6 +175,9 @@ function updateDropdown(data) {
 		// update the visualization with the filtered data
 		updateVisualization(filteredData);
 	});
+
+	current_year = document.getElementById('yearDropdown').value
+
 	// add an event listener to the previous button
 	document.getElementById('previousYear').addEventListener('click', function() {
 		// get the index of the current year in the dropdown
@@ -269,14 +237,21 @@ function getFourthLevelItems(data, topLevelItem, secondLevelItem, thirdLevelItem
 // ego
 // ----------------------------------------
 
-function createEgoCard(egoData, egocounter) {
+function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = true) {
 	// create a div for the ego
 	egoDiv = document.createElement('div');
 	egoDiv.className = 'ego';
 
 	// create a header for the ego
 	egoHeader = document.createElement('h3');
-	age = document.getElementById('yearDropdown').value - egoData.birthnac;
+
+	// create a variable for the age
+	// if year is not defined, use the dropdown year
+	if (year === undefined) {
+		age = document.getElementById('yearDropdown').value - egoData.birthnac;
+	} else {
+		age = year - egoData.birthnac;
+	}
 	deathage=egoData.death-egoData.birthnac;
 	
 	// make ego a number
@@ -291,40 +266,40 @@ function createEgoCard(egoData, egocounter) {
 	// check if birth_vil is different from vil_id
 	bornhtml = '';
 	if (egoData.birth_vil !== egoData.vil_id) {
-		bornhtml += '<br>born in another village: '+getVillageInfo(egoData.birth_vil,egoData.vil_id);
+		bornhtml += '<br>born in another village: '+getVillageInfo(egoData.birth_vil,egoData.vil_id,show_map);
 	}
 	// lifespan html
 	if (egoData.death === 0) {
 		lifespanhtml = 'death year unknown';
 	} else {
-		lifespanhtml = egoData.birthnac + '~' + egoData.death+' death at '+deathage;
+		lifespanhtml = egoData.birthnac + '~' + egoData.death+' ('+deathage+')';
 	}
 	
 	// rel
 	if (egoData.rel === 1) {
-		relhtml = '<span style="font-size:1.5rem">★</span>';
+		relhtml = '<span style="font-size:1.5rem">★</span><br>';
 	} else if (egoData.rel === 2) {
-		relhtml = 'stem kin';
+		relhtml = '<br>stem kin';
 	} else if (egoData.rel === 3) {
-		relhtml = 'spouse of stem kin';
+		relhtml = '<br>spouse of stem kin';
 	} else if (egoData.rel === 4) {
-		relhtml = 'non-stem kin';
+		relhtml = '<br>non-stem kin';
 	} else if (egoData.rel === 5) {
-		relhtml = 'non kin';
+		relhtml = '<br>non kin';
 	} else if (egoData.rel === 6) {
-		relhtml = 'servant';
+		relhtml = '<br>servant';
 	} else if (egoData.rel === 7) {
-		relhtml = '<span style="font-size:1.5rem;color:red;">★</span>';
+		relhtml = '<span style="font-size:1.5rem;color:red;">★</span><br>';
 	}
 
 	// icon
-	if (age < 15 && egoData.nsex === 'M') {
+	if (age < 18 && egoData.nsex === 'M') {
 		iconhtml = '<span class="icon">👦🏻</span>';
-	} else if (age < 15 && egoData.nsex === 'F') {
+	} else if (age < 18 && egoData.nsex === 'F') {
 		iconhtml = '<span class="icon">👧🏻</span>';
-	} else if (age >= 15 && age<60 && egoData.nsex === 'M') {
+	} else if (age >= 18 && age<60 && egoData.nsex === 'M') {
 		iconhtml = '<span class="icon">🧔🏻</span>';
-	} else if (age >= 15 && age<60 && egoData.nsex === 'F') {
+	} else if (age >= 18 && age<60 && egoData.nsex === 'F') {
 		iconhtml = '<span class="icon">👩🏻</span>';
 	} else if (age >= 60 && egoData.nsex === 'M') {
 		iconhtml = '<span class="icon">👴🏼</span>';
@@ -332,7 +307,14 @@ function createEgoCard(egoData, egocounter) {
 		iconhtml = '<span class="icon">👵🏼</span>';
 	}
 
-	egoHeader.innerHTML = egocounter + '. <b>' + iconhtml + ' ' + age + ' years old</b> '+relhtml+'<br>'+lifespanhtml+'<br>'+bornhtml+'<br><span class="lifeline">'+createLifeLine(egoData.birthnac, document.getElementById('yearDropdown').value, egoData.death)+'</span>';
+	// if lifeline is true, create a lifeline
+	if (show_lifeline) {
+		lifelinehtml = '<br><span class="lifeline">'+createLifeLine(egoData.birthnac, year, egoData.death)+'</span>';
+	} else {
+		lifelinehtml = '';
+	}
+
+	egoHeader.innerHTML = egocounter + '. <b>' + iconhtml + ' ' + age + '歳</b>'+relhtml+'<br>'+lifespanhtml+bornhtml+lifelinehtml;
 
 	// egoHeader.innerHTML = egocounter + '. <b>' + iconhtml + ' ' + age + ' years old</b> '+relhtml+'<br>'+lifespanhtml+'<br>'+egoData.ego+'(ego)<br>'+egoData.father+'(father)'+'<br>'+egoData.mother+'(mother)'+bornhtml+'<br><span class="lifeline">'+createLifeLine(egoData.birthnac, document.getElementById('yearDropdown').value, egoData.death)+'</span>';
 
@@ -352,15 +334,73 @@ function createEgoCard(egoData, egocounter) {
 
 }		
 
+// ----------------------------------------
+// create household
+// ----------------------------------------
 
+function createHousehold(data,current_year,village, household,show_lifeline = true,show_map = true) {
 
+	// console the fed arguments
+	console.log('createHousehold',data,current_year,village, household);
 
-// function to look up village information by village id
-function getVillageInfo(from_vil_id,to_vil_id) {
-	console.log('village id: '+from_vil_id);
+	// create a div for the household
+	householdDiv = document.createElement('div');
+	householdDiv.className = 'household';
+	// create a header for the household
+	householdHeader = document.createElement('h3');
+	
+	// add onclick event to household header to createHouseholdTimeline function
+	householdHeader.onclick = function() {
+		createHouseholdTimeline(village,household);
+	}
+	// change mouse cursor to pointer
+	householdHeader.style.cursor = 'pointer';
+	householdHeader.innerHTML = household + '--▶︎';
+	householdDiv.appendChild(householdHeader);
+
+	// ----------------------------------------
+	// ego
+	// ----------------------------------------
+
+	ego = getThirdLevelItems(data, village, household);
+
+	// order the ego by looking up the birthnac
+	ego.sort((a, b) => {
+		return data[village][household][a].birthnac - data[village][household][b].birthnac;
+	});
+
+	
+	
+	egocounter = 1;
+	// get the data for each ego and put it in an array
+	ego_array = [];
+	ego.forEach(ego => {
+		ego_array.push(getFourthLevelItems(data, village, household, ego));
+	})
+	createGridData(ego_array);
+
+	ego.forEach(ego => {
+		// get the data for the ego
+		egoData = getFourthLevelItems(data, village, household, ego);
+
+		// create a div for the ego
+		createEgoCard(egoData, egocounter,current_year,show_lifeline,show_map);
+		
+		egocounter++;
+	});
+	console.log('householdDiv',householdDiv);
+	return householdDiv;
+}
+
+// ----------------------------------------
+// village
+// ----------------------------------------
+
+function getVillageInfo(from_vil_id,to_vil_id,show_map = true) {
+
 	// find and filter the village data by the village id
 	from_village =  village_df.find(village_df => village_df.vil_id === from_vil_id);
-	console.log('village info: '+from_village);
+
 	// return the village data
 	if (from_village === undefined) {
 		return 'village not found';
@@ -376,12 +416,68 @@ function getVillageInfo(from_vil_id,to_vil_id) {
 			if (to_village === undefined) {
 				return 'village not found';
 			}
-			village_map_url = 'https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+ff0000('+to_village.Longitude+','+to_village.Latitude+'),pin-s+555555('+from_village.Longitude+','+from_village.Latitude+')/auto/300x200?access_token=pk.eyJ1IjoieW9obWFuIiwiYSI6IkxuRThfNFkifQ.u2xRJMiChx914U7mOZMiZw'
+			village_map_url = 'https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+ff0000('+to_village.Longitude+','+to_village.Latitude+'),pin-s+555555('+from_village.Longitude+','+from_village.Latitude+')/auto/100x100?access_token=pk.eyJ1IjoieW9obWFuIiwiYSI6IkxuRThfNFkifQ.u2xRJMiChx914U7mOZMiZw'
 		}
 		// village_map_url = 'https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+555555('+village.Longitude+','+village.Latitude+')/137.3574,38.5705,2.78,0/300x200?access_token=pk.eyJ1IjoieW9obWFuIiwiYSI6IkxuRThfNFkifQ.u2xRJMiChx914U7mOZMiZw'
 		// create html img tag with village map url
-		village_map_html = '<img class="map" src="'+village_map_url+'">';
+		if (show_map) {
+			village_map_html = '<img class="map" src="'+village_map_url+'">';
+		}
+		else
+		{
+			village_map_html = '';
+		}
 		return from_village.Mura+' '+from_village.Gun+' '+from_village.Kuni+'<br>'+village_map_html;
 	}
 }
 
+// ----------------------------------------
+// household timeline
+// ----------------------------------------
+
+function createHouseholdTimeline(vil_id,hhid) {
+
+	const records = [];
+	// create an array of years from the ego data
+	const years = Object.keys(ego_df);
+
+	// select the timeline div
+	const timeline = document.getElementById('visualization');
+	// clear the timeline
+	timeline.innerHTML = '';
+
+	// loop through the years
+	for (const year of years) {
+		
+		
+		// find if ego_df[year][vil_id][hhid] exists, if yes, add it to the records array
+		// first check if the village exists, then check if the household exists
+		if (ego_df[parseInt(year)] && ego_df[parseInt(year)][parseInt(vil_id)] && ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
+			// create a container for the year
+			const yearContainer = document.createElement('div');
+			yearContainer.className = 'year';
+			yearContainer.innerHTML = year;
+			// append the year container to the timeline
+			filteredData = filterByYear(ego_df, year);
+			createHousehold(filteredData,year, vil_id, hhid,false,false);
+
+
+			// append the household to the village
+			yearContainer.appendChild(householdDiv);
+
+			timeline.appendChild(yearContainer);
+			// records.push(ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]);
+		}
+
+
+		// if (ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
+		// 	records.push(ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]);
+		// }
+
+	}
+
+	// create a timeline
+
+	
+	
+}
