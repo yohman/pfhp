@@ -293,17 +293,29 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	}
 
 	// icon
-	if (age < 18 && egoData.nsex === 'M') {
+	if (age < 4 && egoData.nsex === 'M') {
+		iconhtml = '<span class="icon">👶🏻</span>';
+	} else if (age < 4 && egoData.nsex === 'F') {
+		iconhtml = '<span class="icon">👶🏻</span>';
+
+	} else if (age >= 4 && age < 15 && egoData.nsex === 'M') {
 		iconhtml = '<span class="icon">👦🏻</span>';
-	} else if (age < 18 && egoData.nsex === 'F') {
+	} else if (age >= 4 && age < 15 && egoData.nsex === 'F') {
 		iconhtml = '<span class="icon">👧🏻</span>';
-	} else if (age >= 18 && age<60 && egoData.nsex === 'M') {
+
+	} else if (age >= 15 && age<30 && egoData.nsex === 'M') {
+		iconhtml = '<span class="icon">👨🏻</span>';
+	} else if (age >= 15 && age<30 && egoData.nsex === 'F') {
+		iconhtml = '<span class="icon">🧒🏻</span>';
+
+	} else if (age >= 30 && age<55 && egoData.nsex === 'M') {
 		iconhtml = '<span class="icon">🧔🏻</span>';
-	} else if (age >= 18 && age<60 && egoData.nsex === 'F') {
+	} else if (age >= 30 && age<55 && egoData.nsex === 'F') {
 		iconhtml = '<span class="icon">👩🏻</span>';
-	} else if (age >= 60 && egoData.nsex === 'M') {
+
+	} else if (age >= 55 && egoData.nsex === 'M') {
 		iconhtml = '<span class="icon">👴🏼</span>';
-	} else if (age >= 60 && egoData.nsex === 'F') {
+	} else if (age >= 55 && egoData.nsex === 'F') {
 		iconhtml = '<span class="icon">👵🏼</span>';
 	}
 

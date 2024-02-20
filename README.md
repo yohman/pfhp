@@ -18,8 +18,12 @@ At the core of this complex web of inter-related nodes is the ego itself, which 
 
 In this example, the household has five members spanning three generations, all living under a single roof, a typical housing condition in early modern Japan. The grandparents will live well into their 70's, the head of the household, now 39 years old, married a woman from outside his village, but we know that they would both die before they reach 70. Their only daughter, who is 6 years old, will unfortunately only live to be 11 years old.
 
-This, and many, many more narratives, are available to witness via this interactive web platform.
+This, and many more narratives are available to witness via this interactive web platform. In doing so, we discover patterns previously not seen through tabular or other forms of data analysis, as the visual narratives convey the human story in an immersive manner.
 
 [https://yohman.github.io/pfhp/households.html](https://yohman.github.io/pfhp/households.html)
 
 ![alt text](image-5.png)
+
+## Acknowledgements
+
+This project is being developed at the [Population and Family History Center](https://www.pfhp-japan.info/) at [Reitaku University](https://www.reitaku-u.ac.jp/), Japan.
