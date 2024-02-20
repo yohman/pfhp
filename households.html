@@ -20,6 +20,7 @@
 		}
 		.year {
 			border: 1px solid black;
+			font-family: 'Courier New', Courier, monospace;
 			margin: 10px;
 			padding: 10px;
 		}
@@ -59,21 +60,24 @@
 			color: red;
 		}
 		#yearDropdown {
-			font-size: 2rem;
+			font-family: 'Courier New', Courier, monospace;
+			font-weight: bolder;
+			border-color: white;
+			font-size: 4rem;
 			padding: 7px;
 		}
 		button {
-			font-size: 1.2rem;
+			font-size: 1rem;
 			font-family: 'Courier New', Courier, monospace;
 			padding: 5px;
 		}
 		.egoMale {
-			background-color: lightblue;
+			background-color: rgba(173, 216, 230, 0.5);
 			margin: 5px;
 			padding: 5px;
 		}
 		.egoFemale {
-			background-color: lightcoral;
+			background-color: rgba(240, 128, 128, 0.5);
 			margin: 5px;
 			padding: 5px;
 		}
@@ -90,20 +94,66 @@
 	<div id="visualization"></div>	
 
 	<script>
-		// Add your JavaScript code here
-		// import data from households.json
-		var masterdata = 'hello';
-		var temp = 'world';
-		d3.json('households.json').then(data => {
-			masterdata = data;
-			// update the dropdown with the years
-			updateDropdown(masterdata);
-			// filter the data by the first year in the dropdown
-			filteredData = filterByYear(masterdata, document.getElementById('yearDropdown').value);
-			// update the visualization with the filtered data
-			updateVisualization(filteredData);
+		
+// English
+function loadData(...files) {
+    // Function to load a JSON file
+    function loadJSON(file) {
+        return new Promise((resolve, reject) => {
+            fetch(file)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch ${file}: ${response.status} ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => resolve(data))
+                .catch(error => reject(error));
+        });
+    }
 
-		});
+    // Load all JSON files concurrently
+    const promises = files.map(file => loadJSON(file));
+
+    // Wait for all promises to resolve
+    return Promise.all(promises);
+}
+
+let ego_df, village_df;
+
+// Example usage:
+loadData('ego.json', 'village.json')
+    .then(([ego, village]) => {
+        // Do something with the loaded data
+		ego_df = ego;
+		village_df = village;
+        // console.log('ego_df:', ego_df);
+        // console.log('village_df:', village_df);
+        // Perform further actions here
+		updateDropdown(ego_df);
+
+		// filter the data by the first year in the dropdown
+		filteredData = filterByYear(ego_df, document.getElementById('yearDropdown').value);
+
+		// update the visualization with the filtered data
+		updateVisualization(filteredData);
+    })
+    .catch(error => {
+        console.error('Error loading data:', error);
+    });
+
+
+
+		// d3.json('households.json').then(data => {
+		// 	ego_df = data;
+		// 	// update the dropdown with the years
+		// 	updateDropdown(ego_df);
+		// 	// filter the data by the first year in the dropdown
+		// 	filteredData = filterByYear(ego_df, document.getElementById('yearDropdown').value);
+		// 	// update the visualization with the filtered data
+		// 	updateVisualization(filteredData);
+
+		// });
 
 
 		// function that updates the visualization with the data
@@ -116,6 +166,7 @@
 			// ----------------------------------------
 			// villages
 			// ----------------------------------------
+			console.log(village_df)
 
 			villages = getTopLevelItems(data);
 			villages.forEach(village => {
@@ -123,8 +174,15 @@
 				villageDiv = document.createElement('div');
 				villageDiv.className = 'village';
 				// create a header for the village
+				
+				// get the village information
+				
+				console.log(village);
+				village_info = getVillageInfo(parseInt(village));
+				console.log(getVillageInfo(parseInt(village)));
+
 				villageHeader = document.createElement('h2');
-				villageHeader.innerHTML = 'Village ID: '+village;
+				villageHeader.innerHTML = village_info;
 				villageDiv.appendChild(villageHeader);
 				
 				// ----------------------------------------
@@ -156,7 +214,6 @@
 					ego.forEach(ego => {
 						// get the data for the ego
 						egoData = getFourthLevelItems(data, village, household, ego);
-						console.log(egoData);
 
 						// create a div for the ego
 						egoDiv = document.createElement('div');
@@ -176,6 +233,11 @@
 							nsexhtml = '<span class="female">㊛</span>';
 						}
 
+						// check if birth_vil is different from vil_id
+						bornhtml = '';
+						if (egoData.birth_vil !== egoData.vil_id) {
+							bornhtml += '<br>born in another village: '+getVillageInfo(egoData.birth_vil);
+						}
 						// lifespan html
 						if (egoData.death === 0) {
 							lifespanhtml = 'death year unknown';
@@ -183,7 +245,7 @@
 							lifespanhtml = egoData.birthnac + '~' + egoData.death+': '+deathage;
 						}
 						
-						egoHeader.innerHTML = egocounter + '. <b>' + nsexhtml + ' ' + age + ' years old</b> ('+lifespanhtml+')<br>'+'<span class="lifeline">'+createLifeLine(egoData.birthnac, document.getElementById('yearDropdown').value, egoData.death)+'</span>';
+						egoHeader.innerHTML = egocounter + '. <b>' + nsexhtml + ' ' + age + ' years old</b> ('+lifespanhtml+')<br>'+egoData.ego+'(ego)<br>'+egoData.father+'(father)'+'<br>'+egoData.mother+'(mother)'+bornhtml+'<br><span class="lifeline">'+createLifeLine(egoData.birthnac, document.getElementById('yearDropdown').value, egoData.death)+'</span>';
 
 						egoDiv.appendChild(egoHeader);
 						
@@ -243,7 +305,7 @@
 			// add an event listener to the dropdown
 			dropdown.addEventListener('change', function() {
 				// filter the data by the selected year
-				filteredData = filterByYear(masterdata, this.value);
+				filteredData = filterByYear(ego_df, this.value);
 				// update the visualization with the filtered data
 				updateVisualization(filteredData);
 			});
@@ -256,7 +318,7 @@
 					// set the dropdown to the previous year
 					document.getElementById('yearDropdown').value = years[index - 1];
 					// filter the data by the previous year
-					filteredData = filterByYear(masterdata, document.getElementById('yearDropdown').value);
+					filteredData = filterByYear(ego_df, document.getElementById('yearDropdown').value);
 					// update the visualization with the filtered data
 					updateVisualization(filteredData);
 				}
@@ -270,7 +332,7 @@
 					// set the dropdown to the next year
 					document.getElementById('yearDropdown').value = years[index + 1];
 					// filter the data by the next year
-					filteredData = filterByYear(masterdata, document.getElementById('yearDropdown').value);
+					filteredData = filterByYear(ego_df, document.getElementById('yearDropdown').value);
 					// update the visualization with the filtered data
 					updateVisualization(filteredData);
 				}
@@ -301,7 +363,22 @@
 		function getFourthLevelItems(data, topLevelItem, secondLevelItem, thirdLevelItem) {
 			return data[topLevelItem][secondLevelItem][thirdLevelItem];
 		}
-		
+		// function to look up village information by village id
+		function getVillageInfo(vil_id) {
+			console.log('village id: '+vil_id);
+			// find and filter the village data by the village id
+			village =  village_df.find(village_df => village_df.vil_id === vil_id);
+			console.log('village info: '+village);
+			// return the village data
+			if (village === undefined) {
+				return 'village not found';
+			}
+			else
+			{
+				return village.Mura+' '+village.Gun+' '+village.Kuni;
+			}
+		}
+
 
 	</script>
 </body>
