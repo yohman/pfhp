@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Static Map</title>
+<style>
+    #map {
+        width: 800px;
+        height: 600px;
+    }
+</style>
+<script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" />
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+    // Replace with your desired latitude and longitude
+    const latitude = 40.7128;
+    const longitude = -74.0060;
+
+    const map = new maplibregl.Map({
+        container: 'map',
+        style: 'https://tiles.stadiamaps.com/styles/alidade_smooth.json', // You can choose any MapLibre style
+        center: [longitude, latitude],
+        zoom: 10 // Adjust the zoom level as needed
+    });
+</script>
+
+</body>
+</html>

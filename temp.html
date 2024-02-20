@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Grid</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(4, 20px);
+        grid-template-rows: repeat(4, 20px);
+        gap: 5px;
+    }
+
+    .grid-item {
+        width: 20px; /* Width of each cell */
+        height: 20px; /* Height of each cell */
+        text-align: center;
+        font-size: 0.6rem;
+        line-height: 20px; /* Center text vertically */
+    }
+</style>
+</head>
+<body>
+
+<script>
+    function createGrid(gridData) {
+        const gridContainer = document.createElement('div');
+        gridContainer.classList.add('grid-container');
+
+        for (let row = 1; row <= 4; row++) {
+            for (let col = 1; col <= 4; col++) {
+                const cellData = gridData.find(cell => cell.row === row && cell.column === col);
+                const cell = document.createElement('div');
+                cell.classList.add('grid-item');
+                if (cellData) {
+                    cell.style.backgroundColor = cellData.color;
+                    cell.textContent = cellData.label;
+                } else {
+                    cell.style.backgroundColor = 'gainsboro';
+                }
+                cell.style.gridColumn = col;
+                cell.style.gridRow = row;
+                gridContainer.appendChild(cell);
+            }
+        }
+
+        return gridContainer;
+    }
+
+    // // Example usage
+    const gridData2 = [
+        { row: '1', column: 1, color: 'red', label: 'A1' },
+        { row: 2, column: 2, color: 'blue', label: 'B1' },
+        { row: '1', column: '3', color: 'green', label: 'C1' },
+        // Add more cells as needed
+    ];
+
+    // // const gridData2 = [];
+    // console.log(gridData2); // Output the generated grid data
+    // const gridContainer = createGrid(gridData2);
+    // const gridContainer2 = createGrid(gridData2);
+    // document.body.appendChild(gridContainer);
+
+    // document.body.appendChild(gridContainer2);    
+
+
+function createGridData(egos) {
+    const gridData = [];
+
+    // Find existing child-parent relationships
+    const childParentMap = new Map();
+    egos.forEach(ego => {
+        if (ego.mother && ego.father) {
+            childParentMap.set(ego.ego, [ego.mother, ego.father]);
+        }
+    });
+    console.log(childParentMap);
+    // Create gridData based on child-parent relationships
+    childParentMap.forEach((parents, child) => {
+        const [mother, father] = parents;
+        // Check if grandparents exist
+        const grandparents = [];
+        egos.forEach(ego => {
+            if (ego.ego !== mother && ego.ego !== father && ego.mother === mother && ego.father === father) {
+                grandparents.push(ego.ego);
+            }
+        });
+
+        // Add grandparents to gridData if they exist
+        if (grandparents.length > 0) {
+            grandparents.forEach((grandparent, index) => {
+                gridData.push({ row: 1, column: index + 1, color: index % 2 === 0 ? 'red' : 'blue', label: grandparent });
+            });
+        } else {
+            // Add parents to gridData if grandparents don't exist
+            gridData.push({ row: 1, column: 1, color: 'red', label: mother });
+            gridData.push({ row: 1, column: 2, color: 'blue', label: father });
+        }
+
+        // Add child to gridData
+        gridData.push({ row: 2, column: 1, color: 'gainsboro', label: child });
+    });
+
+    return gridData;
+}
+
+// Example usage
+const egos = [
+    { ego: 'Child1', mother: 'Mother2', father: 'Father2' },
+    { ego: 'Child2', mother: 'Mother2', father: 'Father2' },
+    { ego: 'Mother2', mother: 'Mother3', father: 'Father3' }, // Add more egos as needed
+    { ego: 'Father2', mother: 'Mother4', father: 'Father4' },
+    // Add more egos as needed
+];
+
+const gridData = createGridData(egos);
+console.log(gridData); // Output the generated grid data
+document.body.appendChild(createGrid(gridData));
+
+</script>
+</body>
+</html>
