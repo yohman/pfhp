@@ -61,22 +61,12 @@ h3 {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bolder;
     border-color: white;
-    font-size: 4rem;
+    font-size: 2rem;
     padding: 7px;
 }
 button {
-    font-size: 1rem;
+    font-size: 0.6rem;
     font-family: 'Courier New', Courier, monospace;
-    padding: 5px;
-}
-.egoMale {
-    background-color: rgba(173, 216, 230, 0.5);
-    margin: 5px;
-    padding: 5px;
-}
-.egoFemale {
-    background-color: rgba(240, 128, 128, 0.5);
-    margin: 5px;
     padding: 5px;
 }
 .grid-container {
@@ -103,4 +93,51 @@ line-height: 20px; /* Center text vertically */
     background-color: white;
     margin: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.container {
+    width: 100%; /* Adjust as needed */
+    overflow-x: auto;
+    white-space: nowrap; /* Prevent wrapping */
+  }
+
+.mini-year {
+    background-color: #f0f0f0;
+    display: inline-block;
+    vertical-align: top;
+    margin:0px;
+    border:1px solid white;
+    font-size: 0.6rem;
+}
+.mini-year-current {
+    background-color: #ff0000;
+    display: inline-block;
+    vertical-align: top;
+    margin:0px;
+    border:2px solid red;
+    font-size: 0.6rem;
+}
+
+.mini-egoMale {
+    background-color: rgba(173, 216, 230, 1);
+    margin: 0px;
+    width:3px;
+    height:3px;
+    /* padding: 1px; */
+}
+.mini-egoFemale {
+    background-color: rgba(240, 128, 128, 1);
+    margin: 0px;
+    width:3px;
+    height:3px;
+    /* padding: 1px; */
+}
+.egoMale {
+    background-color: rgba(173, 216, 230, 0.5);
+    margin: 5px;
+    padding: 5px;
+}
+.egoFemale {
+    background-color: rgba(240, 128, 128, 0.5);
+    margin: 5px;
+    padding: 5px;
 }

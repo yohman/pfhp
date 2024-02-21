@@ -3,125 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dynamic Grid</title>
+<title>Connect Divs with Line</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
+  .box {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    position: absolute;
+  }
 
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(4, 20px);
-        grid-template-rows: repeat(4, 20px);
-        gap: 5px;
-    }
+  #div1 {
+    top: 50px;
+    left: 50px;
+  }
 
-    .grid-item {
-        width: 20px; /* Width of each cell */
-        height: 20px; /* Height of each cell */
-        text-align: center;
-        font-size: 0.6rem;
-        line-height: 20px; /* Center text vertically */
-    }
+  #div2 {
+    top: 200px;
+    left: 200px;
+  }
+
+  #line {
+    position: absolute;
+    stroke: black; /* color of the line */
+    stroke-width: 2px; /* thickness of the line */
+  }
 </style>
 </head>
 <body>
-
+<div id="div1" class="box"></div>
+<div id="div2" class="box"></div>
+<svg id="line"></svg>
 <script>
-    function createGrid(gridData) {
-        const gridContainer = document.createElement('div');
-        gridContainer.classList.add('grid-container');
+  const div1 = document.getElementById('div1');
+  const div2 = document.getElementById('div2');
+  const line = document.getElementById('line');
 
-        for (let row = 1; row <= 4; row++) {
-            for (let col = 1; col <= 4; col++) {
-                const cellData = gridData.find(cell => cell.row === row && cell.column === col);
-                const cell = document.createElement('div');
-                cell.classList.add('grid-item');
-                if (cellData) {
-                    cell.style.backgroundColor = cellData.color;
-                    cell.textContent = cellData.label;
-                } else {
-                    cell.style.backgroundColor = 'gainsboro';
-                }
-                cell.style.gridColumn = col;
-                cell.style.gridRow = row;
-                gridContainer.appendChild(cell);
-            }
-        }
+  function connectDivs() {
+    const rect1 = div1.getBoundingClientRect();
+    const rect2 = div2.getBoundingClientRect();
+    
+    const x1 = rect1.left + rect1.width / 2;
+    const y1 = rect1.top + rect1.height / 2;
+    const x2 = rect2.left + rect2.width / 2;
+    const y2 = rect2.top + rect2.height / 2;
+    
+    const length = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+    const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+    
+    line.innerHTML = `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" style="stroke:black; stroke-width:2" />`;
+  }
 
-        return gridContainer;
-    }
-
-    // // Example usage
-    const gridData2 = [
-        { row: '1', column: 1, color: 'red', label: 'A1' },
-        { row: 2, column: 2, color: 'blue', label: 'B1' },
-        { row: '1', column: '3', color: 'green', label: 'C1' },
-        // Add more cells as needed
-    ];
-
-    // // const gridData2 = [];
-    // console.log(gridData2); // Output the generated grid data
-    // const gridContainer = createGrid(gridData2);
-    // const gridContainer2 = createGrid(gridData2);
-    // document.body.appendChild(gridContainer);
-
-    // document.body.appendChild(gridContainer2);    
-
-
-function createGridData(egos) {
-    const gridData = [];
-
-    // Find existing child-parent relationships
-    const childParentMap = new Map();
-    egos.forEach(ego => {
-        if (ego.mother && ego.father) {
-            childParentMap.set(ego.ego, [ego.mother, ego.father]);
-        }
-    });
-    console.log(childParentMap);
-    // Create gridData based on child-parent relationships
-    childParentMap.forEach((parents, child) => {
-        const [mother, father] = parents;
-        // Check if grandparents exist
-        const grandparents = [];
-        egos.forEach(ego => {
-            if (ego.ego !== mother && ego.ego !== father && ego.mother === mother && ego.father === father) {
-                grandparents.push(ego.ego);
-            }
-        });
-
-        // Add grandparents to gridData if they exist
-        if (grandparents.length > 0) {
-            grandparents.forEach((grandparent, index) => {
-                gridData.push({ row: 1, column: index + 1, color: index % 2 === 0 ? 'red' : 'blue', label: grandparent });
-            });
-        } else {
-            // Add parents to gridData if grandparents don't exist
-            gridData.push({ row: 1, column: 1, color: 'red', label: mother });
-            gridData.push({ row: 1, column: 2, color: 'blue', label: father });
-        }
-
-        // Add child to gridData
-        gridData.push({ row: 2, column: 1, color: 'gainsboro', label: child });
-    });
-
-    return gridData;
-}
-
-// Example usage
-const egos = [
-    { ego: 'Child1', mother: 'Mother2', father: 'Father2' },
-    { ego: 'Child2', mother: 'Mother2', father: 'Father2' },
-    { ego: 'Mother2', mother: 'Mother3', father: 'Father3' }, // Add more egos as needed
-    { ego: 'Father2', mother: 'Mother4', father: 'Father4' },
-    // Add more egos as needed
-];
-
-const gridData = createGridData(egos);
-console.log(gridData); // Output the generated grid data
-document.body.appendChild(createGrid(gridData));
-
+  connectDivs();
+  window.addEventListener('resize', connectDivs);
 </script>
 </body>
 </html>

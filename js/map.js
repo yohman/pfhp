@@ -3,6 +3,26 @@
 // ----------------------------------------
 
 let ego_df, village_df,current_year;
+let show_egos = true;
+
+// toggle the show_egos to true if checkbox is checked and false if unchecked
+document.getElementById('showEgos').addEventListener('change', function() {
+	// if it is checked, set show_egos to true
+	if (this.checked) {
+		show_egos = true;
+	}
+	// if it is unchecked, set show_egos to false
+	else {
+		show_egos = false;
+	}
+	// filter the data by the first year in the dropdown
+	filteredData = filterByYear(ego_df, document.getElementById('yearDropdown').value);
+	// update the visualization with the filtered data
+	updateVisualization(filteredData);
+
+});
+
+
 function loadData(...files) {
 	// Function to load a JSON file
 	function loadJSON(file) {
@@ -83,8 +103,6 @@ function updateVisualization(data) {
 
 			// create household
 			createHousehold(data,current_year,village, household);
-
-
 			
 			// append the household to the village
 			villageDiv.appendChild(householdDiv);
@@ -157,8 +175,10 @@ function createGrid(gridData) {
 // ----------------------------------------
 
 function updateDropdown(data) {
+
 	// get the years from the data
 	years = getTopLevelItems(data);
+
 	// select the dropdown
 	dropdown = document.getElementById('yearDropdown');
 	// add the years to the dropdown
@@ -170,6 +190,8 @@ function updateDropdown(data) {
 	});
 	// add an event listener to the dropdown
 	dropdown.addEventListener('change', function() {
+		// removeMiniTimeline
+		removeDivByClass('.minitimeline');
 		// filter the data by the selected year
 		filteredData = filterByYear(ego_df, this.value);
 		// update the visualization with the filtered data
@@ -180,6 +202,9 @@ function updateDropdown(data) {
 
 	// add an event listener to the previous button
 	document.getElementById('previousYear').addEventListener('click', function() {
+		// removeMiniTimeline
+		removeDivByClass('.minitimeline');
+
 		// get the index of the current year in the dropdown
 		index = years.indexOf(document.getElementById('yearDropdown').value);
 		// if the current year is not the first year
@@ -194,6 +219,10 @@ function updateDropdown(data) {
 	});
 	// add an event listener to the next button
 	document.getElementById('nextYear').addEventListener('click', function() {
+		
+		// removeMiniTimeline
+		removeDivByClass('.minitimeline');
+
 		// get the index of the current year in the dropdown
 		index = years.indexOf(document.getElementById('yearDropdown').value);
 		// if the current year is not the last year
@@ -207,6 +236,15 @@ function updateDropdown(data) {
 		}
 	});
 }
+
+function removeDivByClass(classname) {
+	const elementToRemove = document.querySelector(classname);
+	if (elementToRemove) {
+	  elementToRemove.remove();
+	} else {
+	  alert('No element found with the class name ', classname);
+	}
+  }
 
 // function that filters the data by year
 function filterByYear(data, year) {
@@ -346,14 +384,49 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 
 }		
 
+function createMiniEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = true) {
+	// create a div for the ego
+	egoDiv = document.createElement('div');
+	egoDiv.className = 'mini-ego';
+
+	if (year === undefined) {
+		age = document.getElementById('yearDropdown').value - egoData.birthnac;
+	} else {
+		age = year - egoData.birthnac;
+	}
+
+	// check if birth_vil is different from vil_id
+	bornhtml = '';
+	if (egoData.birth_vil !== egoData.vil_id) {
+		bornhtml += '<br>born in another village: '+getVillageInfo(egoData.birth_vil,egoData.vil_id,show_map);
+	}
+	
+	// rel
+	if (egoData.rel === 1) {
+		relhtml = '<span style="font-size:0.3rem">★</span><br>';
+	} else if (egoData.rel === 7) {
+		relhtml = '<span style="font-size:0.3rem;color:red;">★</span><br>';
+	} else {
+		relhtml = ' ';
+	}
+
+	// egoDiv.innerHTML = relhtml;
+
+	egoDiv.className = egoData.nsex ===	'M' ? 'mini-egoMale' : 'mini-egoFemale';
+
+	// append the ego to the household
+	minihouseholdDiv.appendChild(egoDiv);		
+	
+	// return the ego div
+	return egoDiv;
+
+}		
+
 // ----------------------------------------
 // create household
 // ----------------------------------------
 
-function createHousehold(data,current_year,village, household,show_lifeline = true,show_map = true) {
-
-	// console the fed arguments
-	console.log('createHousehold',data,current_year,village, household);
+function createHousehold(data,current_year,village, household,show_lifeline = true,show_map = true,show_minitimeline = true) {
 
 	// create a div for the household
 	householdDiv = document.createElement('div');
@@ -365,10 +438,64 @@ function createHousehold(data,current_year,village, household,show_lifeline = tr
 	householdHeader.onclick = function() {
 		createHouseholdTimeline(village,household);
 	}
-	// change mouse cursor to pointer
 	householdHeader.style.cursor = 'pointer';
 	householdHeader.innerHTML = household + '--▶︎';
 	householdDiv.appendChild(householdHeader);
+
+	// add mini timeline to household
+	if (show_minitimeline) {
+		miniContainerDiv = document.createElement('div');
+		miniContainerDiv.className = 'mini-timeline';
+		miniContainerDiv.appendChild(createHouseholdMiniTimeline(village,household));
+		miniContainerDiv.style.cursor = 'pointer';
+		miniContainerDiv.onclick = function() {
+			createHouseholdTimeline(village,household);
+		}
+		householdDiv.appendChild(miniContainerDiv);
+	}
+
+	// householdDiv.appendChild(createHouseholdMiniTimeline(village,household));
+
+	// ----------------------------------------
+	// ego
+	// ----------------------------------------
+
+	if (show_egos) {
+		ego = getThirdLevelItems(data, village, household);
+
+		// order the ego by looking up the birthnac
+		ego.sort((a, b) => {
+			return data[village][household][a].birthnac - data[village][household][b].birthnac;
+		});
+		
+		egocounter = 1;
+		// get the data for each ego and put it in an array
+		ego_array = [];
+		ego.forEach(ego => {
+			ego_array.push(getFourthLevelItems(data, village, household, ego));
+		})
+		createGridData(ego_array);
+
+		ego.forEach(ego => {
+			// get the data for the ego
+			egoData = getFourthLevelItems(data, village, household, ego);
+
+			// create a div for the ego
+			createEgoCard(egoData, egocounter,current_year,show_lifeline,show_map);
+			
+			egocounter++;
+		});
+	}
+	
+	return householdDiv;
+}
+
+
+function createMiniHousehold(data,current_year,village, household,show_lifeline = true,show_map = true) {
+
+	// create a div for the household
+	minihouseholdDiv = document.createElement('div');
+	minihouseholdDiv.className = 'minihousehold';
 
 	// ----------------------------------------
 	// ego
@@ -380,8 +507,6 @@ function createHousehold(data,current_year,village, household,show_lifeline = tr
 	ego.sort((a, b) => {
 		return data[village][household][a].birthnac - data[village][household][b].birthnac;
 	});
-
-	
 	
 	egocounter = 1;
 	// get the data for each ego and put it in an array
@@ -389,19 +514,17 @@ function createHousehold(data,current_year,village, household,show_lifeline = tr
 	ego.forEach(ego => {
 		ego_array.push(getFourthLevelItems(data, village, household, ego));
 	})
-	createGridData(ego_array);
 
 	ego.forEach(ego => {
 		// get the data for the ego
 		egoData = getFourthLevelItems(data, village, household, ego);
 
 		// create a div for the ego
-		createEgoCard(egoData, egocounter,current_year,show_lifeline,show_map);
+		createMiniEgoCard(egoData, egocounter,current_year,false,false);
 		
 		egocounter++;
 	});
-	console.log('householdDiv',householdDiv);
-	return householdDiv;
+	return minihouseholdDiv;
 }
 
 // ----------------------------------------
@@ -449,7 +572,9 @@ function getVillageInfo(from_vil_id,to_vil_id,show_map = true) {
 
 function createHouseholdTimeline(vil_id,hhid) {
 
-	const records = [];
+	// hide the time-dial div
+	document.getElementById('timedial').style.display = 'none';
+
 	// create an array of years from the ego data
 	const years = Object.keys(ego_df);
 
@@ -458,38 +583,89 @@ function createHouseholdTimeline(vil_id,hhid) {
 	// clear the timeline
 	timeline.innerHTML = '';
 
+	// create a back button div
+	const backButton = document.createElement('div');
+	backButton.className = 'backButton';
+	backButton.innerHTML = '◀︎ back to households';
+	// change cursor to pointer
+	backButton.style.cursor = 'pointer';
+	backButton.onclick = function() {
+		// removeMiniTimeline
+		removeDivByClass('.minitimeline');
+		// show the time-dial div
+		document.getElementById('timedial').style.display = 'block';
+		// filter the data by the first year in the dropdown
+		filteredData = filterByYear(ego_df, document.getElementById('yearDropdown').value);
+		// update the visualization with the filtered data
+		updateVisualization(filteredData);
+	}
+	timeline.appendChild(backButton);
+	// add the mini timeline to the timeline
+	const topcontainer = document.getElementById('top-container');
+	// topcontainer.appendChild('◀︎ back to households')
+	topcontainer.appendChild(createHouseholdMiniTimeline(vil_id,hhid));
+	
 	// loop through the years
 	for (const year of years) {
 		
-		
-		// find if ego_df[year][vil_id][hhid] exists, if yes, add it to the records array
-		// first check if the village exists, then check if the household exists
+		// if the household exists in the year
 		if (ego_df[parseInt(year)] && ego_df[parseInt(year)][parseInt(vil_id)] && ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
+
 			// create a container for the year
 			const yearContainer = document.createElement('div');
 			yearContainer.className = 'year';
 			yearContainer.innerHTML = year;
+
 			// append the year container to the timeline
 			filteredData = filterByYear(ego_df, year);
-			createHousehold(filteredData,year, vil_id, hhid,false,false);
-
+			createHousehold(filteredData,year, vil_id, hhid,false,false,show_minitimeline=false);
 
 			// append the household to the village
 			yearContainer.appendChild(householdDiv);
 
 			timeline.appendChild(yearContainer);
-			// records.push(ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]);
 		}
-
-
-		// if (ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
-		// 	records.push(ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]);
-		// }
-
 	}
-
-	// create a timeline
-
 	
+}
+
+function createHouseholdMiniTimeline(vil_id,hhid) {
+
+	// create an array of years from the ego data
+	const years = Object.keys(ego_df);
+
+	// create another div for the graph
+	const minitimeline = document.createElement('div');
+	minitimeline.className = 'minitimeline';
+
+	// loop through the years
+	for (const year of years) {
+		
+		// if the household exists in the year
+		if (ego_df[parseInt(year)] && ego_df[parseInt(year)][parseInt(vil_id)] && ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
+
+			// create a container for the year
+			const yearContainer = document.createElement('div');
+
+			// if year is the current year, set the class to mini-year current
+			if (year == document.getElementById('yearDropdown').value) {
+				yearContainer.className = 'mini-year-current';
+			}
+			else
+			{
+				yearContainer.className = 'mini-year';
+			}
+
+			// append the year container to the timeline
+			filteredData = filterByYear(ego_df, year);
+			createMiniHousehold(filteredData,year, vil_id, hhid,false,false);
+
+			// append the household to the village
+			yearContainer.appendChild(minihouseholdDiv);
+
+			minitimeline.appendChild(yearContainer);
+		}
+	}
+	return minitimeline;
 	
 }

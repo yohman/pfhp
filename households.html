@@ -7,16 +7,34 @@
 	<!-- import style.css -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
+	<style>
+		.top-container {
+			position: sticky;
+			top: 0;
+			background-color: white;
+			z-index: 1;
+		}
+		</style>
 </head>
 <body>
-	<h1>Villages and families in the Edo Period</h1>
-
-	<!-- html dropdown for years with previous and next buttons before and after it -->
-	<button id="previousYear">◀︎ prev</button>
-	<select id="yearDropdown"></select>
-	<button id="nextYear">next ▶︎</button>
 	
-	<div id="visualization"></div>	
+	<div class="top-container" id="top-container">
+		<h1>Villages and families in the Edo Period</h1>
+	
+		<div id="timedial">
+			<!-- html dropdown for years with previous and next buttons before and after it -->
+			<button id="previousYear">◀︎ prev</button>
+			<select id="yearDropdown"></select>
+			<button id="nextYear">next ▶︎</button>
+			<!-- add a checkbox to toggle show_egos to true or false -->
+			<input type="checkbox" id="showEgos" checked> Show egos
+			
+		</div>
+	</div>
+	
+	<div class="container">
+		<div id="visualization"></div>	
+	</div>
 
 	<!-- import map.js -->
 	<script src="js/map.js"></script>
