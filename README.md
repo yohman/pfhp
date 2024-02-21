@@ -21,32 +21,32 @@ In this example, the household has five members spanning three generations, all 
 Iconography for the ego is defined by the following categorization (in javascript):
 
 ```js
-	// icon
-	if (age < 4 && egoData.nsex === 'M') {
-		iconhtml = '<span class="icon">👶🏻</span>';
-	} else if (age < 4 && egoData.nsex === 'F') {
-		iconhtml = '<span class="icon">👶🏻</span>';
+// icon
+if (age < 4 && egoData.nsex === 'M') {
+    iconhtml = '<span class="icon">👶🏻</span>';
+} else if (age < 4 && egoData.nsex === 'F') {
+    iconhtml = '<span class="icon">👶🏻</span>';
 
-	} else if (age >= 4 && age < 15 && egoData.nsex === 'M') {
-		iconhtml = '<span class="icon">👦🏻</span>';
-	} else if (age >= 4 && age < 15 && egoData.nsex === 'F') {
-		iconhtml = '<span class="icon">👧🏻</span>';
+} else if (age >= 4 && age < 15 && egoData.nsex === 'M') {
+    iconhtml = '<span class="icon">👦🏻</span>';
+} else if (age >= 4 && age < 15 && egoData.nsex === 'F') {
+    iconhtml = '<span class="icon">👧🏻</span>';
 
-	} else if (age >= 15 && age<30 && egoData.nsex === 'M') {
-		iconhtml = '<span class="icon">👨🏻</span>';
-	} else if (age >= 15 && age<30 && egoData.nsex === 'F') {
-		iconhtml = '<span class="icon">🧒🏻</span>';
+} else if (age >= 15 && age<30 && egoData.nsex === 'M') {
+    iconhtml = '<span class="icon">👨🏻</span>';
+} else if (age >= 15 && age<30 && egoData.nsex === 'F') {
+    iconhtml = '<span class="icon">🧒🏻</span>';
 
-	} else if (age >= 30 && age<55 && egoData.nsex === 'M') {
-		iconhtml = '<span class="icon">🧔🏻</span>';
-	} else if (age >= 30 && age<55 && egoData.nsex === 'F') {
-		iconhtml = '<span class="icon">👩🏻</span>';
+} else if (age >= 30 && age<55 && egoData.nsex === 'M') {
+    iconhtml = '<span class="icon">🧔🏻</span>';
+} else if (age >= 30 && age<55 && egoData.nsex === 'F') {
+    iconhtml = '<span class="icon">👩🏻</span>';
 
-	} else if (age >= 55 && egoData.nsex === 'M') {
-		iconhtml = '<span class="icon">👴🏼</span>';
-	} else if (age >= 55 && egoData.nsex === 'F') {
-		iconhtml = '<span class="icon">👵🏼</span>';
-	}
+} else if (age >= 55 && egoData.nsex === 'M') {
+    iconhtml = '<span class="icon">👴🏼</span>';
+} else if (age >= 55 && egoData.nsex === 'F') {
+    iconhtml = '<span class="icon">👵🏼</span>';
+}
 ```
 
 This, and many more narratives are available to witness via this interactive web platform. In doing so, we discover patterns previously not seen through tabular or other forms of data analysis, as the visual narratives convey the human story in an immersive manner.
