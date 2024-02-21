@@ -1,9 +1,44 @@
 // ----------------------------------------
+// Variables
+// ----------------------------------------
+
+let year, show_egos, show_map, show_lifeline, show_minitimeline;
+function initializeParameters() {
+	// get url parameters
+	const urlParams = new URLSearchParams(window.location.search);
+	year = urlParams.get('year') || 1716;
+	show_egos = urlParams.get('show_egos') || true;
+	show_map = urlParams.get('show_map') || true;
+	show_lifeline = urlParams.get('show_lifeline') || true;
+	show_minitimeline = urlParams.get('show_minitimeline') || true;
+
+	updateDropdown();
+
+	// set the value for the year dropdown to the year variable
+	// document.getElementById('yearDropdown').value = year;
+
+	// filter the data by the first year in the dropdown
+	filteredData = filterByYear(ego_df, document.getElementById('yearDropdown').value);
+
+	// update the visualization with the filtered data
+	// if vil_id and hhid are url parameters, create a household timeline
+	if (urlParams.has('vil_id') && urlParams.has('hhid')) {
+		createHouseholdTimeline(urlParams.get('vil_id'), urlParams.get('hhid'));
+	}
+	else
+	{
+		updateVisualization(filteredData);
+	}
+
+
+
+}
+
+// ----------------------------------------
 // Load the data
 // ----------------------------------------
 
-let ego_df, village_df,current_year;
-let show_egos = true;
+
 
 // toggle the show_egos to true if checkbox is checked and false if unchecked
 document.getElementById('showEgos').addEventListener('change', function() {
@@ -52,13 +87,8 @@ loadData('ego.json', 'village.json')
 		ego_df = ego;
 		village_df = village;
 		// Perform further actions here
-		updateDropdown(ego_df);
 
-		// filter the data by the first year in the dropdown
-		filteredData = filterByYear(ego_df, document.getElementById('yearDropdown').value);
-
-		// update the visualization with the filtered data
-		updateVisualization(filteredData);
+		initializeParameters();
 	})
 	.catch(error => {
 		console.error('Error loading data:', error);
@@ -74,7 +104,9 @@ function updateVisualization(data) {
 	visualization = document.getElementById('visualization');
 	// clear the visualization
 	visualization.innerHTML = '';
-	
+	// delete the back button
+	removeDivByClass('.backButton');
+		
 	// ----------------------------------------
 	// villages
 	// ----------------------------------------
@@ -174,10 +206,10 @@ function createGrid(gridData) {
 // dropdown
 // ----------------------------------------
 
-function updateDropdown(data) {
-
+function updateDropdown() {
+	console.log(year)
 	// get the years from the data
-	years = getTopLevelItems(data);
+	years = getTopLevelItems(ego_df);
 
 	// select the dropdown
 	dropdown = document.getElementById('yearDropdown');
@@ -242,7 +274,7 @@ function removeDivByClass(classname) {
 	if (elementToRemove) {
 	  elementToRemove.remove();
 	} else {
-	  alert('No element found with the class name ', classname);
+	  console.log('No element found with the class name ', classname);
 	}
   }
 
@@ -571,6 +603,8 @@ function getVillageInfo(from_vil_id,to_vil_id,show_map = true) {
 // ----------------------------------------
 
 function createHouseholdTimeline(vil_id,hhid) {
+	// turn show_egos to true
+	show_egos = true;
 
 	// hide the time-dial div
 	document.getElementById('timedial').style.display = 'none';
@@ -582,6 +616,9 @@ function createHouseholdTimeline(vil_id,hhid) {
 	const timeline = document.getElementById('visualization');
 	// clear the timeline
 	timeline.innerHTML = '';
+
+	// delete the back button
+	removeDivByClass('.backButton');
 
 	// create a back button div
 	const backButton = document.createElement('div');
@@ -599,9 +636,9 @@ function createHouseholdTimeline(vil_id,hhid) {
 		// update the visualization with the filtered data
 		updateVisualization(filteredData);
 	}
-	timeline.appendChild(backButton);
 	// add the mini timeline to the timeline
 	const topcontainer = document.getElementById('top-container');
+	topcontainer.appendChild(backButton);
 	// topcontainer.appendChild('◀︎ back to households')
 	topcontainer.appendChild(createHouseholdMiniTimeline(vil_id,hhid));
 	
