@@ -29,18 +29,12 @@ function initializeParameters() {
 	{
 		updateVisualization(filteredData);
 	}
-
-
-
 }
 
 // ----------------------------------------
-// Load the data
+// Event listeners
 // ----------------------------------------
 
-
-
-// toggle the show_egos to true if checkbox is checked and false if unchecked
 document.getElementById('showEgos').addEventListener('change', function() {
 	// if it is checked, set show_egos to true
 	if (this.checked) {
@@ -57,6 +51,9 @@ document.getElementById('showEgos').addEventListener('change', function() {
 
 });
 
+// ----------------------------------------
+// Load the data
+// ----------------------------------------
 
 function loadData(...files) {
 	// Function to load a JSON file
@@ -166,48 +163,10 @@ function createLifeLine(birthYear, currentYear, deathYear) {
 }
 
 // ----------------------------------------
-// grid
-// ----------------------------------------
-
-function createGridData(ego) {
-	gridData = [];
-	
-	
-
-	return gridData;
-}
-
-
-function createGrid(gridData) {
-	const gridContainer = document.createElement('div');
-	gridContainer.classList.add('grid-container');
-
-	for (let row = 1; row <= 4; row++) {
-		for (let col = 1; col <= 4; col++) {
-			const cellData = gridData.find(cell => cell.row === row.toString() && cell.column === col.toString());
-			const cell = document.createElement('div');
-			cell.classList.add('grid-item');
-			if (cellData) {
-				cell.style.backgroundColor = cellData.color;
-				cell.textContent = cellData.label;
-			} else {
-				cell.style.backgroundColor = 'gainsboro';
-			}
-			cell.style.gridColumn = col;
-			cell.style.gridRow = row;
-			gridContainer.appendChild(cell);
-		}
-	}
-
-	return gridContainer;
-}
-
-// ----------------------------------------
 // dropdown
 // ----------------------------------------
 
 function updateDropdown() {
-	console.log(year)
 	// get the years from the data
 	years = getTopLevelItems(ego_df);
 
@@ -223,7 +182,7 @@ function updateDropdown() {
 	// add an event listener to the dropdown
 	dropdown.addEventListener('change', function() {
 		// removeMiniTimeline
-		removeDivByClass('.minitimeline');
+		removeDivByClass('.mini-timeline');
 		// filter the data by the selected year
 		filteredData = filterByYear(ego_df, this.value);
 		// update the visualization with the filtered data
@@ -235,7 +194,7 @@ function updateDropdown() {
 	// add an event listener to the previous button
 	document.getElementById('previousYear').addEventListener('click', function() {
 		// removeMiniTimeline
-		removeDivByClass('.minitimeline');
+		removeDivByClass('.mini-timeline');
 
 		// get the index of the current year in the dropdown
 		index = years.indexOf(document.getElementById('yearDropdown').value);
@@ -253,7 +212,7 @@ function updateDropdown() {
 	document.getElementById('nextYear').addEventListener('click', function() {
 		
 		// removeMiniTimeline
-		removeDivByClass('.minitimeline');
+		removeDivByClass('.mini-timeline');
 
 		// get the index of the current year in the dropdown
 		index = years.indexOf(document.getElementById('yearDropdown').value);
@@ -277,6 +236,10 @@ function removeDivByClass(classname) {
 	  console.log('No element found with the class name ', classname);
 	}
   }
+
+// ----------------------------------------
+// data functions
+// ----------------------------------------
 
 // function that filters the data by year
 function filterByYear(data, year) {
@@ -351,7 +314,7 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	} else if (egoData.rel === 2) {
 		relhtml = '<br>stem kin';
 	} else if (egoData.rel === 3) {
-		relhtml = '<br>spouse of stem kin';
+		relhtml = '<br>semi-stem kin';
 	} else if (egoData.rel === 4) {
 		relhtml = '<br>non-stem kin';
 	} else if (egoData.rel === 5) {
@@ -408,6 +371,18 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	// egoDiv.style.backgroundColor = egoData.nsex === 'M' ? 'lightblue' : 'lightcoral';
 	egoDiv.className = egoData.nsex ===	'M' ? 'egoMale' : 'egoFemale';
 
+	// override if servant
+	if (egoData.rel === 6) {
+		egoDiv.className = 'egoServant';
+	}
+
+	// override if non kin 4 or 5	
+	if (egoData.rel === 4) {
+		egoDiv.className = 'egoNonKin';
+	}
+	if (egoData.rel === 5) {
+		egoDiv.className = 'egoNonKin';
+	}
 	// append the ego to the household
 	householdDiv.appendChild(egoDiv);		
 	
@@ -435,14 +410,34 @@ function createMiniEgoCard(egoData, egocounter,year,show_lifeline = true,show_ma
 	
 	// rel
 	if (egoData.rel === 1) {
-		relhtml = '<span style="font-size:0.3rem">★</span><br>';
+		relhtml = '<span class="ego-head">★</span>';
 	} else if (egoData.rel === 7) {
-		relhtml = '<span style="font-size:0.3rem;color:red;">★</span><br>';
+		relhtml = '<span class="ego-head-spouse">★</span>';
 	} else {
 		relhtml = ' ';
 	}
 
-	// egoDiv.innerHTML = relhtml;
+
+	// rel
+	if (egoData.rel === 1) {
+		relhtml = '<span class="ego-head">★</span>';
+	} else if (egoData.rel === 2) {
+		relhtml = '<span class="ego-head-kin"></span>';
+	} else if (egoData.rel === 3) {
+		relhtml = '<span class="ego-head-kin"></span>';
+	} else if (egoData.rel === 4) {
+		relhtml = '<span class="ego-head-nonkin">n</span>';
+	} else if (egoData.rel === 5) {
+		relhtml = '<span class="ego-head-nonkin">n</span>';
+	} else if (egoData.rel === 6) {
+		relhtml = '<span class="ego-head-servant">s</span>';
+	} else if (egoData.rel === 7) {
+		relhtml = '<span class="ego-head-spouse">★</span>';
+	}
+
+
+
+	egoDiv.innerHTML = relhtml;
 
 	egoDiv.className = egoData.nsex ===	'M' ? 'mini-egoMale' : 'mini-egoFemale';
 
@@ -506,7 +501,6 @@ function createHousehold(data,current_year,village, household,show_lifeline = tr
 		ego.forEach(ego => {
 			ego_array.push(getFourthLevelItems(data, village, household, ego));
 		})
-		createGridData(ego_array);
 
 		ego.forEach(ego => {
 			// get the data for the ego
@@ -628,7 +622,7 @@ function createHouseholdTimeline(vil_id,hhid) {
 	backButton.style.cursor = 'pointer';
 	backButton.onclick = function() {
 		// removeMiniTimeline
-		removeDivByClass('.minitimeline');
+		removeDivByClass('.mini-timeline');
 		// show the time-dial div
 		document.getElementById('timedial').style.display = 'block';
 		// filter the data by the first year in the dropdown
@@ -673,7 +667,7 @@ function createHouseholdMiniTimeline(vil_id,hhid) {
 
 	// create another div for the graph
 	const minitimeline = document.createElement('div');
-	minitimeline.className = 'minitimeline';
+	minitimeline.className = 'mini-timeline';
 
 	// loop through the years
 	for (const year of years) {
