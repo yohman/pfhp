@@ -108,15 +108,11 @@ line-height: 20px; /* Center text vertically */
     background-color: #f0f0f0;
     display: inline-block;
     vertical-align: top;
-    margin:0px;
-    border:0px solid white;
     font-size: 0.6rem;
 }
 .mini-year-current {
-    background-color: #ff0000;
     display: inline-block;
     vertical-align: top;
-    margin:0px;
     border:1px solid red;
     font-size: 0.6rem;
 }
@@ -124,10 +120,8 @@ line-height: 20px; /* Center text vertically */
 .mini-egoMale {
     /* border: 1px solid rgba(87, 120, 164,1); */
     background-color: rgba(87, 120, 164,1);
-    margin: 0px;
     width:8px;
     height:8px;
-    /* padding: 1px; */
     margin: 1px;
     display: flex;
     justify-content: center; /* Horizontally center */
@@ -137,11 +131,8 @@ line-height: 20px; /* Center text vertically */
 .mini-egoFemale {
     /* border: 1px solid rgba(209, 97, 93,1); */
     background-color: rgba(209, 97, 93,1);
-    /* color:#b80000; */
-    margin: 0px;
     width:8px;
     height:8px;
-    /* padding: 1px; */
     margin: 1px;
     display: flex;
     justify-content: center; /* Horizontally center */
@@ -177,7 +168,7 @@ line-height: 20px; /* Center text vertically */
     padding: 5px;
 }
 .ego-head {
-    /* font-size: 0.4rem; */
+    font-size: 0.4rem;
     font-family: 'Courier New', Courier, monospace;
     /* margin: 0; */
 }

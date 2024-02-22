@@ -299,7 +299,7 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	// check if birth_vil is different from vil_id
 	bornhtml = '';
 	if (egoData.birth_vil !== egoData.vil_id) {
-		bornhtml += '<br>born in another village: '+getVillageInfo(egoData.birth_vil,egoData.vil_id,show_map);
+		bornhtml += '<br><span style="font-size:1.2rem">➟⌂</span> '+getVillageInfo(egoData.birth_vil,egoData.vil_id,show_map);
 	}
 	// lifespan html
 	if (egoData.death === 0) {
@@ -395,30 +395,20 @@ function createMiniEgoCard(egoData, egocounter,year,show_lifeline = true,show_ma
 	// create a div for the ego
 	egoDiv = document.createElement('div');
 	egoDiv.className = 'mini-ego';
-
-	if (year === undefined) {
-		age = document.getElementById('yearDropdown').value - egoData.birthnac;
-	} else {
-		age = year - egoData.birthnac;
-	}
-
-	// check if birth_vil is different from vil_id
-	bornhtml = '';
-	if (egoData.birth_vil !== egoData.vil_id) {
-		bornhtml += '<br>born in another village: '+getVillageInfo(egoData.birth_vil,egoData.vil_id,show_map);
-	}
 	
 	// rel
-	if (egoData.rel === 1) {
-		relhtml = '<span class="ego-head">★</span>';
-	} else if (egoData.rel === 7) {
-		relhtml = '<span class="ego-head-spouse">●</span>';
-	} else {
-		relhtml = ' ';
-	}
+	// 	1 household head
+	// 	2 stem kin (child, grandchild, parents, 
+	// 	  grandparents; incl. adopted/step)
+	// 	3 semi-stem kin (spouse of stem kin)
+	// 	4 non-stem kin (siblings, uncle/aunt, nephew/niece,
+	// 	  cousin)
+	// 	5 non kin (neither kin nor servants)
+	// 	6 servant
+	// 	7 spouse of head  
+	//  9 unknown   
 
 
-	// rel
 	if (egoData.rel === 1) {
 		relhtml = '<span class="ego-head">★</span>';
 	} else if (egoData.rel === 2) {
@@ -426,15 +416,15 @@ function createMiniEgoCard(egoData, egocounter,year,show_lifeline = true,show_ma
 	} else if (egoData.rel === 3) {
 		relhtml = '<span class="ego-head-kin"></span>';
 	} else if (egoData.rel === 4) {
-		relhtml = '<span class="ego-head-nonkin">n</span>';
+		relhtml = '<span class="ego-head-nonkin"></span>';
 	} else if (egoData.rel === 5) {
-		relhtml = '<span class="ego-head-nonkin">n</span>';
+		relhtml = '<span class="ego-head-nonkin"></span>';
 	} else if (egoData.rel === 6) {
-		relhtml = '<span class="ego-head-servant">s</span>';
+		relhtml = '<span class="ego-head-servant"></span>';
 	} else if (egoData.rel === 7) {
 		relhtml = '<span class="ego-head-spouse">●</span>';
 	}
-
+	
 
 
 	egoDiv.innerHTML = relhtml;
