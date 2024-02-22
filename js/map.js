@@ -412,7 +412,7 @@ function createMiniEgoCard(egoData, egocounter,year,show_lifeline = true,show_ma
 	if (egoData.rel === 1) {
 		relhtml = '<span class="ego-head">★</span>';
 	} else if (egoData.rel === 7) {
-		relhtml = '<span class="ego-head-spouse">★</span>';
+		relhtml = '<span class="ego-head-spouse">●</span>';
 	} else {
 		relhtml = ' ';
 	}
@@ -432,7 +432,7 @@ function createMiniEgoCard(egoData, egocounter,year,show_lifeline = true,show_ma
 	} else if (egoData.rel === 6) {
 		relhtml = '<span class="ego-head-servant">s</span>';
 	} else if (egoData.rel === 7) {
-		relhtml = '<span class="ego-head-spouse">★</span>';
+		relhtml = '<span class="ego-head-spouse">●</span>';
 	}
 
 
