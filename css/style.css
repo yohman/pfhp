@@ -1,6 +1,10 @@
 body {
     font-family: 'Courier New', Courier, monospace;
 }
+
+#timedial {
+    display: none;
+}
 /* Add your CSS styles here */
 .household {
     /* border: 1px solid black; */
@@ -32,7 +36,7 @@ body {
     /* align them to the top */
     vertical-align: top;
     /* make the divs the same width */
-    width: 45%;
+    /* width: 45%; */
 
 }
 .ego {
@@ -105,7 +109,7 @@ line-height: 20px; /* Center text vertically */
 */
 
 .mini-year {
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
     display: inline-block;
     vertical-align: top;
     font-size: 0.6rem;
@@ -118,6 +122,7 @@ line-height: 20px; /* Center text vertically */
 }
 
 .mini-egoMale {
+    font-size:0.4rem;
     /* border: 1px solid rgba(87, 120, 164,1); */
     background-color: rgba(87, 120, 164,1);
     width:8px;
@@ -129,6 +134,7 @@ line-height: 20px; /* Center text vertically */
 
 }
 .mini-egoFemale {
+    font-size:0.4rem;
     /* border: 1px solid rgba(209, 97, 93,1); */
     background-color: rgba(209, 97, 93,1);
     width:8px;
@@ -139,8 +145,39 @@ line-height: 20px; /* Center text vertically */
     align-items: center; /* Vertically center */
 
 }
+.mini-egoServant {
+    /* border: 1px solid rgba(209, 97, 93,1); */
+    background-color: rgba(184, 176, 172,1);
+    width:8px;
+    height:8px;
+    margin: 1px;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+
+}
+.mini-egoNonkin {
+    /* border: 1px solid rgba(209, 97, 93,1); */
+    background-color: rgba(231, 202, 96,1);
+
+    width:8px;
+    height:8px;
+    margin: 1px;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+
+}
+.minihousehold-year {
+    vertical-align: top;
+    width: 8px;
+    font-size: 0.6rem;
+    overflow: visible;
+}
 .mini-timeline {
     overflow-x: auto;
+    background-color: white;
+    margin: 10px;
 }
 
 .egoMale {
@@ -187,6 +224,9 @@ line-height: 20px; /* Center text vertically */
     /* color: rgba(0, 0, 0,0.5); */
     width: 100%;
     height: 100%;
+
+
+
 }
 
 .ego-head-kin {
