@@ -30,12 +30,8 @@
 </style>
 
 
-<a href="https://yohman.github.io/pfhp/households.html" target="_blank">
-<img src="image-11.png" width=80% class="post-image">
-</a>
 
-
-[![My Image](image-11.png)](image-11.png){:style="border: 4px solid #000; border-radius: 5px; max-width: 100%;"}
+[![website snapshot](image-11.png)]([image-11.png](https://yohman.github.io/pfhp/households.html))
 
 
 → [https://yohman.github.io/pfhp/households.html](https://yohman.github.io/pfhp/households.html)
@@ -55,7 +51,6 @@ The first modern national census in Japan was conducted in 1920. Despite its ric
 <span class="big-quote">
 「宗門」(shumon)　→　religious investigation<br>
 「改帳」(aratamecho)　→　registry
-
 </span>
 
 While the original intent of these documents was to abolish Christianity, it is uncertain as to whether or not it served to fulfill its purpose. Moreover, with little effort to centralize and/or standardize the collection process, the documents were deemed to have little value. The decentralized nature of the documents inevitably led to many documents being thrown away or lost entirely over the years. What did survive—and a good portion managed to do so—have become a treasure-trove for historical demographers, allowing for an unprecedented view into population statistics in early modern Japan.
