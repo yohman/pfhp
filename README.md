@@ -26,7 +26,7 @@
 
 → [https://yohman.github.io/pfhp/households.html](https://yohman.github.io/pfhp/households.html)
 
-What did a household look like for common people in early modern Japan? Were there multiple generations living under one roof? Who would assume the role of household head, and how often did people from outside their village come to live with them?
+What did a household look like for common people in early modern Japan? Were there multiple generations living under one roof? Who would assume the role of household head, how often did people from outside their village come to live with them, and how many servants did each household have?
 
 These questions, and many more, are revealed through the **visualization** of a rare digital collection of *Shumon-aratame-cho (SAC)* and *Ninbetsu-aratame-cho (NAC)*, which are the two major sources for the research of historical demography in Japan. The longitudinal and comparative approach applied to the records of thousands of lives of people will allow us to gain new understanding of our history and the resilience of people to socioeconomic and environmental changes.
 
@@ -36,7 +36,7 @@ These questions, and many more, are revealed through the **visualization** of a 
 
 ↑ An example of the original document shows a page from Niremata Village, Mino Province, 1638 (Cornell, Hayashi, 1986)
 
-The first modern national census in Japan was conducted in 1920. Despite its rich history, there has been no systematic or sustained population data intake prior to 1920. That being said, the most comprehensive population registry was established by the Tokugawa government during the 17th century. The odd thing about this registry is that it was not originally conducted as a census. It's origins were rather inauspicious in nature, with a singular purpose to abolish Christianity from Japan, which was deemed to pose a threat to the rulers intent on national unification. 
+The first modern national census in Japan was conducted in 1920. Despite its rich history, there has been no systematic or sustained population data intake prior to 1920. In spite of this, there was a comprehensive population registry conducted and established by the Tokugawa government during the 17th century. It was an unusual set of circumstances that led to the creation of this registry, which was by no account originally meant to be used as a census. Its origins were rather inauspicious and haunting, with a singular purpose: to abolish Christianity from Japan, which at the time, was deemed to pose a threat to the rulers intent on national unification. 
 
 <span class="big-quote">
 「宗門」(shumon)　→　religious investigation
@@ -45,12 +45,12 @@ The first modern national census in Japan was conducted in 1920. Despite its ric
 
 </span>
 
-While the original intent of these documents was to abolish Christianity, it is uncertain as to whether or not such actions were taken due to the content of the registry. Moreover, with little effort to centralize and standardize the collection process, the documents were deemed to have little value, and many records were thrown away or lost entirely over the years. What did survive have become a treasure-trove for historical demographers, allowing for an unprecedented view into population statistics in early modern Japan.
+While the original intent of these documents was to abolish Christianity, it is uncertain as to whether or not it served to fulfill its purpose. Moreover, with little effort to centralize and/or standardize the collection process, the documents were deemed to have little value. The decentralized nature of the documents inevitably led to many documents being thrown away or lost entirely over the years. What did survive—and a good portion managed to do so—have become a treasure-trove for historical demographers, allowing for an unprecedented view into population statistics in early modern Japan.
 
-## Two villages, from 1716 to 1869
+## "Big data" for two villages, from 1716 to 1869
 <img src="image-14.png" width=400>
 
-Of the surviving documents, two villages stand out as having an almost complete annual coverage. Located in Fukushima Prefecture, Niita Village and Shimomoriya Village's combined registry data consists of 118,879 total records. The dataset consists of 61 columns, combining for a total of 7.2 million data points.
+Of the surviving documents, two villages stand out as having the most complete set of annual coverage. Located in Fukushima Prefecture, Niita Village and Shimomoriya village's combined registry data consists of 118,879 total records. The dataset consists of 61 columns, amassing a total of 7.2 million data points.
 
 ### Missing data
 As "complete" as the data may be, it is not without gaps. The following table illustrates where data is lacking for each village.
@@ -80,7 +80,7 @@ Take for example [household #1 from Shimomoriya Village](https://yohman.github.i
 
 ![alt text](image-7.png)
 
-Gender is presented in blue and red squares, households heads with a star, and spouses of household heads with a black dot. Servants (gray squares), are present throughout, indicative of the prolongued wealth of the family. The non-stem kins (in yellow) indicate the occasional presence of uncles/aunts, nephews/nieces, and cousins in the household.
+Gender is presented in blue and red squares, households heads with a star, and spouses of household heads with a black dot. Servants (gray squares), are present throughout, indicative of the prolonged wealth of the family. The non-stem kins (in yellow) indicate the occasional presence of uncles/aunts, nephews/nieces, and cousins in the household.
 
 Consider the following mini-timeline ([household # 219 in Niita Village)](https://yohman.github.io/pfhp/households.html?vil_id=5010130&hhid=21900000):
 
@@ -91,7 +91,7 @@ Here, one witnesses a relatively short family history, from 1793 to 1851. The ma
 
 ## Visualizing family histories
 
-This prototype attempts to visualize family history in modalities that the general public can relate to. By distilling big data in generically meaningful segements such as "villages," "households," and "family roles," the historical registry comes to life, revealing interactive family lineages as never seen before. Take for example the following seven year span from 1724 to 1731 of a household in 下守屋村 安積 岩代:
+This prototype attempts to visualize family history in modalities that the general public can relate to. By distilling big data in generically meaningful segments such as "villages," "households," and "family roles," the historical registry comes to life, revealing interactive family lineages as never seen before. Take for example the following seven year span from 1724 to 1731 of a household in 下守屋村 安積 岩代:
 
 ![alt text](image.png)
 
