@@ -536,14 +536,13 @@ function createMiniEgoCard(egoData,current_year) {
 
 	// on hover, highlight other divs with the same ego on the mini timeline
 	egoDiv.onmouseover = function() {
+		// select all divs with parent div of class 
+
+
 		sameEgoDivs = document.querySelectorAll('div[ego="'+egoData.ego+'"]');
 		// loop through the mini timeline divs
 		sameEgoDivs.forEach(sameDiv => {
-			// if the ego is the same as the ego in the div
-			if (sameDiv.getAttribute('ego') == egoData.ego) {
-				// highlight the div
 				sameDiv.style.backgroundColor = 'lightblue';
-			}
 		});
 	}
 	// on mouseout, remove the highlight
@@ -551,11 +550,8 @@ function createMiniEgoCard(egoData,current_year) {
 		sameEgoDivs = document.querySelectorAll('div[ego="'+egoData.ego+'"]');
 		// loop through the mini timeline divs
 		sameEgoDivs.forEach(sameDiv => {
-			// if the ego is the same as the ego in the div
-			if (sameDiv.getAttribute('ego') == egoData.ego) {
 				// remove the highlight
 				sameDiv.style.backgroundColor = '';
-			}
 		});
 	}
 
@@ -827,6 +823,75 @@ function createHouseholdTimeline(vil_id,hhid) {
 	
 }
 
+// ----------------------------------------
+// household stats
+// ----------------------------------------
+
+function householdStats(vil_id,hhid){
+	console.log('householdStats',vil_id,hhid);
+	// find number of distinct egos with the same vil_id and hhid in the ego data
+	// do so by looping through the every year of the ego data
+	// and checking if the household exists in each year
+	// if it does, add the number of egos in the household to the total
+	// create an array of years from the ego data
+	const years = Object.keys(ego_df);
+	// create an array for the number of egos
+	egos = [];
+	// loop through the years
+	for (const year of years) {
+		// if the household exists in the year
+		if (ego_df[parseInt(year)] && ego_df[parseInt(year)][parseInt(vil_id)] && ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
+			// get the number of egos in the household
+			egos.push(getThirdLevelItems(ego_df[parseInt(year)], vil_id, hhid).length);
+		}
+	}
+	// sum the number of egos
+	total = egos.reduce((a, b) => a + b, 0);
+
+	// find the number of distinct egos
+	// do so by creating a set from the egos array
+	distinct = new Set(egos);
+	// find the size of the set
+	distinct = distinct.size;
+
+	// find the number of years the household exists
+	// do so by finding the first year that this household exists
+	// and the last year that this household exists
+	// if the household exists in the year
+	if (ego_df[parseInt(years[0])] && ego_df[parseInt(years[0])][parseInt(vil_id)] && ego_df[parseInt(years[0])][parseInt(vil_id)][parseInt(hhid)]) {
+		// get the first year
+		firstYear = years[0];
+	}
+	// if the household exists in the year
+	if (ego_df[parseInt(years[years.length-1])] && ego_df[parseInt(years[years.length-1])][parseInt(vil_id)] && ego_df[parseInt(years[years.length-1])][parseInt(vil_id)][parseInt(hhid)]) {
+		// get the last year
+		lastYear = years[years.length-1];
+	}
+	// if the first year is the same as the last year
+	if (firstYear === lastYear) {
+		// set the years to the first year
+		years = firstYear;
+	} else {
+		// set the years to the first year to the last year
+		years = firstYear + ' to ' + lastYear;
+	}
+
+	// create a div for the stats
+	stats = document.createElement('div');
+	stats.className = 'stats';
+	// add the years to the stats
+	stats.innerHTML = 'years: '+years;
+
+	// add the total number of egos to the stats
+	stats.innerHTML = '<br>total: '+total+' egos';
+	// add the number of distinct egos to the stats
+	stats.innerHTML += '<br>distinct: '+distinct+' egos';
+
+	return stats;
+
+
+}
+
 function createHouseholdMiniTimeline(vil_id,hhid) {
 
 	// create an array of years from the ego data
@@ -842,6 +907,9 @@ function createHouseholdMiniTimeline(vil_id,hhid) {
 
 	minititle.innerHTML = 'Household '+hhid+'--▶︎';;
 	minitimeline.appendChild(minititle);
+
+	// add household stats to the mini timeline
+	// minitimeline.appendChild(householdStats(vil_id,hhid));
 
 	// loop through the years
 	for (const year of years) {
