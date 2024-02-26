@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
 # Villages, families, and egos in the Edo Period
 
 <style>
@@ -118,3 +127,6 @@ This, and many more narratives are available to witness via this interactive web
 ## Acknowledgements
 
 This project is being developed at the [Population and Family History Center](https://www.pfhp-japan.info/) at [Reitaku University](https://www.reitaku-u.ac.jp/), Japan.
+
+</body>
+</html>
