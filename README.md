@@ -19,10 +19,20 @@
     margin: 0 0 -2rem !important;
 }
 
+.caption {
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    
+}
 </style>
 
 
-<a href="https://yohman.github.io/pfhp/households.html" target="_blank"><img src="image-11.png" width=80% class="post-image"></a>
+<a href="https://yohman.github.io/pfhp/households.html" target="_blank">
+<img src="image-11.png" width=80% class="post-image">
+</a>
 
 → [https://yohman.github.io/pfhp/households.html](https://yohman.github.io/pfhp/households.html)
 
@@ -34,13 +44,12 @@ These questions, and many more, are revealed through the **visualization** of a 
 
 <img src="image-12.png" class="post-image">
 
-↑ An example of the original document shows a page from Niremata Village, Mino Province, 1638 (Cornell, Hayashi, 1986)
+<span class="caption">↑ An example of the original document shows a page from Niremata Village, Mino Province, 1638 (Cornell, Hayashi, 1986)</span>
 
 The first modern national census in Japan was conducted in 1920. Despite its rich history, there has been no systematic or sustained population data intake prior to 1920. In spite of this, there was a comprehensive population registry conducted and established by the Tokugawa government during the 17th century. It was an unusual set of circumstances that led to the creation of this registry, which was by no account originally meant to be used as a census. Its origins were rather inauspicious and haunting, with a singular purpose: to abolish Christianity from Japan, which at the time, was deemed to pose a threat to the rulers intent on national unification. 
 
 <span class="big-quote">
-「宗門」(shumon)　→　religious investigation
-
+「宗門」(shumon)　→　religious investigation<br>
 「改帳」(aratamecho)　→　registry
 
 </span>
@@ -63,7 +72,6 @@ As "complete" as the data may be, it is not without gaps. The following table il
 
 ### Descriptive statistics
 
-<!-- create a table for stats for each village -->
 | Village | Total Records | Total Households | Total Individuals | Average Household Size | Largest Household |
 |---------|---------------|------------------|-------------------|------------------------|--|
 | Niita   |        68,682       |340|3,875|4.24|[33](https://yohman.github.io/pfhp/households.html?vil_id=5010130&hhid=6330000)|
