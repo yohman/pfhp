@@ -34,6 +34,10 @@
 <img src="image-11.png" width=80% class="post-image">
 </a>
 
+
+[![My Image](image-11.png)](image-11.png){:style="border: 4px solid #000; border-radius: 5px; max-width: 100%;"}
+
+
 → [https://yohman.github.io/pfhp/households.html](https://yohman.github.io/pfhp/households.html)
 
 What did a household look like for common people in early modern Japan? Were there multiple generations living under one roof? Who would assume the role of household head, how often did people from outside their village come to live with them, and how many servants did each household have?
