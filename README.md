@@ -58,7 +58,7 @@ While the original intent of these documents was to abolish Christianity, it is 
 ## "Big data" for two villages, from 1716 to 1869
 <img src="image-14.png" width=400>
 
-Of the surviving documents, two villages stand out as having the most complete set of annual coverage. Located in Fukushima Prefecture, Niita Village and Shimomoriya village's combined registry data consists of 118,879 total records. The dataset consists of 61 columns, amassing a total of 7.2 million data points.
+Of the surviving documents, two villages stand out as having the most complete set of annual coverage. Located in Fukushima Prefecture, Niita Village and Shimomoriya village's combined registry data consists of 118,879 total records. The dataset, meticulously curated by historians (a painstaking process of converting paper notes into digital data), boasts 61 columns, amassing a total of 7.2 million data points.
 
 ### Missing data
 As "complete" as the data may be, it is not without gaps. The following table illustrates where data is lacking for each village.
@@ -79,7 +79,9 @@ As "complete" as the data may be, it is not without gaps. The following table il
 
 ## Mini-timelines
 
-A macro view of the family histories can be visualized through a series of "mini" timelines. A village will consist of numerous timelines, with each representing a household's entire recorded history. This more than likely results in timelines that span multiple generations, but what makes these graphics compelling is that you can determine the relative size, wealth, and longevity of each household. Here is an example of eight households in the Shimomoriya village. Notice the differences in sizes and shapes, visual temporal snapshots that demonstrate diverse familial circumstances within a single village.
+This prototype attempts to visualize family history in modalities that the general public can relate to. By distilling big data in generically meaningful segments such as "villages," "households," and "family roles," the historical registry comes to life, revealing interactive family lineages as never seen before. 
+
+A macro view of the family histories can be visualized through a series of "mini" timelines. A village will consist of numerous timelines, with each representing a household's entire recorded history. This more than likely results in timelines that span multiple generations, but what makes these graphics compelling is that you can determine the relative size, wealth, and longevity of each household. Here is an example of eight households in the Shimomoriya village. Notice the differences in sizes and shapes, visual temporal snapshots that demonstrate diverse familial circumstances within a single village. Some families have lineages that span the entire timeframe (households #460 and 481), while others occupy a shortened segment (households #450,#461,#470,#471,#480).
 
 <img src="image-13.png" class="post-image">
 
@@ -91,25 +93,13 @@ Gender is presented in blue and red squares, households heads with a star, and s
 
 Consider the following mini-timeline ([household # 219 in Niita Village)](https://yohman.github.io/pfhp/households.html?vil_id=5010130&hhid=21900000):
 
-![alt text](image-8.png)
+![alt text](image-16.png)
 
-Here, one witnesses a relatively short family history, from 1793 to 1851. The male household head (indicated by the blue box with a star), marries and has a child (1799) who dies after just six years. The father dies six years later, and the household head is transferred to the wife (notice the transition of the star from the blue square to the red). In the same year, she remarries, and lives with her second husband until their deaths.
+Here, one witnesses a relatively short family history, from 1793 to 1851. The male household head (indicated by the blue box with a star), marries and has a child (1799) who dies after just six years. Three years after the death of their daughter (1808)—perhaps to help deal with tragedy—the household is joined by a "non stem kin," likely a sibling of either the husband or wife. The father, however, dies three years later in 1810, as illustrated below:
 
+![alt text](image-17.png)
 
-## Visualizing family histories
-
-This prototype attempts to visualize family history in modalities that the general public can relate to. By distilling big data in generically meaningful segments such as "villages," "households," and "family roles," the historical registry comes to life, revealing interactive family lineages as never seen before. Take for example the following seven year span from 1724 to 1731 of a household in 下守屋村 安積 岩代:
-
-![alt text](image.png)
-
-In the above timeline, you witness a happy family of three, only to have the father die at a youthful age of 29, then for the wife to immediately find and welcome another (younger!) partner from another village into the same household. Three years later, another child is born, only to have that child die within a year... Two years later, another child is born, but the data reveals that this second child will only live to be five years old.
-
-At the core of this complex web of inter-related nodes is the ego itself, which is represented as a series of "ego cards."
-
-<img src="image-3.png" class="post-image" width=200> 
-
-In this example, the household has five members spanning three generations, all living under a single roof, a typical housing condition in early modern Japan. The grandparents will live well into their 70's, the head of the household, now 39 years old, married a woman from outside his village, but we know that they would both die before they reach 70. Their only daughter, who is 6 years old, will unfortunately only live to be 11 years old.
-
+What happens next is entirely up to speculation, but one may presume that the household is joined by relatives (including a 13 year old niece). At the same time, the wife of the deceased husband is absent for two years, taking a leave to deal with the death of her husband, only to come back in 1813 assuming the role as the new household head. But she does not return alone, instead, she now has a new husband with her, and together, they live until their respective deaths many years later, without having any children.
 
 This, and many more narratives are available to witness via this interactive web platform. In doing so, we discover patterns previously not seen through tabular or other forms of data analysis, as the visual narratives convey the human story in an immersive manner.
 
