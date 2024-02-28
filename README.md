@@ -19,6 +19,15 @@
     margin: 0 0 -2rem !important;
 }
 
+caption {
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    
+}
+
 .caption {
     font-size: 0.8rem;
     color: #888;
@@ -72,7 +81,7 @@ While the title to this section suggests that the original documents were conver
 
 And still, the digitization would require yet another manual phase: coding. Coders extracted information from each BDS and organized them by handwriting data into paper forms, creating elaborate codebooks that marked every possible permutation between various categories of household codes and individual relationships. Because of this formidably laborious process, only a handful of villages were finally made into a relational database, one that is called "Xavier." Still so, Xavier is an impressive big data endeavor. It boasts data for 346,700 egos, and with numerous relational columns, amasses to having more than 21 million total data points.
 
-This visualization project builds upon the immense labor conducted by previous historians. It is the icing on the cake, per se, but an important one for several reasons. First, while this archive presents itself as a rare digital collection to study Japanese history, it still remains in the domain of experts. Only the most dedicated of demographic scholars can make sense of them, using it to pursue their own research agendas. For this reason, it fails to justify the enormous groundwork to create Xavier, as it is kept within the confines of experts. 
+This visualization project builds upon the immense labor conducted by previous historians. It is the icing on the cake, per se, but an important one for several reasons. First, while this archive presents itself as a rare digital collection to study Japanese demographic history, it remains in the domain of experts. Only the most dedicated of demographic scholars can make sense of them, using it to pursue their own research agendas. For this reason, it fails to justify the enormous groundwork and labor to create Xavier, as it is kept within the confines of experts. 
 
 To this account, the second reason is to bring the lives of historical commoners, to modern commoners, in a form that is instantly accessible, visually intuitive, and *understandable*. 
 
@@ -83,7 +92,7 @@ To this account, the second reason is to bring the lives of historical commoners
 ## "Big data" for two villages, from 1716 to 1869
 <img src="image-14.png" width=400>
 
-Of the surviving documents, two villages stand out as having the most complete set of annual coverage. Located in Fukushima Prefecture, Niita Village and Shimomoriya village's combined registry data consists of 118,879 total records. The dataset, meticulously curated by historians (a painstaking process of converting paper notes into digital data), boasts 61 columns, amassing a total of 7.2 million data points.
+Of the surviving documents, two villages stand out as having the most complete set of annual coverage. Located in Fukushima Prefecture, Niita Village and Shimomoriya village's combined registry data consists of 118,879 total records. 
 
 ### Missing data
 As "complete" as the data may be, it is not without gaps. The following table illustrates where data is lacking for each village.
@@ -104,13 +113,22 @@ As "complete" as the data may be, it is not without gaps. The following table il
 
 ## Mini-timelines
 
-This prototype attempts to visualize family history in modalities that the general public can relate to. By distilling big data in generically meaningful segments such as "villages," "households," and "family roles," the historical registry comes to life, revealing interactive family lineages as never seen before. 
+In order to untangle the complexities of the relational database, we use modalities that the general public can relate to. By distilling big data in generically meaningful segments such as "villages," "households," and "family roles," the historical registry comes to life, revealing interactive family lineages as never seen before. 
 
-A macro view of the family histories can be visualized through a series of "mini" timelines. A village will consist of numerous timelines, with each representing a household's entire recorded history. This more than likely results in timelines that span multiple generations, but what makes these graphics compelling is that you can determine the relative size, wealth, and longevity of each household. Here is an example of eight households in the Shimomoriya village. Notice the differences in sizes and shapes, visual temporal snapshots that demonstrate diverse familial circumstances within a single village. Some families have lineages that span the entire timeframe (households #460 and 481), while others occupy a shortened segment (households #450,#461,#470,#471,#480).
+A macro view of the family histories can be visualized through a series of "mini" timelines. A village will consist of numerous timelines, with each representing a household's entire recorded history. This more than likely results in timelines that span multiple generations, but what makes these graphics compelling is that you can determine the relative size, wealth, and longevity of each household. Here is an example of eight households in the Shimomoriya village. Notice the differences in sizes and shapes, visual temporal snapshots that demonstrate diverse familial circumstances within a single village. Some families have lineages that span the entire timeframe (households #460 and 481), while others occupy a shortened segment (households #450,#461,#470,#471,#480). [Household #460](https://yohman.github.io/pfhp/households.html?vil_id=5040310&hhid=4600000) stands out for its prodigious presence, especially in the early phase of its recorded history. In fact, in years 1749 and 1750, it housed a total of 23 members, by far the largest household size recorded in Shimomoriya village.
 
 <img src="image-13.png" class="post-image">
 
-Take for example [household #1 from Shimomoriya Village](https://yohman.github.io/pfhp/households.html?vil_id=5040310&hhid=100000). In this timeline, recorded history begins in 1716 and ends in 1863, a span of 147 years.
+<caption>A series of eight mini-timelines in Shimomoriya village</caption>
+
+
+Now let's look at [household #112](https://yohman.github.io/pfhp/households.html?vil_id=5010130&hhid=11200000) in Niita village, which was previously shown in its original format, and shown here in its mini-timeline form:
+
+![alt text](<images/mini-timeline 112.jpg>)
+
+This households' timeline spans the full extent of the recorded data for Niita village, starting in 1720 and ending in 1870, a 150 year history. It shows a stable, resilient, common household, one that survived the trials of generations, with only core family members living together (with a few exceptions in the latter years).
+
+Take another example [household #1 from Shimomoriya Village](https://yohman.github.io/pfhp/households.html?vil_id=5040310&hhid=100000). In this timeline, recorded history begins in 1716 and ends in 1863, a span of 147 years.
 
 ![alt text](image-7.png)
 
