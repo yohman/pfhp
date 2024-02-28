@@ -73,13 +73,13 @@ The process of converting analog information into digital data is never easy, of
 <span class = "caption">The original document for household #112 in Niita, year 1763 (Kurosu, et al., 2021)</span>
 
 
-While the title to this section suggests that the original documents were converted to microfilm and then made digital, the actual process included an additional step, a paper form called the Basic Data Sheet (BDS) prior to becoming digital. The BDS was essentially an equivalent form of the original calligraphy entry, but in a tabular—but still manually entered—format shown below. 
+While the title to this section suggests that the original documents were converted to microfilm and then made digital, the actual process included several additional steps in between, one of which was a paper form called the Basic Data Sheet (BDS). The BDS was essentially an equivalent form of the original calligraphy entry, but in a tabular—but still manually entered—format shown below. 
 
 ![alt text](<images/bds 112.jpg>)
 <span class="caption">A copy of the BDS for Household #112 (Kurosu et al., 2021)</span>
 
 
-And still, the digitization would require yet another manual process: coding. Coders extracted information from each BDS and organized them by handwriting data into paper forms, creating elaborate codebooks that marked every possible permutation between various categories of household codes and individual relationships. Because of this formidably laborious process, only a handful of villages made it into "Xavier," the name given to the relational database that lives today as the home for this digital archive. Xavier is an impressive big data endeavor. It boasts data for 346,700 egos, and with numerous relational columns, amasses to having more than 21 million total data points.
+The digitization would demand yet another manual process: coding. Coders extracted information from each BDS and organized them by handwriting data into paper forms, creating elaborate codebooks that marked every possible permutation between various categories of household codes and individual relationships. Because of this formidably laborious process, only a handful of villages made it into "Xavier," the name given to the relational database that lives today as the home for this digital archive. Xavier is an impressive big data endeavor. It boasts data for 346,700 egos, and with numerous relational columns, amasses to having more than 21 million total data points.
 
 This visualization project builds upon the cumulative labor conducted by previous historians. It is the icing on the cake, per-se, but an important one for several reasons. First, while this archive presents itself as a rare digital collection for the study of Japanese demographic history, it remains in the domain of experts. Only the most dedicated of demographic scholars can make sense of the intricacies within the complex dataset, having to use sophisticated methods to pursue their own research agendas. For this reason, it fails to justify the enormous groundwork and labor expended in the creation of Xavier, as its usefulness is kept within the confines of experts. 
 
