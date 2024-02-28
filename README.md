@@ -44,7 +44,7 @@ These questions, and many more, are revealed through the **visualization** of a 
 
 <img src="image-12.png" class="post-image">
 
-<span class="caption">↑ An example of the original document shows a page from Niremata Village, Mino Province, 1638 (Cornell, Hayashi, 1986)</span>
+<span class="caption">↑ An example of the original document shows a page from Niremata Village, Mino Province, 1638 (Cornell & Hayami, 1986)</span>
 
 The first modern national census in Japan was conducted in 1920. Despite its rich history, there has been no systematic or sustained population data intake prior to 1920. In spite of this, there was a comprehensive population registry conducted and established by the Tokugawa government during the 17th century. It was an unusual set of circumstances that led to the creation of this registry, which was by no account originally meant to be used as a census. Its origins were rather inauspicious and haunting, with a singular purpose: to abolish Christianity from Japan, which at the time, was deemed to pose a threat to the rulers intent on national unification. 
 
@@ -54,6 +54,31 @@ The first modern national census in Japan was conducted in 1920. Despite its ric
 </span>
 
 While the original intent of these documents was to abolish Christianity, it is uncertain as to whether or not it served to fulfill its purpose. Moreover, with little effort to centralize and/or standardize the collection process, the documents were deemed to have little value. The decentralized nature of the documents inevitably led to many documents being thrown away or lost entirely over the years. What did survive—and a good portion managed to do so—have become a treasure-trove for historical demographers, allowing for an unprecedented view into population statistics in early modern Japan.
+
+## Original Paper → Microfilm → Digital → Visualization (kind of)
+
+The process of converting analog information into digital data is never easy, often necessitating a painstaking phase of arduous manual data input. While modern technologies like OCR make automation possible, the nature of historical documents in their calligraphic state make this particular collection impossible for machine learning and automation. Fortunately, this archive was handled and digitized by a group of dedicated historians, led by Akira Hayami, founder of historical Japanese demography whose group collected, transcribed, and coded this registry into digital form. 
+
+![alt text](<images/original shumon 112.jpg>)
+
+<span class = "caption">The original document for household #112 in Niita, year 1763 (Kurosu, et al., 2021)</span>
+
+
+While the title to this section suggests that the original documents were converted to microfilm and then made digital, the actual process included an additional step, a paper form called the Basic Data Sheet (BDS) prior to becoming digital. The BDS was essentially an equivalent form of the original calligraphy entry, but in a tabular—but still manually entered—format shown below. 
+
+![alt text](<images/bds 112.jpg>)
+<span class="caption">A copy of the BDS for Household #112 (Kurosu et al., 2021)</span>
+
+
+And still, the digitization would require yet another manual phase: coding. Coders extracted information and organized them by handwriting them into paper forms, creating elaborate codebooks that marked every possible permutation between various categories of household codes and individual relationships. Perhaps it is that because of this formidably laborious process, only a handful of villages were finally made into a relational database, one that is called "Xavier."
+
+This visualization project builds upon the immense labor conducted by previous historians. It is the icing on the cake, per se, but an important one for several reasons. First, while this archive presents itself as a rare digital collection to study Japanese history, it still remains in the domain of experts. Only the most dedicated of demographic scholars can make sense of them, using it to pursue their own research agendas. For this reason, it fails to justify the enormous groundwork to create Xavier, as it is kept within the confines of experts. 
+
+To this account, the second reason is to bring the lives of historical commoners, to modern commoners, in a form that is instantly accessible, visually intuitive, and *understandable*. 
+
+![alt text](<images/nac bds web.jpg>)
+
+<span class="caption">Original aratamecho document (left), BDS (middle), interactive website (right), all showing data for Household #112
 
 ## "Big data" for two villages, from 1716 to 1869
 <img src="image-14.png" width=400>
@@ -108,3 +133,11 @@ This, and many more narratives are available to witness via this interactive web
 ## Acknowledgements
 
 This project is being developed at the [Population and Family History Center](https://www.pfhp-japan.info/) at [Reitaku University](https://www.reitaku-u.ac.jp/), Japan.
+
+## Bibliography
+
+Cornell, L. L., & Hayami, A. (1986). The Shumon Aratame Cho: Japan’s Population Registers. Journal of Family History, 11(4), 311-328. https://doi.org/10.1177/036319908601100401
+
+Kurosu, S., Takahashi, M., & Dong, H. (2021). Thank You, Akira Hayami! The Xavier Database of
+Historical Japan. Historical Life Course Studies, 11, 112–131. https://doi.org/10.51964/hlcs11113
+
