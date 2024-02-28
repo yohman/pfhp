@@ -1,4 +1,4 @@
-# Villages, families, and egos in the Edo Period
+# FaViz: Visualizing villages, families, and egos in the Edo Period
 
 <style>
 
@@ -47,7 +47,7 @@ caption {
 
 What did a household look like for common people in early modern Japan? Were there multiple generations living under one roof? Who would assume the role of household head, how often did people from outside their village come to live with them, and how many servants did each household have?
 
-These questions, and many more, are revealed through the **visualization** of a rare digital collection of *Shumon-aratame-cho (SAC)* and *Ninbetsu-aratame-cho (NAC)*, which are the two major sources for the research of historical demography in Japan. The longitudinal and comparative approach applied to the records of thousands of lives of people will allow us to gain new understanding of our history and the resilience of people to socioeconomic and environmental changes.
+These questions, and many more, are revealed through **FaViz**, a visualization of a rare digital collection of *Shumon-aratame-cho (SAC)* and *Ninbetsu-aratame-cho (NAC)*, which are the two major sources for the research of historical demography in Japan. FaViz is an interactive visualization tool for longitudinal and comparative inspection, applied to the records of thousands of lives of people. Its intuitive interface will allow us to gain new understanding of our history and the resilience of people to socioeconomic and environmental changes.
 
 ## It's not what it looks like: The origins of the data named "Shumon-aratame-cho"
 
@@ -81,10 +81,11 @@ While the title to this section suggests that the original documents were conver
 
 The digitization would demand yet another manual process: coding. Coders extracted information from each BDS and organized them by handwriting data into paper forms, creating elaborate codebooks that marked every possible permutation between various categories of household codes and individual relationships. Because of this formidably laborious process, only a handful of villages made it into "Xavier," the name given to the relational database that lives today as the home for this digital archive. Xavier is an impressive big data endeavor. It boasts data for 346,700 egos, and with numerous relational columns, amasses to having more than 21 million total data points.
 
-This visualization project builds upon the cumulative labor conducted by previous historians. It is the icing on the cake, per-se, but an important one for several reasons. First, while this archive presents itself as a rare digital collection for the study of Japanese demographic history, it remains in the domain of experts. Only the most dedicated of demographic scholars can make sense of the intricacies within the complex dataset, having to use sophisticated methods to pursue their own research agendas. For this reason, it fails to justify the enormous groundwork and labor expended in the creation of Xavier, as its usefulness is kept within the confines of experts. 
+This visualization project builds upon the cumulative labor instituted by previous historians. It is the icing on the cake per se, but an important one for several reasons. First, while this archive presents itself as a rare digital collection for the study of Japanese demographic history, it remains in the domain of experts. Only the most dedicated of demographic scholars can make sense of the intricacies within the complex dataset, having to use sophisticated methods to pursue their own research agendas. For this reason, it fails to justify the enormous groundwork and labor expended in the creation of Xavier, as its usefulness is kept within the confines of experts. 
 
-To this account, the second reason is to bring the lived experiences and narratives of the historical commoners, to modern commoners, in a form that is instantly accessible, visually intuitive, and *understandable*. 
+To this account, the second reason is to elevate the lived experiences and narratives of early modern Japanese households in a form that is instantly accessible, visually intuitive, and *understandable*, bringing relevancy to the roots of household and family structures.
 
+A final reason that makes this visualization meaningful is its longitudinal representation. Neither the NAC nor the BDS makes viewing an entire household history easy—doing so would require the extraction of numerous BDS pages. This makes it difficult to situate and compare households from one another. 
 ![alt text](<images/nac bds web.jpg>)
 
 <span class="caption">Original aratamecho document (left), BDS (middle), interactive website (right), all showing data for Household #112
