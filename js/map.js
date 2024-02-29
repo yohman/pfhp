@@ -341,27 +341,20 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 
 	// on hover, highlight other divs with the same ego on the mini timeline
 	egoDiv.onmouseover = function() {
-		sameEgoDivs = document.querySelectorAll('div[ego="'+egoData.ego+'"]');
-		// loop through the mini timeline divs
-		sameEgoDivs.forEach(sameDiv => {
-			// if the ego is the same as the ego in the div
-			if (sameDiv.getAttribute('ego') == egoData.ego) {
-				// highlight the div
-				sameDiv.style.backgroundColor = 'lightblue';
-			}
-		});
+		
+		// for all other divs with different ego, set the divs opacity to 0.5
+		for (const div of document.querySelectorAll('div[ego]:not([ego="'+egoData.ego+'"])')) {
+			div.style.opacity = 0.2;
+		}
+
 	}
 	// on mouseout, remove the highlight
 	egoDiv.onmouseout = function() {
-		sameEgoDivs = document.querySelectorAll('div[ego="'+egoData.ego+'"]');
-		// loop through the mini timeline divs
-		sameEgoDivs.forEach(sameDiv => {
-			// if the ego is the same as the ego in the div
-			if (sameDiv.getAttribute('ego') == egoData.ego) {
-				// remove the highlight
-				sameDiv.style.backgroundColor = '';
-			}
-		});
+		
+		// for all other divs with different ego, set the divs opacity to 1
+		for (const div of document.querySelectorAll('div[ego]:not([ego="'+egoData.ego+'"])')) {
+			div.style.opacity = 1;
+		}
 	}
 
 
@@ -536,17 +529,7 @@ function createMiniEgoCard(egoData,current_year) {
 
 	// on hover, highlight other divs with the same ego on the mini timeline
 	egoDiv.onmouseover = function() {
-		// select all divs with parent div of class 
-
-
-		sameEgoDivs = document.querySelectorAll('div[ego="'+egoData.ego+'"]');
-		// loop through the mini timeline divs
-		sameEgoDivs.forEach(sameDiv => {
-				// sameDiv.style.backgroundColor = 'black';
-				// sameDiv.style.border = '1px solid black';
-				
-
-		});
+		
 		// for all other divs with different ego, set the divs opacity to 0.5
 		for (const div of document.querySelectorAll('div[ego]:not([ego="'+egoData.ego+'"])')) {
 			div.style.opacity = 0.2;
@@ -555,12 +538,7 @@ function createMiniEgoCard(egoData,current_year) {
 	}
 	// on mouseout, remove the highlight
 	egoDiv.onmouseout = function() {
-		sameEgoDivs = document.querySelectorAll('div[ego="'+egoData.ego+'"]');
-		// loop through the mini timeline divs
-		sameEgoDivs.forEach(sameDiv => {
-				// remove the highlight
-				sameDiv.style.backgroundColor = '';
-		});
+		
 		// for all other divs with different ego, set the divs opacity to 1
 		for (const div of document.querySelectorAll('div[ego]:not([ego="'+egoData.ego+'"])')) {
 			div.style.opacity = 1;
