@@ -139,9 +139,9 @@ Take another example [household #1 from Shimomoriya Village](https://yohman.gith
 
 ![alt text](images/hh%201.jpg)
 
-Gender is presented in blue and red squares, households heads with a star, and spouses of household heads with a black dot. Servants (gray squares), are present throughout, indicative of the prolonged wealth of the family. The non-stem kins (in yellow) indicate the occasional presence of uncles/aunts, nephews/nieces, and cousins in the household.
+Gender is presented in blue and red squares, households heads with a star, and spouses of household heads with a black dot. Servants (squares wrapped in a gray border), are present throughout, indicative of the prolonged wealth of the family. The non-stem kins (squares with a gray border at the bottom) indicate the occasional presence of uncles/aunts, nephews/nieces, and cousins in the household. This household enjoys a prolonged girth, at no time having less than five members present. Servants are abundant, and in some years outnumber the "stem" members of the household, indicative of the evident wealth and status.
 
-Consider the following mini-timeline ([household # 219 in Niita Village)](https://yohman.github.io/pfhp/households.html?vil_id=5010130&hhid=21900000):
+Finally, consider the following mini-timeline ([household # 219 in Niita Village)](https://yohman.github.io/pfhp/households.html?vil_id=5010130&hhid=21900000):
 
 ![alt text](images/hh%20219.jpg)
 
