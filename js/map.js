@@ -542,8 +542,16 @@ function createMiniEgoCard(egoData,current_year) {
 		sameEgoDivs = document.querySelectorAll('div[ego="'+egoData.ego+'"]');
 		// loop through the mini timeline divs
 		sameEgoDivs.forEach(sameDiv => {
-				sameDiv.style.backgroundColor = 'lightblue';
+				// sameDiv.style.backgroundColor = 'black';
+				// sameDiv.style.border = '1px solid black';
+				
+
 		});
+		// for all other divs with different ego, set the divs opacity to 0.5
+		for (const div of document.querySelectorAll('div[ego]:not([ego="'+egoData.ego+'"])')) {
+			div.style.opacity = 0.2;
+		}
+
 	}
 	// on mouseout, remove the highlight
 	egoDiv.onmouseout = function() {
@@ -553,6 +561,10 @@ function createMiniEgoCard(egoData,current_year) {
 				// remove the highlight
 				sameDiv.style.backgroundColor = '';
 		});
+		// for all other divs with different ego, set the divs opacity to 1
+		for (const div of document.querySelectorAll('div[ego]:not([ego="'+egoData.ego+'"])')) {
+			div.style.opacity = 1;
+		}
 	}
 
 	
