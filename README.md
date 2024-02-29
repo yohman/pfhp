@@ -1,4 +1,4 @@
-# FaViz: Visualizing villages, families, and egos in the Edo Period
+# XaViz: Visualizing villages, families, and egos in the Edo Period
 
 <style>
 
@@ -40,13 +40,13 @@ caption {
 
 
 
-<a href="https://yohman.github.io/pfhp/households.html" target="_blank"><img src="images/faviz.gif"></a>
+<a href="https://yohman.github.io/pfhp/households.html" target="_blank"><img src="images/XaViz.gif"></a>
 
 → [https://yohman.github.io/pfhp/households.html](https://yohman.github.io/pfhp/households.html)
 
 What did a household look like for common people in early modern Japan? Were there multiple generations living under one roof? Who assumes the role of household head, how often did people from outside their village come to live with them, and how many servants did each household have?
 
-These questions, and many more, are revealed through **FaViz**, a visualization of a rare digital collection of *Shumon-aratame-cho (SAC)* and *Ninbetsu-aratame-cho (NAC)*, which are the two major sources for the research of historical demography in Japan. FaViz is an interactive visualization tool for longitudinal and comparative inspection, applied to the records of thousands of lives of people. Its intuitive interface will allow us to gain new insights on our history and the resilience of people to socioeconomic and environmental changes.
+These questions, and many more, are revealed through **XaViz**, a visualization of a rare digital collection of *Shumon-aratame-cho (SAC)* and *Ninbetsu-aratame-cho (NAC)*, which are the two major sources for the research of historical demography in Japan. XaViz is an interactive visualization tool for longitudinal and comparative inspection, applied to the records of thousands of lives of people. Its intuitive interface will allow us to gain new insights on our history and the resilience of people to socioeconomic and environmental changes.
 
 ## It's not what it looks like: The origins of the data named "Shumon-aratame-cho"
 
@@ -80,15 +80,15 @@ While the title to this section suggests that the original documents were conver
 
 The digitization demands yet another manual process: coding. Coders extracted information from each BDS and organized them by handwriting data into paper forms, creating elaborate codebooks that marked every possible permutation between various categories of household codes and individual relationships. Because of this formidably laborious process, only a handful of villages made it into "Xavier," the name given to the relational database that lives today as the home for this digital archive. Xavier is an impressive big data endeavor. It boasts data for 346,700 egos, and with numerous relational columns, amasses to having more than 21 million total data points.
 
-FaViz builds upon the cumulative labor instituted by previous historians. It is the icing on the cake per se, but an important one for several reasons. First, while this archive presents itself as a rare digital collection for the study of Japanese demographic history, it remains in the domain of experts. Only the most dedicated of demographic scholars can make sense of the intricacies within the complex dataset, having to use sophisticated methods to pursue their own research agendas. For this reason, it fails to justify the enormous groundwork and labor expended in the creation of Xavier, as its usefulness is kept within the confines of experts. 
+XaViz builds upon the cumulative labor instituted by previous historians. It is the icing on the cake per se, but an important one for several reasons. First, while this archive presents itself as a rare digital collection for the study of Japanese demographic history, it remains in the domain of experts. Only the most dedicated of demographic scholars can make sense of the intricacies within the complex dataset, having to use sophisticated methods to pursue their own research agendas. For this reason, it fails to justify the enormous groundwork and labor expended in the creation of Xavier, as its usefulness is kept within the confines of experts. 
 
 To this account, the second reason is to elevate the lived experiences and narratives of early modern Japanese households in a form that is instantly accessible, visually intuitive, and *understandable*, bringing relevancy to the roots of household and family structures.
 
-A final reason that makes FaViz meaningful is in its longitudinal representation. Neither the NAC nor the BDS makes viewing an entire household history easy—doing so requires the extraction of numerous BDS pages, a complicated effort of finding connections between egos through history. FaViz, with its data coming from a relational database, already comes with built in connectors between households, egos, and time. A page on FaViz is no longer limited to a single household, or a single year of data. It is now able to support an assortment of visual interactions with the data.
+A final reason that makes XaViz meaningful is in its longitudinal representation. Neither the NAC nor the BDS makes viewing an entire household history easy—doing so requires the extraction of numerous BDS pages, a complicated effort of finding connections between egos through history. XaViz, with its data coming from a relational database, already comes with built in connectors between households, egos, and time. A page on XaViz is no longer limited to a single household, or a single year of data. It is now able to support an assortment of visual interactions with the data.
 
 ![alt text](<images/nac bds web.jpg>)
 
-<span class="caption">Original aratamecho document (left), BDS (middle), FaViz (right), all showing data for Household #112
+<span class="caption">Original aratamecho document (left), BDS (middle), XaViz (right), all showing data for Household #112
 
 ## "Big data" for two villages, from 1716 to 1869
 <img src="image-14.png" width=400>
@@ -126,7 +126,7 @@ Here is an example of eight households in the Shimomoriya village. Notice the di
 
 <img src="images/timelines 450-481.jpg" class="post-image">
 
-<caption>A series of eight mini-timelines in Shimomoriya village</caption>
+<span class="caption">A series of eight mini-timelines in Shimomoriya village</span>
 
 
 Now let's look at [household #112](https://yohman.github.io/pfhp/households.html?vil_id=5010130&hhid=11200000) in Niita village, which was previously shown in its original format, and shown here in its mini-timeline form:
@@ -139,7 +139,7 @@ Take another example [household #1 from Shimomoriya Village](https://yohman.gith
 
 ![alt text](images/hh%201.jpg)
 
-Gender is presented in blue and red squares, households heads with a star, and spouses of household heads with a black dot. Servants can be identified by the squares wrapped in a gray border, while non-stem kins (uncles/aunts, nephews/nieces) are squares with a gray border at the bottom. This household enjoys a prolonged girth, at no time having less than five members. Servants are abundant, and in some years outnumber the "stem" members of the household, indicative of the evident wealth and status.
+Gender is presented in blue and red squares, households heads with a star, and spouses of household heads with a black dot. Servants can be identified by the squares wrapped in a gray border, while non-stem kins (uncles/aunts, nephews/nieces) are squares with a gray border at the bottom. This household enjoys a prolonged girth, at no time having less than five members. Servants are abundant, and in some years outnumber the "stem" members of the household, indicative of the overall wealth and status.
 
 Finally, consider the following mini-timeline ([household # 219 in Niita Village)](https://yohman.github.io/pfhp/households.html?vil_id=5010130&hhid=21900000):
 
@@ -153,7 +153,7 @@ What happens next is entirely up to speculation. The household is joined by rela
 
 ## Thoughts
 
-Visualizing history through interactive platforms adds dimensions that are not possible to experience through traditional interfaces. FaViz brings several of these new dimensions to the forefront.
+Visualizing history through interactive platforms adds dimensions that are not possible to experience through traditional interfaces. XaViz brings several of these new dimensions to the forefront.
 
 - the mini-timeline
 - comparative longitudinal snapshots
