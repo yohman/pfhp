@@ -40,8 +40,7 @@ caption {
 
 
 
-[![website snapshot](image-11.png)]([image-11.png](https://yohman.github.io/pfhp/households.html))
-
+<a href="https://yohman.github.io/pfhp/households.html" target="_blank"><img src="images/faviz.gif"></a>
 
 → [https://yohman.github.io/pfhp/households.html](https://yohman.github.io/pfhp/households.html)
 
