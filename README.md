@@ -116,9 +116,15 @@ As "complete" as the data may be, it is not without gaps. The following table il
 
 In order to untangle the complexities of the relational database, we use modalities that the general public can relate to. By distilling big data in generically meaningful segments such as "villages," "households," and "family roles," the historical registry comes to life, revealing interactive family lineages as never seen before. 
 
-A macro view of the family histories can be visualized through a series of "mini" timelines. A village will consist of numerous timelines, with each representing a household's entire recorded history. This more than likely results in timelines that span multiple generations, but what makes these graphics compelling is that you can determine the relative size, wealth, and longevity of each household. Here is an example of eight households in the Shimomoriya village. Notice the differences in sizes and shapes, visual temporal snapshots that demonstrate diverse familial circumstances within a single village. Some families have lineages that span the entire timeframe (households #460 and 481), while others occupy a shortened segment (households #450,#461,#470,#471,#480). [Household #460](https://yohman.github.io/pfhp/households.html?vil_id=5040310&hhid=4600000) stands out for its prodigious presence, especially in the early phase of its recorded history. In fact, in years 1749 and 1750, it housed a total of 23 members, by far the largest household size recorded in Shimomoriya village.
+A macro view of the family histories can be visualized through a series of "mini" timelines. A village will consist of numerous timelines, with each representing a household's entire recorded history. This more than likely results in timelines that span multiple generations, but what makes these graphics compelling is that you can determine the relative size, wealth, and longevity of each household. 
 
-<img src="image-13.png" class="post-image">
+Each household is represented by its members (egos) as graphical box. The boxes are colored by gender (blue for males, red for females) and are further adorned by the different roles:
+
+<img src="images/legend.jpg" >
+
+Here is an example of eight households in the Shimomoriya village. Notice the differences in sizes and shapes, visual temporal snapshots that demonstrate diverse familial circumstances within a single village. Some families have lineages that span the entire timeframe (households #460 and 481), while others occupy a shortened segment (households #450,#461,#470,#471,#480). [Household #460](https://yohman.github.io/pfhp/households.html?vil_id=5040310&hhid=4600000) stands out for its prodigious presence, especially in the early phase of its recorded history. In fact, in years 1749 and 1750, it housed a total of 23 members, by far the largest household size recorded in Shimomoriya village.
+
+<img src="images/timelines 450-481.jpg" class="post-image">
 
 <caption>A series of eight mini-timelines in Shimomoriya village</caption>
 
@@ -131,17 +137,17 @@ This households' timeline spans the full extent of the recorded data for Niita v
 
 Take another example [household #1 from Shimomoriya Village](https://yohman.github.io/pfhp/households.html?vil_id=5040310&hhid=100000). In this timeline, recorded history begins in 1716 and ends in 1863, a span of 147 years.
 
-![alt text](image-7.png)
+![alt text](images/hh%201.jpg)
 
 Gender is presented in blue and red squares, households heads with a star, and spouses of household heads with a black dot. Servants (gray squares), are present throughout, indicative of the prolonged wealth of the family. The non-stem kins (in yellow) indicate the occasional presence of uncles/aunts, nephews/nieces, and cousins in the household.
 
 Consider the following mini-timeline ([household # 219 in Niita Village)](https://yohman.github.io/pfhp/households.html?vil_id=5010130&hhid=21900000):
 
-![alt text](image-16.png)
+![alt text](images/hh%20219.jpg)
 
 Here, one witnesses a relatively short family history, from 1793 to 1851. The male household head (indicated by the blue box with a star), marries and has a child (1799) who dies after just six years. Three years after the death of their daughter (1808)—perhaps to help deal with tragedy—the household is joined by a "non stem kin," likely a sibling of either the husband or wife. The father, however, dies three years later in 1810, as illustrated below:
 
-![alt text](image-17.png)
+![alt text](images/hh%20219%20closeup.jpg)
 
 What happens next is entirely up to speculation, but one may presume that the household is joined by relatives (including a 13 year old niece). At the same time, the wife of the deceased husband is absent for two years, taking a leave to deal with the death of her husband, only to come back in 1813 assuming the role as the new household head. But she does not return alone, instead, she now has a new husband with her, and together, they live until their respective deaths many years later, without having any children.
 
