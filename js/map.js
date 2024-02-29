@@ -383,7 +383,7 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 		// return the village data
 		from_village =  village_df.find(village_df => village_df.vil_id === egoData.birth_vil);
 		if (from_village === undefined) {
-			bornhtml += 'village not found';
+			bornhtml += '<br>village not found';
 		}
 		else
 		{
