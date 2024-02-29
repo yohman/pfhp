@@ -88,7 +88,7 @@ A final reason that makes FaViz meaningful is in its longitudinal representation
 
 ![alt text](<images/nac bds web.jpg>)
 
-<span class="caption">Original aratamecho document (left), BDS (middle), interactive website (right), all showing data for Household #112
+<span class="caption">Original aratamecho document (left), BDS (middle), FaViz (right), all showing data for Household #112
 
 ## "Big data" for two villages, from 1716 to 1869
 <img src="image-14.png" width=400>
@@ -149,7 +149,7 @@ Here, one witnesses a relatively short family history, from 1793 to 1851. The ma
 
 ![alt text](images/hh%20219%20closeup.jpg)
 
-What happens next is entirely up to speculation, but one may presume that the household is joined by relatives (including a 13 year old niece). At the same time, the wife of the deceased husband is absent for two years, taking a leave to deal with the death of her husband, only to come back in 1813 assuming the role as the new household head. But she does not return alone, instead, she now has a new husband with her, and together, they live until their respective deaths many years later, without having any children.
+What happens next is entirely up to speculation. The household is joined by relatives (including a 13 year old niece). At the same time, the wife of the deceased husband is absent for two years, taking a leave to deal with the death of her husband, only to come back in 1813 assuming the role as the new household head. She does not return alone. She now has a new husband with her (1813), and together, they live until their respective deaths many years later, without having any children.
 
 This, and many more narratives are available to witness via this interactive web platform. In doing so, we discover patterns previously not seen through tabular or other forms of data analysis, as the visual narratives convey the human story in an immersive manner.
 
