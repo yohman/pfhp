@@ -46,7 +46,7 @@ caption {
 
 What did a household look like for common people in early modern Japan? Were there multiple generations living under one roof? Who assumes the role of household head, how often did people from outside their village come to live with them, and how many servants did each household have?
 
-These questions, and many more, are revealed through **FaViz**, a visualization of a rare digital collection of *Shumon-aratame-cho (SAC)* and *Ninbetsu-aratame-cho (NAC)*, which are the two major sources for the research of historical demography in Japan. FaViz is an interactive visualization tool for longitudinal and comparative inspection, applied to the records of thousands of lives of people. Its intuitive interface will allow us to gain new understanding of our history and the resilience of people to socioeconomic and environmental changes.
+These questions, and many more, are revealed through **FaViz**, a visualization of a rare digital collection of *Shumon-aratame-cho (SAC)* and *Ninbetsu-aratame-cho (NAC)*, which are the two major sources for the research of historical demography in Japan. FaViz is an interactive visualization tool for longitudinal and comparative inspection, applied to the records of thousands of lives of people. Its intuitive interface will allow us to gain new insights on our history and the resilience of people to socioeconomic and environmental changes.
 
 ## It's not what it looks like: The origins of the data named "Shumon-aratame-cho"
 
@@ -156,10 +156,9 @@ What happens next is entirely up to speculation. The household is joined by rela
 Visualizing history through interactive platforms adds dimensions that are not possible to experience through traditional interfaces. FaViz brings several of these new dimensions to the forefront.
 
 - the mini-timeline
-
-
-This, and many more narratives are available to witness via this interactive web platform. In doing so, we discover patterns previously not seen through tabular or other forms of data analysis, as the visual narratives convey the human story in an immersive manner.
-
+- comparative longitudinal snapshots
+- visual family relations
+- "hover" function to view individuals through the course of a lifetime
 
 
 ## Acknowledgements
