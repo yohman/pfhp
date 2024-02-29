@@ -152,6 +152,9 @@ function getHouseholdsByVillage(village) {
 
 	document.getElementById('info').innerHTML = '<a href="households.html">◀︎ back to villages</a>';
 	
+	// add legend to info
+	document.getElementById('info').appendChild(createLegend());
+
 	// add vil_id to the url
 	const url = new URL(window.location.href);
 	url.searchParams.set('vil_id', village);
@@ -388,6 +391,7 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	// lifespan html
 	if (egoData.death === 0) {
 		lifespanhtml = 'death year unknown';
+		lifespanhtml = egoData.birthnac + '~';
 	} else {
 		lifespanhtml = egoData.birthnac + '~' + egoData.death+' ('+deathage+')';
 	}
@@ -457,23 +461,43 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 
 	// override if servant
 	if (egoData.rel === 6) {
-		egoDiv.className = 'egoServant';
+		egoDiv.style.boxSizing = 'border-box';
+		egoDiv.style.border = '10px solid rgba(0,0,0,0.5)';
 	}
 
 	// override if non kin 4 or 5	
-	if (egoData.rel === 4) {
-		egoDiv.className = 'egoNonKin';
+	if (egoData.rel === 4 || egoData.rel === 5) {
+		egoDiv.style.boxSizing = 'border-box';
+		egoDiv.style.borderBottom = '10px solid rgba(0,0,0,0.5)';
+
+		// egoDiv.className = 'egoNonKin';
 	}
-	if (egoData.rel === 5) {
-		egoDiv.className = 'egoNonKin';
-	}
+
 	// append the ego to the household
 	householdDiv.appendChild(egoDiv);		
 	
 	// return the ego div
 	return egoDiv;
 
-}		
+}
+
+function createLegend() {
+	// create a div for the legend
+	legendDiv = document.createElement('div');
+	legendDiv.className = 'legend';
+
+	// create a single line for the legend
+	let legendHTML = '';
+	legendHTML += '<img src="images/box-head.jpg" width=15> household head ';
+	legendHTML += '<img src="images/box-head-spouse.jpg" width=15> spouse of household head ';
+	legendHTML += '<img src="images/box-non-stem-kin.jpg" width=15> non-stem kin ';
+	legendHTML += '<img src="images/box-servant.jpg" width=15> servant';
+
+	legendDiv.innerHTML += legendHTML;
+	
+	return legendDiv;
+}
+	
 
 function createMiniEgoCard(egoData,current_year) {
 	// rel
@@ -516,12 +540,22 @@ function createMiniEgoCard(egoData,current_year) {
 	}
 	
 	egoDiv.innerHTML = relhtml;
+	egoDiv.className = egoData.nsex ===	'M' ? 'mini-egoMale' : 'mini-egoFemale';
 
 	if (egoData.rel === 6) {
-		egoDiv.className = 'mini-egoServant';
+		// add a css inner border to egoDiv
+		egoDiv.style.boxSizing = 'border-box';
+		egoDiv.style.border = '3px solid rgba(0,0,0,0.5)';
+		
+		// egoDiv.className = 'mini-egoServant';
+		// add a css diagonal line to egoDiv
+		// egoDiv.style.backgroundImage = 'linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(-45deg, black 25%, transparent 25%, transparent 75%, black 75%, black)';
 	}
 	else if (egoData.rel === 4 || egoData.rel === 5) {
-		egoDiv.className = 'mini-egoNonkin';
+		egoDiv.style.boxSizing = 'border-box';
+		egoDiv.style.borderBottom = '5px solid rgba(0,0,0,0.5)';
+
+		// egoDiv.className = 'mini-egoNonkin';
 	} else {
 		egoDiv.className = egoData.nsex ===	'M' ? 'mini-egoMale' : 'mini-egoFemale';
 	}
@@ -571,7 +605,7 @@ function createHousehold(data,current_year,village, household,show_lifeline = tr
 		createHouseholdTimeline(village,household);
 	}
 	householdHeader.style.cursor = 'pointer';
-	householdHeader.innerHTML = household + '--▶︎';
+	// householdHeader.innerHTML = household + '--▶︎';
 	householdDiv.appendChild(householdHeader);
 
 	// add mini timeline to household
@@ -767,6 +801,8 @@ function createHouseholdTimeline(vil_id,hhid) {
 	// add the mini timeline to the timeline
 	const topcontainer = document.getElementById('top-container');
 	topcontainer.appendChild(backButton);
+	// add legend to topcontainer
+	topcontainer.appendChild(createLegend());
 	topcontainer.appendChild(createHouseholdMiniTimeline(vil_id,hhid));
 	
 	// loop through the years
