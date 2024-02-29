@@ -2,10 +2,10 @@
 // Variables
 // ----------------------------------------
 
-let year, show_egos, show_map, show_lifeline, show_minitimeline;
+let year, show_egos, show_map, show_lifeline, show_minitimeline,urlParams, vil_id, hhid;
 function initializeParameters() {
 	// get url parameters
-	const urlParams = new URLSearchParams(window.location.search);
+	urlParams = new URLSearchParams(window.location.search);
 	year = urlParams.get('year') || 1716;
 	show_egos = urlParams.get('show_egos') || false;
 	show_map = urlParams.get('show_map') || true;
@@ -150,7 +150,7 @@ function getHouseholdsByVillage(village) {
 	// link to itself without any parameters
 	document
 
-	document.getElementById('info').innerHTML = '<a href="households.html">back to villages</a>';
+	document.getElementById('info').innerHTML = '<a href="households.html">◀︎ back to villages</a>';
 	
 	// add vil_id to the url
 	const url = new URL(window.location.href);
@@ -528,24 +528,23 @@ function createMiniEgoCard(egoData,current_year) {
 
 
 	// on hover, highlight other divs with the same ego on the mini timeline
-	egoDiv.onmouseover = function() {
-		
-		// for all other divs with different ego, set the divs opacity to 0.5
-		for (const div of document.querySelectorAll('div[ego]:not([ego="'+egoData.ego+'"])')) {
-			div.style.opacity = 0.2;
+	// only if hhid is in url
+	if (urlParams.has('hhid')) {
+		egoDiv.onmouseover = function() {
+			// for all other divs with different ego, set the divs opacity to 0.5
+			for (const div of document.querySelectorAll('div[ego]:not([ego="'+egoData.ego+'"])')) {
+				div.style.opacity = 0.2;
+			}
 		}
-
-	}
-	// on mouseout, remove the highlight
-	egoDiv.onmouseout = function() {
-		
-		// for all other divs with different ego, set the divs opacity to 1
-		for (const div of document.querySelectorAll('div[ego]:not([ego="'+egoData.ego+'"])')) {
-			div.style.opacity = 1;
+		// on mouseout, remove the highlight
+		egoDiv.onmouseout = function() {
+			// for all other divs with different ego, set the divs opacity to 1
+			for (const div of document.querySelectorAll('div[ego]:not([ego="'+egoData.ego+'"])')) {
+				div.style.opacity = 1;
+			}
 		}
 	}
 
-	
 
 	// append the ego to the household
 	minihouseholdDiv.appendChild(egoDiv);		
@@ -752,23 +751,22 @@ function createHouseholdTimeline(vil_id,hhid) {
 	// create a back button div
 	const backButton = document.createElement('div');
 	backButton.className = 'backButton';
-	backButton.innerHTML = '◀︎ back to households';
+	backButton.innerHTML = '◀︎ back to village';
 	// change cursor to pointer
 	backButton.style.cursor = 'pointer';
 	backButton.onclick = function() {
-		// removeMiniTimeline
-		removeDivByClass('.mini-timeline');
-		// show the time-dial div
-		// document.getElementById('timedial').style.display = 'block';
-		// filter the data by the first year in the dropdown
-		filteredData = filterByYear(ego_df, document.getElementById('yearDropdown').value);
-		// update the visualization with the filtered data
-		updateVisualization(filteredData);
+		// if vil_id and hhid are both url parameters, go to households.html with vil_id as a url parameter
+		if (urlParams.has('vil_id') && urlParams.has('hhid')) {
+			window.location.href = 'households.html?vil_id=' + vil_id;
+		}
+		// if only vil_id is a url parameter, go to households.html
+		else if (urlParams.has('vil_id')) {
+			window.location.href = 'households.html';
+		}
 	}
 	// add the mini timeline to the timeline
 	const topcontainer = document.getElementById('top-container');
 	topcontainer.appendChild(backButton);
-	// topcontainer.appendChild('◀︎ back to households')
 	topcontainer.appendChild(createHouseholdMiniTimeline(vil_id,hhid));
 	
 	// loop through the years
@@ -916,17 +914,20 @@ function createHouseholdMiniTimeline(vil_id,hhid) {
 			yearContainer.setAttribute('year', year);
 
 			// on hover, scroll to the household div with the same year
-			yearContainer.onmouseover = function() {
-				// query all divs in visualization, and find  the div with the same year
-				sameyearDivs = document.querySelectorAll('.year[year="'+year+'"]');
-				sameyearDivs.forEach(sameyearDiv => {
-					// ease scroll to the div scroll to top
-					sameyearDiv.scrollIntoView();
-					window.scrollTo(0, 0);
-				});
-
-
+			// search url params for hhid
+			
+			if (urlParams.has('hhid')) {
+				yearContainer.onmouseover = function() {
+					// query all divs in visualization, and find  the div with the same year
+					sameyearDivs = document.querySelectorAll('.year[year="'+year+'"]');
+					sameyearDivs.forEach(sameyearDiv => {
+						// ease scroll to the div scroll to top
+						sameyearDiv.scrollIntoView();
+						window.scrollTo(0, 0);
+					});
+				}		
 			}
+
 			// append the year container to the timeline
 			filteredData = filterByYear(ego_df, year);
 			createMiniHousehold(filteredData,year, vil_id, hhid,false,false);
