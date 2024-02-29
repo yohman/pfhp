@@ -552,7 +552,7 @@ function createMiniEgoCard(egoData,current_year) {
 	}
 	else if (egoData.rel === 3) {
 		egoDiv.style.boxSizing = 'border-box';
-		egoDiv.style.borderRight = '3px solid rgba(0,0,0,0.5)';
+		egoDiv.style.borderRight = '5px solid rgba(0,0,0,0.5)';
 	}
 	else if (egoData.rel === 4 || egoData.rel === 5) {
 		egoDiv.style.boxSizing = 'border-box';
