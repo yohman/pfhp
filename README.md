@@ -151,6 +151,13 @@ Here, one witnesses a relatively short family history, from 1793 to 1851. The ma
 
 What happens next is entirely up to speculation. The household is joined by relatives (including a 13 year old niece). At the same time, the wife of the deceased husband is absent for two years, taking a leave to deal with the death of her husband, only to come back in 1813 assuming the role as the new household head. She does not return alone. She now has a new husband with her (1813), and together, they live until their respective deaths many years later, without having any children.
 
+## Thoughts
+
+Visualizing history through interactive platforms adds dimensions that are not possible to experience through traditional interfaces. FaViz brings several of these new dimensions to the forefront.
+
+- the mini-timeline
+
+
 This, and many more narratives are available to witness via this interactive web platform. In doing so, we discover patterns previously not seen through tabular or other forms of data analysis, as the visual narratives convey the human story in an immersive manner.
 
 

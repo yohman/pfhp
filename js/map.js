@@ -345,7 +345,7 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	// on hover, highlight other divs with the same ego on the mini timeline
 	egoDiv.onmouseover = function() {
 		
-		// for all other divs with different ego, set the divs opacity to 0.5
+		// for all other divs with different ego, set the divs opacity to 0.2
 		for (const div of document.querySelectorAll('div[ego]:not([ego="'+egoData.ego+'"])')) {
 			div.style.opacity = 0.2;
 		}
@@ -359,8 +359,6 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 			div.style.opacity = 1;
 		}
 	}
-
-
 
 	// create a header for the ego
 	egoHeader = document.createElement('h3');
@@ -376,17 +374,22 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	
 	// make ego a number
 	ego = parseInt(ego);
-	// if nsex is M, use male emoji, else use female emoji
-	if (egoData.nsex === 'M') {
-		nsexhtml = '<span class="male">㊚</span>';
-	} else {
-		nsexhtml = '<span class="female">㊛</span>';
-	}
 
 	// check if birth_vil is different from vil_id
 	bornhtml = '';
 	if (egoData.birth_vil !== egoData.vil_id) {
-		bornhtml += '<br><span style="font-size:1.2rem">➟⌂</span> '+getVillageInfo(egoData.birth_vil,egoData.vil_id,show_map);
+		// bornhtml += '<br><span style="font-size:1.2rem">➟⌂</span> '+getVillageInfo(egoData.birth_vil,egoData.vil_id,show_map);
+		// add the name of the village to the bornhtml
+		// return the village data
+		from_village =  village_df.find(village_df => village_df.vil_id === egoData.birth_vil);
+		if (from_village === undefined) {
+			bornhtml += 'village not found';
+		}
+		else
+		{
+			bornhtml += '<br><span style="font-size:1.2rem">➟⌂</span> <span style="font-size:0.6rem">'+from_village.Mura+' '+from_village.Gun+' '+from_village.Kuni+'</span>';
+		}
+			
 	}
 	// lifespan html
 	if (egoData.death === 0) {
@@ -410,7 +413,7 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	} else if (egoData.rel === 6) {
 		relhtml = '<br>servant';
 	} else if (egoData.rel === 7) {
-		relhtml = '<span style="font-size:1.5rem;color:red;">★</span><br>';
+		relhtml = '<span style="font-size:1.5rem;color:black;">●</span><br>';
 	}
 
 	// icon
@@ -447,16 +450,11 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 		lifelinehtml = '';
 	}
 
-	egoHeader.innerHTML = egocounter + '. <b>' + iconhtml + ' ' + age + '歳</b>'+relhtml+'<br>'+lifespanhtml+bornhtml+lifelinehtml;
-
-	// egoHeader.innerHTML = egocounter + '. <b>' + iconhtml + ' ' + age + ' years old</b> '+relhtml+'<br>'+lifespanhtml+'<br>'+egoData.ego+'(ego)<br>'+egoData.father+'(father)'+'<br>'+egoData.mother+'(mother)'+bornhtml+'<br><span class="lifeline">'+createLifeLine(egoData.birthnac, document.getElementById('yearDropdown').value, egoData.death)+'</span>';
+	egoHeader.innerHTML = egocounter + '. <b>' + iconhtml + ' <span style="font-size:1.8rem">' + age + '</span></b>歳'+relhtml+'<br>'+lifespanhtml+bornhtml+lifelinehtml;
 
 	egoDiv.appendChild(egoHeader);
 	
 	// if egoData nsex is M, set the color to blue, else set it to red
-	// calculate age by subtracting the dropdown year from the egoData birthnac
-	// append the age to the egoDiv
-	// egoDiv.style.backgroundColor = egoData.nsex === 'M' ? 'lightblue' : 'lightcoral';
 	egoDiv.className = egoData.nsex ===	'M' ? 'egoMale' : 'egoFemale';
 
 	// override if servant
@@ -465,12 +463,16 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 		egoDiv.style.border = '10px solid rgba(0,0,0,0.5)';
 	}
 
+	// override if semi stem kin
+	if (egoData.rel === 3) {
+		egoDiv.style.boxSizing = 'border-box';
+		egoDiv.style.borderRight = '10px solid rgba(0,0,0,0.5)';
+	}
+
 	// override if non kin 4 or 5	
 	if (egoData.rel === 4 || egoData.rel === 5) {
 		egoDiv.style.boxSizing = 'border-box';
 		egoDiv.style.borderBottom = '10px solid rgba(0,0,0,0.5)';
-
-		// egoDiv.className = 'egoNonKin';
 	}
 
 	// append the ego to the household
@@ -489,8 +491,9 @@ function createLegend() {
 	// create a single line for the legend
 	let legendHTML = '';
 	legendHTML += '<img src="images/box-head.jpg" width=15> household head ';
-	legendHTML += '<img src="images/box-head-spouse.jpg" width=15> spouse of household head ';
-	legendHTML += '<img src="images/box-non-stem-kin.jpg" width=15> non-stem kin ';
+	legendHTML += '<img src="images/box-head-spouse.jpg" width=15> spouse of head ';
+	legendHTML += '<img src="images/box-semi-stem-kin.jpg" width=15> spouse of stem kin ';
+	legendHTML += '<img src="images/box-non-stem-kin.jpg" width=15> non-stem kin or non-kin ';
 	legendHTML += '<img src="images/box-servant.jpg" width=15> servant';
 
 	legendDiv.innerHTML += legendHTML;
@@ -542,14 +545,14 @@ function createMiniEgoCard(egoData,current_year) {
 	egoDiv.innerHTML = relhtml;
 	egoDiv.className = egoData.nsex ===	'M' ? 'mini-egoMale' : 'mini-egoFemale';
 
+	// servant
 	if (egoData.rel === 6) {
-		// add a css inner border to egoDiv
 		egoDiv.style.boxSizing = 'border-box';
-		egoDiv.style.border = '3px solid rgba(0,0,0,0.5)';
-		
-		// egoDiv.className = 'mini-egoServant';
-		// add a css diagonal line to egoDiv
-		// egoDiv.style.backgroundImage = 'linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(-45deg, black 25%, transparent 25%, transparent 75%, black 75%, black)';
+		egoDiv.style.border = '3px solid rgba(0,0,0,0.5)';	
+	}
+	else if (egoData.rel === 3) {
+		egoDiv.style.boxSizing = 'border-box';
+		egoDiv.style.borderRight = '3px solid rgba(0,0,0,0.5)';
 	}
 	else if (egoData.rel === 4 || egoData.rel === 5) {
 		egoDiv.style.boxSizing = 'border-box';
@@ -756,7 +759,7 @@ function getVillageInfo(from_vil_id,to_vil_id,show_map = true) {
 		{
 			village_map_html = '';
 		}
-		return from_village.Mura+' '+from_village.Gun+' '+from_village.Kuni+'<br>'+village_map_html;
+		return '<span style="font-size:1rem">'+from_village.Mura+' '+from_village.Gun+' '+from_village.Kuni+'<br>'+village_map_html+'</span>';
 	}
 }
 
