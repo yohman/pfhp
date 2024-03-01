@@ -658,6 +658,54 @@ function createHousehold(data,current_year,village, household,show_lifeline = tr
 	return householdDiv;
 }
 
+function createEmptyMiniHousehold(current_year) {
+	// create a div for the household
+	minihouseholdDiv = document.createElement('div');
+	minihouseholdDiv.className = 'minihousehold';
+	// create a header for the household
+	householdHeader = document.createElement('div');
+	householdHeader.className = 'minihousehold-year';
+	// add the year as a parameter to the div
+	householdHeader.setAttribute('year', current_year);
+	// add the year to the header
+	householdHeader.innerHTML = current_year;
+	minihouseholdDiv.appendChild(householdHeader);
+	// hide the header
+	householdHeader.style.visibility = 'hidden';
+	// add year as a parameter to the div
+	minihouseholdDiv.setAttribute('year', current_year);
+
+	// on hover, set the header display to block
+	minihouseholdDiv.onmouseover = function() {
+		// find the household header div with the same year
+		householdHeader = document.querySelector('.minihousehold-year[year="'+current_year+'"]');
+		// set the display to block
+		householdHeader.style.visibility = 'visible';
+
+
+	}
+	// on mouseout, set the header display to none
+	minihouseholdDiv.onmouseout = function() {
+		// find the household header div with the same year
+		householdHeader = document.querySelector('.minihousehold-year[year="'+current_year+'"]');
+		// set the display to none
+		householdHeader.style.visibility = 'hidden';
+	}
+
+	// create an empty household
+	householdDiv = document.createElement('div');
+	householdDiv.className = 'empty-household';
+
+	// add a span to the household div that is the same size as the ego div
+	emptyDiv = document.createElement('span');
+	emptyDiv.innerHTML = '-';
+	householdDiv.appendChild(emptyDiv);	
+
+	minihouseholdDiv.appendChild(householdDiv);
+
+
+	return minihouseholdDiv;
+}
 
 function createMiniHousehold(data,current_year,village, household,show_lifeline = true,show_map = true) {
 
@@ -935,11 +983,14 @@ function createHouseholdMiniTimeline(vil_id,hhid) {
 	minititle.innerHTML = 'Household '+hhid+'--▶︎';;
 	minitimeline.appendChild(minititle);
 
-	// add household stats to the mini timeline
-	// minitimeline.appendChild(householdStats(vil_id,hhid));
+	// get first and last year from years
+	const firstYear = years[0];
+	const lastYear = years[years.length-1];
 
 	// loop through the years
-	for (const year of years) {
+	// for (const year of years) {
+	// start a loop from the first year to the last year
+	for (let year = firstYear; year <= lastYear; year++) {
 		
 		// if the household exists in the year
 		if (ego_df[parseInt(year)] && ego_df[parseInt(year)][parseInt(vil_id)] && ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
@@ -974,6 +1025,17 @@ function createHouseholdMiniTimeline(vil_id,hhid) {
 			// append the household to the village
 			yearContainer.appendChild(minihouseholdDiv);
 
+			minitimeline.appendChild(yearContainer);
+		}
+		else
+		{
+			// create a container for the year
+			const yearContainer = document.createElement('div');
+			yearContainer.className = 'mini-year';
+			yearContainer.setAttribute('year', year);
+			// createEmptyMiniHousehold();
+			yearContainer.appendChild(createEmptyMiniHousehold(year));
+			// yearContainer.innerHTML = '-';
 			minitimeline.appendChild(yearContainer);
 		}
 	}

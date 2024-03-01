@@ -44,6 +44,7 @@ caption {
 
 → [https://yohman.github.io/pfhp/households.html](https://yohman.github.io/pfhp/households.html)
 
+
 What did a household look like for common people in early modern Japan? Were there multiple generations living under one roof? Who assumes the role of household head, how often did people from outside their village come to live with them, and how many servants did each household have?
 
 These questions, and many more, are revealed through **XaViz**, a visualization of a rare digital collection of *Shumon-aratame-cho (SAC)* and *Ninbetsu-aratame-cho (NAC)*, which are the two major sources for the research of historical demography in Japan. XaViz is an interactive visualization tool for longitudinal and comparative inspection, applied to the records of thousands of lives of people. Its intuitive interface will allow us to gain new insights on our history and the resilience of people to socioeconomic and environmental changes.
@@ -103,6 +104,10 @@ As "complete" as the data may be, it is not without gaps. The following table il
 | Shimomoriya| 1716-1869   | 1720, 1729, 1846, 1850, 1858, 1864-1867    |
 | Niita      | 1720-1870   | 1742, 1758, 1796, 1857, 1858                |
 
+### Data structure
+
+For the purposes of XaViz, the data for these two villages were extracted from the Xavier database as a single, flat file.
+
 
 ### Descriptive statistics
 
@@ -150,6 +155,62 @@ Here, one witnesses a relatively short family history, from 1793 to 1851. The ma
 ![alt text](images/hh%20219%20closeup.jpg)
 
 What happens next is entirely up to speculation. The household is joined by relatives (including a 13 year old niece). At the same time, the wife of the deceased husband is absent for two years, taking a leave to deal with the death of her husband, only to come back in 1813 assuming the role as the new household head. She does not return alone. She now has a new husband with her (1813), and together, they live until their respective deaths many years later, without having any children.
+
+## Stories
+
+### The Story of Manji
+
+![alt text](<images/shimomoriya google earth.jpg>)
+<span class="caption">Shimomoriya Village, as seen in Google Earth, has not changed in population size for more than 300 years.</span>
+
+[→ Manji's household](https://yohman.github.io/pfhp/households.html?vil_id=5040310&hhid=1500000)
+
+![alt text](<images/manji timeline.jpg>)
+
+Manji was born in 1722, in Shimomoriya, a small agricultural village in Fukushima prefecture with a population size of approximately 400 people. The village consists of several hundred tightly packed houses, nestled in the tranquil countryside. On its South border, the Sasawara River meanders peacefully, and to its north one can see a chain of mountains just a short distance away. It is otherwise surrounded by agricultural pastures.
+
+![alt text](<images/manji mountains.jpg>)
+<span class="caption">A chain of mountairs are visible beyond the agricultural pastures to the north.</span>
+
+At the time of his birth, Manji lived in a house with his mother Fuku, and his father Shichiro, who were in their mid-twenties. Just two years earlier, his parents had lost Shuta, their first born child, who died within a year after his birth. Before Manji turned 4 years old however, his father, Shichiro would die at a young age of 29, but his mother, Fuku, would find and marry Soemon the following year. Soemon was not born in Shimomoriya, instead, he came from Asanomura, a village located some 13 km to the northwest. Their two villages were divided by mountains, and there was no getting around having to cross this mountain region to see each other. 
+
+![alt text](<images/shimomoriya to asanomura google earth.jpg>)
+
+<span class="caption">Soemon, Fuku's second husband, came from Asanomura, a village located on the other side of the mountain, 12 kilometers away.</span>
+
+Upon his arrival, Soemon would assume the role of household head, despite not being born in the household. When Manji turned 6, Fuku and Soemon would welcome a daughter, but she would die within her first year. Two years later, in 1730 when Manji is 8, they had another son, Hansaburo, but he would only live to be 5 years old. Upon his death in 1734, Fuku and Soemon had yet another daughter, Tora. Finally, Manji's house finds stability, as Tora would stay with them until she turns 21, after which she leaves to join another household. When he turned 15, Manji found a bride Mino, who also came from Shimomoriya. She would join the household at 12 years old. While they did not have children of their own, they adopted a 5 year old girl, Ina in 1755. From hereon, the household enjoyed a long period of stability, with many years of having three generations living together. However, 1773, Fuku would pass away, and in the same year, so did Manji. Fuku was 75, and Manji was 52. Manji's wife, Mino, would continue to live in the house, enjoying becoming a grandmother until she passes away at the age of 67. Manji ended up spending all 52 years of his life in this house. Mino also spent 52 years of her life in the same house.
+
+#### Manji
+
+![alt text](images/manji.jpg)
+
+#### Shichiro, Manji's father
+
+![alt text](images/shichiro.jpg)
+
+#### Fuku, Manji's mother
+
+![alt text](images/fuku.jpg)
+
+#### Soemon, Fuku's second husband
+
+![alt text](images/soemon.jpg)
+
+#### Hansaburo, Manji's little brother
+
+![alt text](images/hansaburo.jpg)
+
+#### Tora, Manji's little sister
+
+![alt text](images/tora.jpg)
+
+#### Mino, Manji's wife
+
+![alt text](images/mino.jpg)
+
+#### Ina, Mino and Manji's adopted daughter
+
+![alt text](images/ina.jpg)
 
 ## Thoughts
 
