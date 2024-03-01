@@ -172,13 +172,13 @@ Manji was born in 1722, in Shimomoriya, a small agricultural village in Fukushim
 ![alt text](<images/manji mountains.jpg>)
 <span class="caption">A chain of mountairs are visible beyond the agricultural pastures to the north.</span>
 
-At the time of his birth, Manji lived in a house with his mother Fuku, and his father Shichiro, who were in their mid-twenties. Just two years earlier, his parents had lost Shuta, their first born child, who died within a year after his birth. Before Manji turned 4 years old however, his father, Shichiro dies at a young age of 29, but his mother, Fuku, finds and marries Soemon the following year. Soemon was not born in Shimomoriya, instead, he came from Asanomura, a village located some 13 km to the northwest. Their two villages are divided by mountains, and there was no getting around having to cross this mountain region to see each other. 
+At the time of his birth, Manji lived in a house with his mother Fuku, and his father Shichiro, who were in their mid-twenties. Just two years earlier, his parents had lost Shuta, their first born child, who died within a year after his birth. Before Manji turned four years old however, his father, Shichiro dies at a young age of 29, but his mother, Fuku, finds and marries Soemon the following year. Soemon was not born in Shimomoriya, instead, he came from Asanomura, a village located some 13 km to the northwest. Their two villages are divided by mountains, and there was no getting around having to cross this mountain region to see each other. 
 
 ![alt text](<images/shimomoriya to asanomura google earth.jpg>)
 
 <span class="caption">Soemon, Fuku's second husband, came from Asanomura, a village located on the other side of the mountain, 12 kilometers away.</span>
 
-Upon his arrival, Soemon assumes the role of household head, despite not being born in the household. When Manji turns 6, Fuku and Soemon welcome a daughter, but she dies within her first year. Two years later, they had another son, Hansaburo, but he only lives to be 5 years old. Upon his death in 1734, Fuku and Soemon have yet another daughter, Tora. Finally, Manji's house finds stability, as Tora stays with them until she turns 21, after which she leaves to join another household. When he turns 15, Manji finds a bride Mino, who also came from Shimomoriya. She joins the household at 12 years old. While they do not have children of their own, they adopt a 5 year old girl, Ina, in 1755. From hereon, the household enjoys a long period of stability, with many years of having three generations living together. However, in 1773, Fuku passes away, and in the same year, so does Manji. Fuku was 75, and Manji was 52. Manji's wife, Mino, continues to live in the house, enjoying becoming a grandmother until she passes away at the age of 67. Manji ended up spending all 52 years of his life in this house. Mino also spent the same number of years, 52, in the same house.
+Upon his arrival, Soemon assumes the role of household head, despite not being born in the household. When Manji turns six, Fuku and Soemon welcome a daughter, but she dies within her first year. Two years later, they have another son, Hansaburo, but he only lives to be 5 years old. Upon his death in 1734, Fuku and Soemon have yet another daughter, Tora. Finally, Manji's house finds stability, as Tora stays with them until she turns 21, after which she leaves to join another household. When he turns 15, Manji finds a bride Mino, who also came from Shimomoriya. She joins the household at 12 years old. While they do not have children of their own, they adopt a 5 year old girl, Ina, in 1755. From hereon, the household enjoys a long period of stability, with many years of having three generations living together. However, in 1773, Fuku passes away, and in the same year, so does Manji. Fuku was 75, and Manji was 52. Manji's wife, Mino, continues to live in the house, enjoying becoming a grandmother until she passes away at the age of 67. Manji ended up spending all 52 years of his life in this house. Mino also spent the same number of years, 52, in the same house.
 
 #### Manji
 
@@ -214,7 +214,7 @@ Upon his arrival, Soemon assumes the role of household head, despite not being b
 
 ## Thoughts
 
-Visualizing history through interactive platforms adds dimensions that are not possible to experience through traditional interfaces. XaViz brings several of these new dimensions to the forefront.
+Visualizing history through interactive platforms adds dimensions that are not possible to experience through traditional interfaces. XaViz brings these dimensions to the forefront.
 
 - the mini-timeline
 - comparative longitudinal snapshots
