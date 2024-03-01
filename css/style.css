@@ -122,30 +122,26 @@ line-height: 20px; /* Center text vertically */
     font-size: 0.6rem;
 }
 
-.mini-egoMale {
-    /* font-size:0.4rem; */
-    /* border: 1px solid rgba(87, 120, 164,1); */
-    background-color: rgba(87, 120, 164,1);
-    width:10px;
-    height:10px;
+.mini {
+    width:8px;
+    height:8px;
     margin: 1px;
     display: flex;
     justify-content: center; /* Horizontally center */
     align-items: center; /* Vertically center */
+}
+.mini-empty {
+    background-color: rgb(159, 159, 159);
+}
 
+.mini-egoMale {
+    background-color: rgba(87, 120, 164,1);
 }
 .mini-egoFemale {
-    /* font-size:0.4rem; */
-    /* border: 1px solid rgba(209, 97, 93,1); */
     background-color: rgba(209, 97, 93,1);
-    width:10px;
-    height:10px;
-    margin: 1px;
-    display: flex;
-    justify-content: center; /* Horizontally center */
-    align-items: center; /* Vertically center */
-
 }
+
+
 .mini-egoServant {
     /* border: 1px solid rgba(209, 97, 93,1); */
     background-color: rgba(184, 176, 172,1);

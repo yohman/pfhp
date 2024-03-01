@@ -543,7 +543,7 @@ function createMiniEgoCard(egoData,current_year) {
 	}
 	
 	egoDiv.innerHTML = relhtml;
-	egoDiv.className = egoData.nsex ===	'M' ? 'mini-egoMale' : 'mini-egoFemale';
+	egoDiv.className = egoData.nsex ===	'M' ? 'mini mini-egoMale' : 'mini mini-egoFemale';
 
 	// servant
 	if (egoData.rel === 6) {
@@ -560,7 +560,7 @@ function createMiniEgoCard(egoData,current_year) {
 
 		// egoDiv.className = 'mini-egoNonkin';
 	} else {
-		egoDiv.className = egoData.nsex ===	'M' ? 'mini-egoMale' : 'mini-egoFemale';
+		egoDiv.className = egoData.nsex ===	'M' ? 'mini mini-egoMale' : 'mini mini-egoFemale';
 	}
 
 
@@ -581,7 +581,6 @@ function createMiniEgoCard(egoData,current_year) {
 			}
 		}
 	}
-
 
 	// append the ego to the household
 	minihouseholdDiv.appendChild(egoDiv);		
@@ -658,6 +657,47 @@ function createHousehold(data,current_year,village, household,show_lifeline = tr
 	return householdDiv;
 }
 
+function getEgo(ego){
+	// get all instances of ego from ego_df
+	// ego_df is structured by year, village or household
+	// get ego regardless of year, village or household
+
+	// loop through each year, then each village, then every household and find the ego
+
+	// get the years from the data
+	years = getTopLevelItems(ego_df);
+	// create an array to store the ego data
+	egos = [];
+
+	// loop through the years
+	for (const year of years) {
+		// get the villages from the data
+		villages = getSecondLevelItems(ego_df, year);
+		// loop through the villages
+		for (const village of villages) {
+			// get the households from the data
+			households = getSecondLevelItems(ego_df[year], village);
+			// loop through the households
+			for (const household of households) {
+				// get the egos from the data
+				egos = getSecondLevelItems(ego_df[year][village], household);
+				// loop through the egos
+				for (const ego of egos) {
+					// if the ego is found, return the data
+					if (ego === ego) {
+						// add to array
+						egos.push(ego_df[year][village][household][ego]);
+						// return ego_df[year][village][household][ego];
+					}
+				}
+			}
+		}
+	}
+	// return the array
+	console.log(egos);
+	// return egos;
+}
+
 function createEmptyMiniHousehold(current_year) {
 	// create a div for the household
 	minihouseholdDiv = document.createElement('div');
@@ -694,11 +734,13 @@ function createEmptyMiniHousehold(current_year) {
 
 	// create an empty household
 	householdDiv = document.createElement('div');
-	householdDiv.className = 'empty-household';
+
+	// add multiple classes mini and mini-empty to the household div
+	householdDiv.className = 'mini mini-empty';
 
 	// add a span to the household div that is the same size as the ego div
 	emptyDiv = document.createElement('span');
-	emptyDiv.innerHTML = '-';
+	emptyDiv.innerHTML = '';
 	householdDiv.appendChild(emptyDiv);	
 
 	minihouseholdDiv.appendChild(householdDiv);
