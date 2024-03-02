@@ -158,37 +158,37 @@ What happens next is entirely up to speculation. The household is joined by rela
 
 ## Stories
 
-### The Story of Manji
+### The Story of Manjiro
 
 ![alt text](<images/shimomoriya google earth.jpg>)
 <span class="caption">Shimomoriya Village, as seen in Google Earth, has not changed in population size for more than 300 years.</span>
 
-[→ Manji's household](https://yohman.github.io/pfhp/households.html?vil_id=5040310&hhid=1500000)
+[→ Manjiro's household](https://yohman.github.io/pfhp/households.html?vil_id=5040310&hhid=1500000)
 
 ![alt text](<images/manji timeline.jpg>)
 
-Manji was born in 1722, in Shimomoriya, a small agricultural village in Fukushima prefecture with a population size of approximately 400 people. The village consists of several hundred tightly packed houses, nestled in the tranquil countryside. On its South border, the Sasawara River meanders peacefully, and to its north one can see a chain of mountains just a short distance away. It is otherwise surrounded by vast agricultural pastures.
+Manjiro was born in 1722, in Shimomoriya, a small agricultural village in Fukushima prefecture with a population size of approximately 400 people. At the time of his birth, his village consisted of 113 tightly packed houses, nestled in the tranquil countryside. On its South border, the Sasawara River meanders peacefully, and to its north one can see a chain of mountains just a short distance away. It is otherwise surrounded by vast agricultural pastures.
 
 ![alt text](<images/manji mountains.jpg>)
-<span class="caption">A chain of mountairs are visible beyond the agricultural pastures to the north.</span>
+<span class="caption">A chain of mountains are visible beyond the agricultural pastures to the north (photo credit: Google Street View).</span>
 
-At the time of his birth, Manji lived in a house with his mother Fuku, and his father Shichiro, who were in their mid-twenties. Just two years earlier, his parents had lost Shuta, their first born child, who died within a year after his birth. Before Manji turned four years old however, his father, Shichiro dies at a young age of 29, but his mother, Fuku, finds and marries Soemon the following year. Soemon was not born in Shimomoriya, instead, he came from Asanomura, a village located some 13 km to the northwest. Their two villages are divided by mountains, and there was no getting around having to cross this mountain region to see each other. 
+At the time of his birth, Manjiro lived in a house with his mother Fuku, and his father Shichiro, who were in their mid-twenties. Just two years earlier, his parents had lost Shuta, their first born child, who died within a year after his birth. Before Manjiro turned four years old however, his father, Shichiro dies at a young age of 29, but his mother, Fuku, finds and marries Soemon the following year. Soemon was not born in Shimomoriya, instead, he came from Asanomura, a village located some 13 km to the northwest. Their two villages are divided by mountains, and there was no getting around having to cross this mountain region to see each other, an 8-9 hour walk. 
 
 ![alt text](<images/shimomoriya to asanomura google earth.jpg>)
 
 <span class="caption">Soemon, Fuku's second husband, came from Asanomura, a village located on the other side of the mountain, 12 kilometers away.</span>
 
-Upon his arrival, Soemon assumes the role of household head, despite not being born in the household. When Manji turns six, Fuku and Soemon welcome a daughter, but she dies within her first year. Two years later, they have another son, Hansaburo, but he only lives to be 5 years old. Upon his death in 1734, Fuku and Soemon have yet another daughter, Tora. Finally, Manji's house finds stability, as Tora stays with them until she turns 21, after which she leaves to join another household. When he turns 15, Manji finds a bride Mino, who also came from Shimomoriya. She joins the household at 12 years old. While they do not have children of their own, they adopt a 5 year old girl, Ina, in 1755. From hereon, the household enjoys a long period of stability, with many years of having three generations living together. However, in 1773, Fuku passes away, and in the same year, so does Manji. Fuku was 75, and Manji was 52. Manji's wife, Mino, continues to live in the house, enjoying becoming a grandmother (Ino would marry and stay in the house with her husband) until she passes away at the age of 67. Manji ended up spending all 52 years of his life in this house. Mino also spent the same number of years, 52, in the same house.
+Upon his arrival, Soemon assumes the role of household head, despite not being born in the household. This was a common occurrence in this village, where husbands would marry-in  (mukoyōshi (婿養子)). As a mukoyōshi, Soemon is adopted into the family and takes the family's surname setting him up to eventually become the household head. When Manjiro turns six, Fuku and Soemon welcome a daughter, but she dies within her first year. Two years later, they have another son, Hansaburo, but he only lives to be 5 years old. Upon his death in 1734, Fuku and Soemon have yet another daughter, Tora. Finally, Manjiro's house finds stability, as Tora stays with them until she turns 21, after which she leaves to join another household. When he turns 15, Manjiro finds a bride Mino, who also came from Shimomoriya. She joins the household at 12 years old. While they do not have children of their own, they adopt a 5 year old girl, Ina, in 1755. From hereon, the household enjoys a long period of stability, with many years of having three generations living together. However, in 1773, Fuku passes away, and in the same year, so does Manjiro. Fuku was 75, and Manjiro was 52. Manjiro's wife, Mino, continues to live in the house, enjoying becoming a grandmother (Ino would marry and stay in the house with her husband) until she passes away at the age of 67. Manjiro ended up spending all 52 years of his life in this house. Mino also spent the same number of years, 52, in the same house.
 
-#### Manji
+#### Manjiro
 
 ![alt text](images/manji.jpg)
 
-#### Shichiro, Manji's father
+#### Shichiro, Manjiro's father
 
 ![alt text](images/shichiro.jpg)
 
-#### Fuku, Manji's mother
+#### Fuku, Manjiro's mother
 
 ![alt text](images/fuku.jpg)
 
@@ -196,19 +196,19 @@ Upon his arrival, Soemon assumes the role of household head, despite not being b
 
 ![alt text](images/soemon.jpg)
 
-#### Hansaburo, Manji's little brother
+#### Hansaburo, Manjiro's little brother
 
 ![alt text](images/hansaburo.jpg)
 
-#### Tora, Manji's little sister
+#### Tora, Manjiro's little sister
 
 ![alt text](images/tora.jpg)
 
-#### Mino, Manji's wife
+#### Mino, Manjiro's wife
 
 ![alt text](images/mino.jpg)
 
-#### Ina, Mino and Manji's adopted daughter
+#### Ina, Mino and Manjiro's adopted daughter
 
 ![alt text](images/ina.jpg)
 

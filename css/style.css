@@ -177,6 +177,13 @@ line-height: 20px; /* Center text vertically */
     margin: 10px;
 }
 
+.mini-title {
+    font-size: 0.6rem;
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+}
+
 .egoMale {
     background-color: rgba(87, 120, 164,0.5);
     /* background-color: rgba(173, 216, 230, 0.5); */
