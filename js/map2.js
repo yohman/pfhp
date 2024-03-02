@@ -420,15 +420,15 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	if (egoData.rel === 1) {
 		relhtml = '<span style="font-size:1.5rem">★</span><br>';
 	} else if (egoData.rel === 2) {
-		relhtml = '<br>stem kin';
+		relhtml = '<br><span style="font-size:0.6rem">stem kin</span>';
 	} else if (egoData.rel === 3) {
-		relhtml = '<br>semi-stem kin';
+		relhtml = '<br><span style="font-size:0.6rem">semi-stem kin</span>';
 	} else if (egoData.rel === 4) {
-		relhtml = '<br>non-stem kin';
+		relhtml = '<br><span style="font-size:0.6rem">non-stem kin</span>';
 	} else if (egoData.rel === 5) {
-		relhtml = '<br>non kin';
+		relhtml = '<br><span style="font-size:0.6rem">non kin</span>';
 	} else if (egoData.rel === 6) {
-		relhtml = '<br>servant';
+		relhtml = '<br><span style="font-size:0.6rem">servant or non-kin</span>';
 	} else if (egoData.rel === 7) {
 		relhtml = '<span style="font-size:1.5rem;color:black;">●</span><br>';
 	}
@@ -488,10 +488,6 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	}
 
 
-
-
-
-
 	// append the ego to the household
 	householdDiv.appendChild(egoDiv);		
 	
@@ -541,23 +537,6 @@ function createMiniEgoCard(egoData,current_year) {
 	
 	// set cursor to pointer
 	egoDiv.style.cursor = 'pointer';
-
-	// if (egoData.rel === 1) {
-	// 	relhtml = '★';
-	// } else if (egoData.rel === 2) {
-	// 	relhtml = '<span class="ego-head-kin"></span>';
-	// } else if (egoData.rel === 3) {
-	// 	relhtml = '<span class="ego-head-kin"></span>';
-	// } else if (egoData.rel === 4) {
-	// 	relhtml = '<span class=""></span>';
-	// } else if (egoData.rel === 5) {
-	// 	relhtml = '<span class=""></span>';
-	// } else if (egoData.rel === 6) {
-	// 	relhtml = '<span class=""></span>';
-	// 	// egoDiv.className = 'ego-head-servant';
-	// } else if (egoData.rel === 7) {
-	// 	relhtml = '●';
-	// }
 	
 	relhtml = '';
 	egoDiv.className = egoData.nsex ===	'M' ? 'mini mini-egoMale' : 'mini mini-egoFemale';
