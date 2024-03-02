@@ -418,7 +418,7 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	
 	// rel
 	if (egoData.rel === 1) {
-		relhtml = '<span style="font-size:1.2rem">★</span><br>';
+		relhtml = '<span style="font-size:1.5rem">★</span><br>';
 	} else if (egoData.rel === 2) {
 		relhtml = '<br><span style="font-size:0.6rem">stem kin</span>';
 	} else if (egoData.rel === 3) {
@@ -430,7 +430,7 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	} else if (egoData.rel === 6) {
 		relhtml = '<br><span style="font-size:0.6rem">servant or non-kin</span>';
 	} else if (egoData.rel === 7) {
-		relhtml = '<span style="font-size:1.2rem;color:black;">●</span><br>';
+		relhtml = '<span style="font-size:1.5rem;color:black;">●</span><br>';
 	}
 
 	// icon
@@ -542,7 +542,7 @@ function createMiniEgoCard(egoData,current_year) {
 	egoDiv.className = egoData.nsex ===	'M' ? 'mini mini-egoMale' : 'mini mini-egoFemale';
 	
 	if (egoData.rel === 1){
-		relhtml = '★';
+		relhtml = '<span style="font-size:0.5rem">★</span>';
 	}
 	// semi stem kin
 	else if (egoData.rel === 3) {
@@ -561,7 +561,7 @@ function createMiniEgoCard(egoData,current_year) {
 	}
 	// spouse of head
 	else if (egoData.rel === 7) {
-		relhtml = '●';
+		relhtml = '<span style="font-size:0.5rem">●</span>';
 	}
 	egoDiv.innerHTML = relhtml;
 
