@@ -12,6 +12,7 @@ let show_minitimeline;
 let urlParams;
 let vil_id;
 let hhid;
+let overlay;
 
 // ---------------------------------------- //
 //											//
@@ -26,6 +27,8 @@ loadData('ego.json', 'village.json','households.json')
 	village_df = village;
 	household_df=household;
 
+	// hide loading
+	hideLoading();
 	// once the data is loaded initialize the site
 	initializeParameters();
 })
@@ -33,45 +36,8 @@ loadData('ego.json', 'village.json','households.json')
 	console.error('Error loading data:', error);
 });
 
-// ---------------------------------------- //
-//											//
-// Initialize the site						//
-//											//
-// ---------------------------------------- //
-
-function initializeParameters() {
-	// get url parameters
-	urlParams 			= new URLSearchParams(window.location.search);
-	year 				= urlParams.get('year') || 1716;
-	show_egos 			= urlParams.get('show_egos') || false;
-	show_map 			= urlParams.get('show_map') || true;
-	show_lifeline		= urlParams.get('show_lifeline') || true;
-	show_minitimeline 	= urlParams.get('show_minitimeline') || true;
-	vil_id 				= urlParams.get('vil_id') || 0;
-	hhid 				= urlParams.get('hhid') || 0;
-
-	// if village and household are defined, go to household page
-	if (urlParams.has('vil_id') && urlParams.has('hhid')) {
-		createHouseholdPage(urlParams.get('vil_id'), urlParams.get('hhid'));
-	}
-	// if only village defined, go to village page
-	else if (urlParams.has('vil_id')) {
-		createVillagePage(urlParams.get('vil_id'));
-	}
-	else 
-	{
-	// if no parameters are defined, go to the main page
-		createHomePage();
-	}
-}
-
-// ---------------------------------------- //
-//											//
-// Load the data							//
-//											//
-// ---------------------------------------- //
-
 function loadData(...files) {
+	showLoading();
 	// Function to load a JSON file
 	function loadJSON(file) {
 		return new Promise((resolve, reject) => {
@@ -95,14 +61,55 @@ function loadData(...files) {
 }
 
 // ---------------------------------------- //
+//											//
+// Initialize the site						//
+//											//
+// ---------------------------------------- //
+
+function initializeParameters() {
+
+	// get url parameters
+	urlParams 			= new URLSearchParams(window.location.search);
+	year 				= urlParams.get('year') || 1716;
+	show_egos 			= urlParams.get('show_egos') || false;
+	show_map 			= urlParams.get('show_map') || true;
+	show_lifeline		= urlParams.get('show_lifeline') || true;
+	show_minitimeline 	= urlParams.get('show_minitimeline') || true;
+	vil_id 				= urlParams.get('vil_id') || 0;
+	hhid 				= urlParams.get('hhid') || 0;
+
+	// if village and household are defined, go to household page
+	// get url parameters
+	urlParams = new URLSearchParams(window.location.search);
+	if (urlParams.has('vil_id') && urlParams.has('hhid')) {
+		createHouseholdPage(urlParams.get('vil_id'), urlParams.get('hhid'));
+	}
+	// if only village defined, go to village page
+	else if (urlParams.has('vil_id')) {
+		createVillagePage(urlParams.get('vil_id'));
+	}
+	else 
+	{
+	// if no parameters are defined, go to the main page
+		createHomePage();
+	}
+}
+
+// ---------------------------------------- //
 //                   						//
 // Create the homepage 						//
 //                   						//
 // ---------------------------------------- //
 
 function createHomePage() {
+	// remove vil_id and hhid from the url
+	removeParameterFromUrl('vil_id');
+	removeParameterFromUrl('hhid');
+
 	// select the visualization div
 	visualization = document.getElementById('visualization');
+	// clear info div
+	document.getElementById('info').innerHTML = '';
 	// clear the visualization
 	visualization.innerHTML = '';
 	// delete the back button
@@ -111,10 +118,260 @@ function createHomePage() {
 	// get villages
 	villages = getVillages();
 	villages.forEach(village => {
-		createVillageDiv(village);
+		createVillageHeader(village);
 	});
 }
 
+// ---------------------------------------- //
+//                   						//
+// Create the village page 					//
+//                   						//
+// ---------------------------------------- //
+
+function createVillagePage(village) {
+
+	// delete hhid from the url
+	removeParameterFromUrl('hhid');
+
+	// clear info div
+	document.getElementById('info').innerHTML = '';
+
+	// create a back button div
+	const backButton = document.createElement('div');
+	backButton.className = 'backButton';
+	backButton.innerHTML = '◀︎ back to villages';
+	// change cursor to pointer
+	backButton.style.cursor = 'pointer';
+	backButton.onclick = function() {
+		// remove vil_id from the url
+		removeParameterFromUrl('vil_id');
+		createHomePage();
+		// window.location.href = 'households.html';
+	}
+	// add back button to info
+	document.getElementById('info').appendChild(backButton);
+
+	// add legend to info
+	document.getElementById('info').appendChild(createLegend());
+
+	// add vil_id to the url
+	const url = new URL(window.location.href);
+	url.searchParams.set('vil_id', village);
+	window.history.pushState({}, '', url);
+
+	// get the visualization div
+	visualization = document.getElementById('visualization');
+	visualization.innerHTML = '';
+
+	// create a div for the village
+	createVillageHeader(village);
+
+	// get the households by village id from household_df, which returns an array
+	households = household_df[village];
+
+	// loop through the households
+	households.forEach(household => {
+		// create a mini-timeline for each household
+		miniContainerDiv = document.createElement('div');
+		miniContainerDiv.className = 'mini-timeline';
+		miniContainerDiv.appendChild(createHouseholdMiniTimeline(village,household));
+		miniContainerDiv.style.cursor = 'pointer';
+		miniContainerDiv.onclick = function() {
+			// add vil_id and hhid to the url
+			const url = new URL(window.location.href);
+			url.searchParams.set('vil_id', village);
+			url.searchParams.set('hhid', household);
+			window.history.pushState({}, '', url);
+			createHouseholdPage(village,household);
+			// go to households.html with vil_id and hhid as a url parameter
+			// window.location.href = 'households.html?vil_id=' + village + '&hhid=' + household;
+		}
+		villageDiv.appendChild(miniContainerDiv);
+	});
+	// append the village to the visualization
+	visualization.appendChild(villageDiv);
+	// hideloading
+	hideLoading();
+}
+
+// ---------------------------------------- //
+//                   						//
+// Create the household page		 		//
+//                   						//
+// ---------------------------------------- //
+
+function createHouseholdPage(vil_id,hhid) {
+	// turn show_egos to true
+	show_egos = true;
+
+	// clear info div
+	info = document.getElementById('info');
+	info.innerHTML = '';
+
+	// create a back button div
+	const backButton = document.createElement('div');
+	backButton.className = 'backButton';
+	backButton.innerHTML = '◀︎ back to village';
+	// change cursor to pointer
+	backButton.style.cursor = 'pointer';
+	backButton.onclick = function() {
+		// if vil_id and hhid are both url parameters, go to households.html with vil_id as a url parameter
+		// get url parameters
+		urlParams = new URLSearchParams(window.location.search);
+		if (urlParams.has('vil_id') && urlParams.has('hhid')) {
+			// get rid of hhid from the url parameters
+			removeParameterFromUrl('hhid');
+			createVillagePage(vil_id);
+			// window.location.href = 'households.html?vil_id=' + vil_id;
+		}
+		// if only vil_id is a url parameter, go to households.html
+		else if (urlParams.has('vil_id')) {
+			// get rid of the url parameters
+			removeParameterFromUrl('vil_id');
+			createHomePage();
+			// window.location.href = 'households.html';
+		}
+	}
+	// add back button to info
+	info.appendChild(backButton);
+	// add legend to info
+	info.appendChild(createLegend());
+
+	
+	// create an array of years from the ego data
+	const years = Object.keys(ego_df);
+
+	// select the timeline div
+	const timeline = document.getElementById('visualization');
+	// clear the timeline
+	timeline.innerHTML = '';
+
+	// delete the back button
+	// removeDivByClass('.backButton');
+
+
+	// add the mini timeline to the timeline
+	const topcontainer = document.getElementById('top-container');
+	// topcontainer.appendChild(backButton);
+	// add legend to topcontainer
+	// topcontainer.appendChild(createLegend());
+	info.appendChild(createHouseholdMiniTimeline(vil_id,hhid));
+	
+	// loop through the years
+	for (const year of years) {
+		
+		// if the household exists in the year
+		if (ego_df[parseInt(year)] && ego_df[parseInt(year)][parseInt(vil_id)] && ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
+
+			// create a container for the year
+			const yearContainer = document.createElement('div');
+			yearContainer.className = 'year';
+			yearContainer.innerHTML = year;
+
+			// add a parameter for the year to the div
+			yearContainer.setAttribute('year', year);
+
+			// append the year container to the timeline
+			filteredData = filterByYear(ego_df, year);
+			createHousehold(filteredData,year, vil_id, hhid,false,false,show_minitimeline=false);
+
+			// on hover, make the year container visible
+			yearContainer.onmouseover = function() {
+				// find the household header div with the same year
+				householdHeader = document.querySelector('.minihousehold-year[year="'+year+'"]');
+				// set the display to block
+				householdHeader.style.visibility = 'visible';
+			}
+			// on mouseout, set the header display to none
+			yearContainer.onmouseout = function() {
+				// find the household header div with the same year
+				householdHeader = document.querySelector('.minihousehold-year[year="'+year+'"]');
+				// set the display to none
+				householdHeader.style.visibility = 'hidden';
+			}
+
+			// append the household to the village
+			yearContainer.appendChild(householdDiv);
+
+			timeline.appendChild(yearContainer);
+		}
+	}
+	
+}
+
+// ---------------------------------------- //
+//                   						//
+// Create the household mini timeline		//
+//                   						//
+// ---------------------------------------- //
+
+function createHouseholdMiniTimeline(vil_id,hhid) {
+
+	// setup
+	// get years where there is data for this village
+	const years = getYearsByVillage(vil_id);
+	const minitimeline 		= document.createElement('div');
+	const minititle 		= document.createElement('div');
+
+	minitimeline.className 	= 'mini-timeline';
+	minititle.className 	= 'mini-title';
+	minititle.innerHTML 	= 'Household '+hhid+'--▶︎';;
+	minitimeline.appendChild(minititle);
+
+	// get first and last year from years
+	const firstYear 		= years[0];
+	const lastYear 			= years[years.length-1];
+
+	// start a loop from the first year to the last year
+	for (let year = firstYear; year <= lastYear; year++) {
+		
+		// if the household exists in the year
+		if (ego_df[parseInt(year)] && ego_df[parseInt(year)][parseInt(vil_id)] && ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
+
+			// create a container for the year
+			const yearContainer 	= document.createElement('div');
+			yearContainer.className = 'mini-year';
+			yearContainer.setAttribute('year', year);
+
+			// on hover, scroll to the household div with the same year
+			const urlParams = new URLSearchParams(window.location.search);
+			if (urlParams.has('hhid')) {
+				console.log('urlParams.has(hhid)');
+				yearContainer.onmouseover = function() {
+					// query all divs in visualization, and find  the div with the same year
+					sameyearDivs = document.querySelectorAll('.year[year="'+year+'"]');
+					sameyearDivs.forEach(sameyearDiv => {
+						// ease scroll to the div scroll to top
+						sameyearDiv.scrollIntoView();
+						window.scrollTo(0, 0);
+					});
+				}		
+			}
+
+			// append the year container to the timeline
+			filteredData = filterByYear(ego_df, year);
+			createMiniHousehold(filteredData,year, vil_id, hhid,false,false);
+
+			// append the household to the village
+			yearContainer.appendChild(minihouseholdDiv);
+
+			minitimeline.appendChild(yearContainer);
+		}
+		else
+		{
+			// create a container for the year
+			const yearContainer = document.createElement('div');
+			yearContainer.className = 'mini-year';
+			yearContainer.setAttribute('year', year);
+			// createEmptyMiniHousehold();
+			yearContainer.appendChild(createEmptyMiniHousehold(year));
+			// yearContainer.innerHTML = '-';
+			minitimeline.appendChild(yearContainer);
+		}
+	}
+	return minitimeline;
+	
+}
 
 // ---------------------------------------- //
 //                   						//
@@ -122,7 +379,7 @@ function createHomePage() {
 //                   						//
 // ---------------------------------------- //
 
-function createVillageDiv(village) {
+function createVillageHeader(village) {
 	// create a div for the village
 	villageDiv = document.createElement('div');
 	villageDiv.className = 'village';
@@ -138,8 +395,21 @@ function createVillageDiv(village) {
 
 	// click the div to go to base url with vil_id
 	villageHeader.onclick = function() {
-		// go to households.html with vil_id as a url parameter
-		window.location.href = 'households.html?vil_id=' + village;
+
+		showLoading();
+		console.log('villageHeader.onclick');
+		
+		// add vil_id to the url
+		const url = new URL(window.location.href);
+		url.searchParams.set('vil_id', village);
+		window.history.pushState({}, '', url);
+
+		// after a delay, go to the village page
+		setTimeout(function() {
+			createVillagePage(village);
+		}, 100);
+
+		// createVillagePage(village);
 	}
 	// append the village to the visualization
 	visualization.appendChild(villageDiv);
@@ -172,150 +442,6 @@ function getVillages() {
 	// get the villages from the data, which returns an array
 	return Object.keys(household_df);
 }
-
-// ---------------------------------------- //
-//                   						//
-// Create the village page 					//
-//                   						//
-// ---------------------------------------- //
-
-function createVillagePage(village) {
-	// add a back to villages link to the info div
-	document.getElementById('info').innerHTML = '<a href="households.html">◀︎ back to villages</a>';
-	
-	// add legend to info
-	document.getElementById('info').appendChild(createLegend());
-
-	// add vil_id to the url
-	const url = new URL(window.location.href);
-	url.searchParams.set('vil_id', village);
-	window.history.pushState({}, '', url);
-
-	// get the visualization div
-	visualization = document.getElementById('visualization');
-	visualization.innerHTML = '';
-
-	// create a div for the village
-	createVillageDiv(village);
-
-	// get the households by village id from household_df, which returns an array
-	households = household_df[village];
-
-	// loop through the households
-	households.forEach(household => {
-		// create a mini-timeline for each household
-		miniContainerDiv = document.createElement('div');
-		miniContainerDiv.className = 'mini-timeline';
-		miniContainerDiv.appendChild(createHouseholdMiniTimeline(village,household));
-		miniContainerDiv.style.cursor = 'pointer';
-		miniContainerDiv.onclick = function() {
-			// go to households.html with vil_id and hhid as a url parameter
-			window.location.href = 'households.html?vil_id=' + village + '&hhid=' + household;
-		}
-		villageDiv.appendChild(miniContainerDiv);
-	});
-	// append the village to the visualization
-	visualization.appendChild(villageDiv);
-}
-
-// ---------------------------------------- //
-//                   						//
-// life line 								//
-//                   						//
-// ---------------------------------------- //
-
-function createLifeLine(birthYear, currentYear, deathYear) {
-	let lifeline = '';
-	const lineLength = deathYear - birthYear + 1;
-	for (let i = 0; i < lineLength; i++) {
-		if (i === currentYear - birthYear) {
-			lifeline += '<span class="currentyear">◯</span>'; // Mark current year with 'C'
-		} else if (i === 0 || i === lineLength - 1) {
-			lifeline += '|'; // Mark birth and death years with '|'
-		} else {
-			lifeline += '-'; // Mark other years with '-'
-		}
-	}
-	lifeline += '\n';
-	return lifeline;
-}
-
-// ---------------------------------------- //
-//                   						//
-// dropdown									//
-//                   						//
-// ---------------------------------------- //
-
-function updateDropdown() {
-	// get the years from the data
-	years = getTopLevelItems(ego_df);
-
-	// select the dropdown
-	dropdown = document.getElementById('yearDropdown');
-	// add the years to the dropdown
-	years.forEach(year => {
-		option = document.createElement('option');
-		option.value = year;
-		option.text = year;
-		dropdown.appendChild(option);
-	});
-	// add an event listener to the dropdown
-	dropdown.addEventListener('change', function() {
-		// removeMiniTimeline
-		removeDivByClass('.mini-timeline');
-		// filter the data by the selected year
-		filteredData = filterByYear(ego_df, this.value);
-		// update the visualization with the filtered data
-		createHomePage(filteredData);
-	});
-
-	current_year = document.getElementById('yearDropdown').value
-
-	// add an event listener to the previous button
-	document.getElementById('previousYear').addEventListener('click', function() {
-		// removeMiniTimeline
-		removeDivByClass('.mini-timeline');
-
-		// get the index of the current year in the dropdown
-		index = years.indexOf(document.getElementById('yearDropdown').value);
-		// if the current year is not the first year
-		if (index > 0) {
-			// set the dropdown to the previous year
-			document.getElementById('yearDropdown').value = years[index - 1];
-			// filter the data by the previous year
-			filteredData = filterByYear(ego_df, document.getElementById('yearDropdown').value);
-			// update the visualization with the filtered data
-			createHomePage(filteredData);
-		}
-	});
-	// add an event listener to the next button
-	document.getElementById('nextYear').addEventListener('click', function() {
-		
-		// removeMiniTimeline
-		removeDivByClass('.mini-timeline');
-
-		// get the index of the current year in the dropdown
-		index = years.indexOf(document.getElementById('yearDropdown').value);
-		// if the current year is not the last year
-		if (index < years.length - 1) {
-			// set the dropdown to the next year
-			document.getElementById('yearDropdown').value = years[index + 1];
-			// filter the data by the next year
-			filteredData = filterByYear(ego_df, document.getElementById('yearDropdown').value);
-			// update the visualization with the filtered data
-			createHomePage(filteredData);
-		}
-	});
-}
-
-function removeDivByClass(classname) {
-	const elementToRemove = document.querySelector(classname);
-	if (elementToRemove) {
-	  elementToRemove.remove();
-	} else {
-	  console.log('No element found with the class name ', classname);
-	}
-  }
 
 // ---------------------------------------- //
 //                   						//
@@ -568,6 +694,8 @@ function createMiniEgoCard(egoData,current_year) {
 
 	// on hover, highlight other divs with the same ego on the mini timeline
 	// only if hhid is in url
+	// get url parameters
+	urlParams = new URLSearchParams(window.location.search);
 	if (urlParams.has('hhid')) {
 		egoDiv.onmouseover = function() {
 			// for all other divs with different ego, set the divs opacity to 0.5
@@ -813,93 +941,6 @@ function createMiniHousehold(data,current_year,village, household,show_lifeline 
 
 
 // ----------------------------------------
-// household timeline
-// ----------------------------------------
-
-function createHouseholdPage(vil_id,hhid) {
-	// turn show_egos to true
-	show_egos = true;
-
-	// hide the time-dial div
-	document.getElementById('timedial').style.display = 'none';
-
-	// create an array of years from the ego data
-	const years = Object.keys(ego_df);
-
-	// select the timeline div
-	const timeline = document.getElementById('visualization');
-	// clear the timeline
-	timeline.innerHTML = '';
-
-	// delete the back button
-	removeDivByClass('.backButton');
-
-	// create a back button div
-	const backButton = document.createElement('div');
-	backButton.className = 'backButton';
-	backButton.innerHTML = '◀︎ back to village';
-	// change cursor to pointer
-	backButton.style.cursor = 'pointer';
-	backButton.onclick = function() {
-		// if vil_id and hhid are both url parameters, go to households.html with vil_id as a url parameter
-		if (urlParams.has('vil_id') && urlParams.has('hhid')) {
-			window.location.href = 'households.html?vil_id=' + vil_id;
-		}
-		// if only vil_id is a url parameter, go to households.html
-		else if (urlParams.has('vil_id')) {
-			window.location.href = 'households.html';
-		}
-	}
-	// add the mini timeline to the timeline
-	const topcontainer = document.getElementById('top-container');
-	topcontainer.appendChild(backButton);
-	// add legend to topcontainer
-	topcontainer.appendChild(createLegend());
-	topcontainer.appendChild(createHouseholdMiniTimeline(vil_id,hhid));
-	
-	// loop through the years
-	for (const year of years) {
-		
-		// if the household exists in the year
-		if (ego_df[parseInt(year)] && ego_df[parseInt(year)][parseInt(vil_id)] && ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
-
-			// create a container for the year
-			const yearContainer = document.createElement('div');
-			yearContainer.className = 'year';
-			yearContainer.innerHTML = year;
-
-			// add a parameter for the year to the div
-			yearContainer.setAttribute('year', year);
-
-			// append the year container to the timeline
-			filteredData = filterByYear(ego_df, year);
-			createHousehold(filteredData,year, vil_id, hhid,false,false,show_minitimeline=false);
-
-			// on hover, make the year container visible
-			yearContainer.onmouseover = function() {
-				// find the household header div with the same year
-				householdHeader = document.querySelector('.minihousehold-year[year="'+year+'"]');
-				// set the display to block
-				householdHeader.style.visibility = 'visible';
-			}
-			// on mouseout, set the header display to none
-			yearContainer.onmouseout = function() {
-				// find the household header div with the same year
-				householdHeader = document.querySelector('.minihousehold-year[year="'+year+'"]');
-				// set the display to none
-				householdHeader.style.visibility = 'hidden';
-			}
-
-			// append the household to the village
-			yearContainer.appendChild(householdDiv);
-
-			timeline.appendChild(yearContainer);
-		}
-	}
-	
-}
-
-// ----------------------------------------
 // household stats
 // ----------------------------------------
 
@@ -985,69 +1026,70 @@ function getYearsByVillage(vil_id) {
 	return villageYears;
 }
 
-function createHouseholdMiniTimeline(vil_id,hhid) {
 
-	// setup
-	// get years where there is data for this village
-	const years = getYearsByVillage(vil_id);
-	const minitimeline 		= document.createElement('div');
-	const minititle 		= document.createElement('div');
 
-	minitimeline.className 	= 'mini-timeline';
-	minititle.className 	= 'mini-title';
-	minititle.innerHTML 	= 'Household '+hhid+'--▶︎';;
-	minitimeline.appendChild(minititle);
+// ---------------------------------------- //
+//                   						//
+// Misc functions							//
+//                   						//
+// ---------------------------------------- //
 
-	// get first and last year from years
-	const firstYear 		= years[0];
-	const lastYear 			= years[years.length-1];
-
-	// start a loop from the first year to the last year
-	for (let year = firstYear; year <= lastYear; year++) {
-		
-		// if the household exists in the year
-		if (ego_df[parseInt(year)] && ego_df[parseInt(year)][parseInt(vil_id)] && ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
-
-			// create a container for the year
-			const yearContainer 	= document.createElement('div');
-			yearContainer.className = 'mini-year';
-			yearContainer.setAttribute('year', year);
-
-			// on hover, scroll to the household div with the same year
-			// only if this is a household page			
-			if (urlParams.has('hhid')) {
-				yearContainer.onmouseover = function() {
-					// query all divs in visualization, and find  the div with the same year
-					sameyearDivs = document.querySelectorAll('.year[year="'+year+'"]');
-					sameyearDivs.forEach(sameyearDiv => {
-						// ease scroll to the div scroll to top
-						sameyearDiv.scrollIntoView();
-						window.scrollTo(0, 0);
-					});
-				}		
-			}
-
-			// append the year container to the timeline
-			filteredData = filterByYear(ego_df, year);
-			createMiniHousehold(filteredData,year, vil_id, hhid,false,false);
-
-			// append the household to the village
-			yearContainer.appendChild(minihouseholdDiv);
-
-			minitimeline.appendChild(yearContainer);
-		}
-		else
-		{
-			// create a container for the year
-			const yearContainer = document.createElement('div');
-			yearContainer.className = 'mini-year';
-			yearContainer.setAttribute('year', year);
-			// createEmptyMiniHousehold();
-			yearContainer.appendChild(createEmptyMiniHousehold(year));
-			// yearContainer.innerHTML = '-';
-			minitimeline.appendChild(yearContainer);
-		}
+function removeDivByClass(classname) {
+	const elementToRemove = document.querySelector(classname);
+	if (elementToRemove) {
+	  elementToRemove.remove();
+	} else {
+	  console.log('No element found with the class name ', classname);
 	}
-	return minitimeline;
-	
+}
+
+
+function showLoading() {
+	console.log('showLoading');
+    // Create overlay div
+    overlay = document.createElement('div');
+    overlay.id = 'loadingOverlay';
+
+    // Create loading spinner
+    var spinner = document.createElement('div');
+    spinner.classList.add('spinner');
+
+    // Create loading text
+    var loadingText = document.createElement('div');
+    loadingText.id = 'loadingText';
+    loadingText.textContent = 'Loading data';
+
+    // Append spinner and text to overlay
+    overlay.appendChild(spinner);
+    overlay.appendChild(loadingText);
+
+    // Append overlay to body
+    document.body.appendChild(overlay);
+
+    // Show overlay
+    overlay.style.display = 'block';
+
+}
+
+function hideLoading() {
+	// Hide the overlay
+	overlay.style.display = 'none';
+    // Remove the overlay from the DOM
+    // loadingData.overlay.parentNode.removeChild(loadingData.overlay);
+}
+
+function removeParameterFromUrl(parameter) {
+    // Get the current URL
+    var url = window.location.href;
+
+    // Create a regular expression pattern to match the parameter
+    var pattern = new RegExp('&?' + parameter + '=[^&]*', 'g');
+
+    // Replace the parameter with an empty string
+    var newUrl = url.replace(pattern, '');
+
+    // If the parameter was found and removed, update the URL
+    if (newUrl !== url) {
+        window.history.replaceState({}, document.title, newUrl);
+    }
 }

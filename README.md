@@ -212,6 +212,9 @@ Upon his arrival, Soemon assumes the role of household head, despite not being b
 
 ![alt text](images/ina.jpg)
 
+### The story of Kiya
+
+
 ## Thoughts
 
 Visualizing history through interactive platforms adds dimensions that are not possible to experience through traditional interfaces. XaViz brings these dimensions to the forefront.
