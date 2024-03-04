@@ -14,13 +14,19 @@ let vil_id;
 let hhid;
 let overlay;
 
+let tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+let tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+window.onload = function() {
+	initializeTooltips();
+  };
 // ---------------------------------------- //
 //											//
 // Load the data							//
 //											//
 // ---------------------------------------- //
 
-loadData('ego.json', 'village.json','households.json')
+loadData('data/ego.json', 'data/village.json','data/households.json')
 .then(([ego, village,household]) => {
 	// Do something with the loaded data
 	ego_df = ego;
@@ -154,6 +160,9 @@ function createVillagePage(village) {
 	// add legend to info
 	document.getElementById('info').appendChild(createLegend());
 
+	// initialize tooltip
+	initializeTooltips();
+
 	// add vil_id to the url
 	const url = new URL(window.location.href);
 	url.searchParams.set('vil_id', village);
@@ -236,7 +245,8 @@ function createHouseholdPage(vil_id,hhid) {
 	info.appendChild(backButton);
 	// add legend to info
 	info.appendChild(createLegend());
-
+	// initialize tooltip
+	initializeTooltips();
 	
 	// create an array of years from the ego data
 	const years = Object.keys(ego_df);
@@ -252,9 +262,6 @@ function createHouseholdPage(vil_id,hhid) {
 
 	// add the mini timeline to the timeline
 	const topcontainer = document.getElementById('top-container');
-	// topcontainer.appendChild(backButton);
-	// add legend to topcontainer
-	// topcontainer.appendChild(createLegend());
 	info.appendChild(createHouseholdMiniTimeline(vil_id,hhid));
 	
 	// loop through the years
@@ -336,8 +343,9 @@ function createHouseholdMiniTimeline(vil_id,hhid) {
 			// on hover, scroll to the household div with the same year
 			const urlParams = new URLSearchParams(window.location.search);
 			if (urlParams.has('hhid')) {
-				console.log('urlParams.has(hhid)');
+
 				yearContainer.onmouseover = function() {
+					console.log('yearContainer.onmouseover');
 					// query all divs in visualization, and find  the div with the same year
 					sameyearDivs = document.querySelectorAll('.year[year="'+year+'"]');
 					sameyearDivs.forEach(sameyearDiv => {
@@ -397,7 +405,6 @@ function createVillageHeader(village) {
 	villageHeader.onclick = function() {
 
 		showLoading();
-		console.log('villageHeader.onclick');
 		
 		// add vil_id to the url
 		const url = new URL(window.location.href);
@@ -507,7 +514,7 @@ function createEgoCard(egoData, egocounter,year,show_lifeline = true,show_map = 
 	}
 
 	// create a header for the ego
-	egoHeader = document.createElement('h3');
+	egoHeader = document.createElement('span');
 
 	// create a variable for the age
 	// if year is not defined, use the dropdown year
@@ -632,8 +639,12 @@ function createLegend() {
 	legendHTML += '<img src="images/box-head.jpg" width=15> household head ';
 	legendHTML += '<img src="images/box-head-spouse.jpg" width=15> spouse of head ';
 	legendHTML += '<img src="images/box-semi-stem-kin.jpg" width=15> spouse of stem kin ';
-	legendHTML += '<img src="images/box-non-stem-kin.jpg" width=15> non-stem kin ';
+	legendHTML += '<img src="images/box-non-stem-kin.jpg" width=15> non-stem kin  <span class="help-icon" data-bs-toggle="tooltip" data-bs-title="siblings, uncle/aunt, nephew/niece,cousin"></span> ';
 	legendHTML += '<img src="images/box-servant.jpg" width=15> servant or non kin ';
+
+	// tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+	// tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+	
 
 	legendDiv.innerHTML += legendHTML;
 	
@@ -730,7 +741,7 @@ function createHousehold(data,current_year,village, household,show_lifeline = tr
 	householdDiv = document.createElement('div');
 	householdDiv.className = 'household';
 	// create a header for the household
-	householdHeader = document.createElement('h3');
+	householdHeader = document.createElement('span');
 	
 	// add onclick event to household header to createHouseholdPage function
 	householdHeader.onclick = function() {
@@ -821,9 +832,7 @@ function getEgo(ego){
 			}
 		}
 	}
-	// return the array
-	console.log(egos);
-	// return egos;
+
 }
 
 function createEmptyMiniHousehold(current_year) {
@@ -945,7 +954,6 @@ function createMiniHousehold(data,current_year,village, household,show_lifeline 
 // ----------------------------------------
 
 function householdStats(vil_id,hhid){
-	console.log('householdStats',vil_id,hhid);
 	// find number of distinct egos with the same vil_id and hhid in the ego data
 	// do so by looping through the every year of the ego data
 	// and checking if the household exists in each year
@@ -1045,8 +1053,8 @@ function removeDivByClass(classname) {
 
 
 function showLoading() {
-	console.log('showLoading');
-    // Create overlay div
+
+	// Create overlay div
     overlay = document.createElement('div');
     overlay.id = 'loadingOverlay';
 
@@ -1092,4 +1100,11 @@ function removeParameterFromUrl(parameter) {
     if (newUrl !== url) {
         window.history.replaceState({}, document.title, newUrl);
     }
+}
+
+// Create a function to initialize tooltips
+function initializeTooltips() {
+	tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+	tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    // $('[data-bs-toggle="tooltip"]').tooltip(); // Initialize tooltips for all elements with data-toggle="tooltip"
 }

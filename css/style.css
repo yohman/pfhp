@@ -99,7 +99,8 @@ line-height: 20px; /* Center text vertically */
     margin: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-.container {
+
+.viz-container {
     width: 100%; /* Adjust as needed */
     overflow-x: auto;
     white-space: nowrap; /* Prevent wrapping */
@@ -301,4 +302,25 @@ line-height: 20px; /* Center text vertically */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* CSS for the help icon */
+.help-icon {
+    display: inline-flex; /* Use flexbox */
+    justify-content: center; /* Align horizontally */
+    align-items: center; /* Align vertically */
+    width: 12px;
+    height: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.4);
+}
+
+.help-icon::before {
+    content: "?";
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 12px; /* Aligns vertically */
 }

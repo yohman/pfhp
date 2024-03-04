@@ -51,7 +51,7 @@ These questions, and many more, are revealed through **XaViz**, a visualization 
 
 ## It's not what it looks like: The origins of the data named "Shumon-aratame-cho"
 
-<img src="image-12.png" class="post-image">
+<img src="images/shumon original.png" class="post-image">
 
 <span class="caption">↑ An example of the original document shows a page from Niremata Village, Mino Province, 1638 (Cornell & Hayami, 1986)</span>
 
@@ -92,7 +92,7 @@ A final reason that makes XaViz meaningful is in its longitudinal representation
 <span class="caption">Original aratamecho document (left), BDS (middle), XaViz (right), all showing data for Household #112
 
 ## "Big data" for two villages, from 1716 to 1869
-<img src="image-14.png" width=400>
+<img src="images/niita shimomoriya map.png" width=400>
 
 Of the surviving documents, two villages stand out as having the most complete set of annual coverage. Located in Fukushima Prefecture, Niita Village and Shimomoriya village's combined registry data consists of 118,879 total records. 
 

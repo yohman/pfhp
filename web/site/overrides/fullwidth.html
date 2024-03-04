@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link href="{{ 'main.css'|url }}" rel="stylesheet">
+    <!-- Include any additional CSS styles if needed -->
+    <style>
+        /* Add custom styles for this specific page */
+        .content {
+            width: 100%;
+        }
+        .md-content {
+            padding: 0;
+        }
+        .md-nav {
+            display: none;
+        }
+        .md-toc {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="content">
+            full width yade...
+            <!-- Content of your specific page goes here -->
+
+            <div class="top-container" id="top-container">
+                <div id="info"></div>
+            </div>
+            
+            <div class="viz-container">
+                <div id="visualization"></div>	
+            </div>
+            
+        </div>
+    </main>
+</body>
+</html>

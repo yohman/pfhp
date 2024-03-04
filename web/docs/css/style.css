@@ -1,0 +1,354 @@
+body {
+    /* font-family: 'Courier New', Courier, monospace; */
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+#timedial {
+    display: none;
+}
+/* Add your CSS styles here */
+.household {
+    /* border: 1px solid black; */
+    background-color: white;
+    margin: 5px;
+    /* padding: 5px; */
+    border-bottom: 1px solid gainsboro;
+    border-top: 1px solid gainsboro;
+    /* add shadow */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    font-size: 0.7rem;
+}
+.year {
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 5px;
+    padding: 5px;
+    /* make this div as a side-by-side column */
+    display: inline-block;
+    /* align them to the top */
+    vertical-align: top;
+    /* make the divs the same width */
+    /* width: 200px; */
+}
+.village {
+    /* width:100%; */
+    /* border: 1px solid blue; */
+    background-color: #f0f0f0;
+    margin: 5px;
+    padding: 5px;
+    /* make this div as a side-by-side column */
+    /* display: inline-block; */
+    /* align them to the top */
+    vertical-align: top;
+    /* make the divs the same width */
+    /* width: 45%; */
+
+}
+.ego {
+    /* border: 1px dashed gray; */
+    margin: 5px;
+    padding: 5px;
+}
+h3 {
+    font-size: 0.8rem;
+    font-weight: normal;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+}
+.lifeline {
+    font-size: 0.5rem;
+    font-weight:bolder;
+    font-family: 'Courier New', Courier, monospace;
+}
+.currentyear {
+    font-size: 0.6rem;
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+    color: red;
+}
+#yearDropdown {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    border-color: white;
+    font-size: 2rem;
+    padding: 7px;
+}
+button {
+    font-size: 0.6rem;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 5px;
+}
+.grid-container {
+display: grid;
+grid-template-columns: repeat(4, 20px);
+grid-template-rows: repeat(4, 20px);
+gap: 5px;
+}
+
+.grid-item {
+width: 20px; /* Width of each cell */
+height: 20px; /* Height of each cell */
+text-align: center;
+font-size: 0.6rem;
+line-height: 20px; /* Center text vertically */
+}
+
+.icon {
+    font-size: 2rem;
+}
+.age {
+    font-size:1.2rem;
+}
+.star{
+
+}
+.lifespan{
+    font-size: 0.5rem;
+    font-weight: bolder;
+    color: #333;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.map {
+    padding: 5px;
+    background-color: white;
+    margin: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.viz-container {
+    width: 100%; /* Adjust as needed */
+    overflow-x: auto;
+    white-space: nowrap; /* Prevent wrapping */
+  }
+
+/* 
+  Mini timeline
+*/
+
+.mini-year {
+    /* background-color: #f0f0f0; */
+    display: inline-block;
+    vertical-align: top;
+    font-size: 0.6rem;
+}
+.mini-year-current {
+    display: inline-block;
+    vertical-align: top;
+    border:1px solid red;
+    font-size: 0.6rem;
+}
+
+.mini {
+    width:8px;
+    height:8px;
+    margin: 1px;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+}
+.mini-empty {
+    background-color: rgb(159, 159, 159);
+}
+
+.mini-egoMale {
+    background-color: rgba(87, 120, 164,1);
+}
+.mini-egoFemale {
+    background-color: rgba(209, 97, 93,1);
+}
+
+
+.mini-egoServant {
+    /* border: 1px solid rgba(209, 97, 93,1); */
+    background-color: rgba(184, 176, 172,1);
+    width:5px;
+    height:5px;
+    margin: 1px;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+
+}
+.mini-egoNonkin {
+    /* border: 1px solid rgba(209, 97, 93,1); */
+    background-color: rgba(231, 202, 96,1);
+
+    width:5px;
+    height:5px;
+    margin: 1px;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+
+}
+.minihousehold-year {
+    vertical-align: top;
+    width: 5px;
+    font-size: 0.6rem;
+    overflow: visible;
+}
+.mini-timeline {
+    overflow-x: auto;
+    background-color: white;
+    margin: 5px;
+}
+
+.mini-title {
+    font-size: 0.6rem;
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+}
+.from-village {
+    font-size: 0.6rem;;
+}
+.egoMale {
+    width:120px;
+    height:120px;
+    background-color: rgba(87, 120, 164,0.5);
+    /* background-color: rgba(173, 216, 230, 0.5); */
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+}
+.egoFemale {
+    width:120px;
+    height:120px;
+    background-color: rgba(209, 97, 93,0.5);
+    /* background-color: rgba(240, 128, 128, 0.5); */
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+}
+.egoServant {
+    background-color: rgba(184, 176, 172,0.5);
+    /* background-color: rgba(240, 128, 128, 0.5); */
+    margin: 5px;
+    padding: 5px;
+}
+.egoNonKin {
+    background-color: rgba(231, 202, 96,0.5);
+    /* background-color: rgba(240, 128, 128, 0.5); */
+    margin: 5px;
+    padding: 5px;
+}
+.ego-head {
+    font-size: 0.4rem;
+    font-family: 'Courier New', Courier, monospace;
+    /* margin: 0; */
+}
+
+.ego-head-spouse {
+    font-size: 0.4rem;
+    color: rgba(0, 0, 0,0.8);
+    font-family: 'Courier New', Courier, monospace;
+    /* margin: 0; */
+}
+
+.ego-head-servant {
+    /* font-size: 0.4rem; */
+    background-color: rgb(184, 176, 172);
+    color: rgb(184, 176, 172);
+    /* color: rgba(0, 0, 0,0.5); */
+    width: 100%;
+    height: 100%;
+
+
+
+}
+
+.ego-head-kin {
+    /* font-size: 0.2rem;
+    background-color: #a87c9f;
+    color: #a87c9f; */
+    width: 100%;
+    height: 100%;
+}
+
+.ego-head-nonkin {
+    /* font-size: 0.2rem; */
+    background-color: #e7ca60;
+    color: #e7ca60;
+    width: 100%;
+    height: 100%;
+}
+
+.top-container {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+}
+
+.backButton {
+    margin-bottom: 10px;
+    position: sticky;
+}
+
+.post-image {
+    width: 80%;
+    height: auto;
+    margin: 5px;
+    padding: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.legend {
+    font-size: 0.8rem;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 5px;
+}
+
+
+
+#loadingOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20% auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* CSS for the help icon */
+.help-icon {
+    display: inline-flex; /* Use flexbox */
+    justify-content: center; /* Align horizontally */
+    align-items: center; /* Align vertically */
+    width: 12px;
+    height: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.4);
+}
+
+.help-icon::before {
+    content: "?";
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 12px; /* Aligns vertically */
+}
