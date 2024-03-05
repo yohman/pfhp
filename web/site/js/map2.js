@@ -333,8 +333,20 @@ function createHouseholdMiniTimeline(vil_id,hhid) {
 
 	minitimeline.className 	= 'mini-timeline';
 	minititle.className 	= 'mini-title';
-	minititle.innerHTML 	= 'Household '+hhid+'--▶︎';;
+	minititle.innerHTML 	= 'Household '+hhid+'--▶︎ ';
+
+	// // add a help popup
+	// const helpIcon = document.createElement('span');
+	// helpIcon.className = 'help-icon';
+	// helpIcon.setAttribute('data-bs-toggle', 'tooltip');
+	// helpIcon.setAttribute('data-bs-placement', 'top');
+	// helpIcon.setAttribute('title', householdStats(vil_id,hhid).innerHTML);
+	// minititle.appendChild(helpIcon);
+	// // initialize tooltip
+	// initializeTooltips();
+
 	minitimeline.appendChild(minititle);
+
 
 	// get first and last year from years
 	const firstYear 		= years[0];
@@ -356,10 +368,8 @@ function createHouseholdMiniTimeline(vil_id,hhid) {
 			if (urlParams.has('hhid')) {
 
 				yearContainer.onmouseover = function() {
-					console.log('yearContainer.onmouseover',year);
 					// query all divs in visualization, and find  the div with the same year
 					sameyearDivs = document.querySelectorAll('.year[year="'+year+'"]');
-					console.log('sameyearDivs',sameyearDivs);
 					sameyearDivs.forEach(sameyearDiv => {
 						// ease scroll to the div scroll to top
 						sameyearDiv.scrollIntoView();
@@ -1029,65 +1039,76 @@ function createMiniHousehold(data,current_year,village, household,show_lifeline 
 // ----------------------------------------
 
 function householdStats(vil_id,hhid){
-	// find number of distinct egos with the same vil_id and hhid in the ego data
-	// do so by looping through the every year of the ego data
-	// and checking if the household exists in each year
-	// if it does, add the number of egos in the household to the total
-	// create an array of years from the ego data
+
+	// set default stats
 	const years = Object.keys(ego_df);
-	// create an array for the number of egos
-	egos = [];
+	let householdSize = [];
+	let egoIDs = [];
+	let totalEgos = 0;
+	let distinctEgos = 0;
+	let firstYear = 0;
+	let lastYear = 0;
+	let span = 0;
+
 	// loop through the years
 	for (const year of years) {
 		// if the household exists in the year
 		if (ego_df[parseInt(year)] && ego_df[parseInt(year)][parseInt(vil_id)] && ego_df[parseInt(year)][parseInt(vil_id)][parseInt(hhid)]) {
-			// get the number of egos in the household
-			egos.push(getThirdLevelItems(ego_df[parseInt(year)], vil_id, hhid).length);
+			// get the ego's in the household
+			// egos = getThirdLevelItems(ego_df[parseInt(year)], vil_id, hhid);
+			egos = ego_df[parseInt(year)][vil_id][hhid];
+
+			// get the number of householdSize in the household
+			householdSize.push(egos.length);
+
+			// loop through egos and put the ego in the egoIDs array
+			for (const ego of egos) {
+				egoIDs.push(ego.ego);
+			}
+
+			// if this is the first year, set the first year
+			if (firstYear === 0) {
+				firstYear = year;
+			}
+			// set the last year to the current year
+			lastYear = year;
 		}
 	}
-	// sum the number of egos
-	total = egos.reduce((a, b) => a + b, 0);
+	// sum the number of householdSize
+	totalEgos = householdSize.reduce((a, b) => a + b, 0);
 
-	// find the number of distinct egos
-	// do so by creating a set from the egos array
-	distinct = new Set(egos);
-	// find the size of the set
-	distinct = distinct.size;
+	// get distinctEgos egoIDs
+	distinctEgos = [...new Set(egoIDs)].length;
 
-	// find the number of years the household exists
-	// do so by finding the first year that this household exists
-	// and the last year that this household exists
-	// if the household exists in the year
-	if (ego_df[parseInt(years[0])] && ego_df[parseInt(years[0])][parseInt(vil_id)] && ego_df[parseInt(years[0])][parseInt(vil_id)][parseInt(hhid)]) {
-		// get the first year
-		firstYear = years[0];
+	// span of years
+	span = lastYear - firstYear;
+
+	// get average of values in householdSize array
+	averageHouseholdSize = totalEgos / householdSize.length;
+	// round to 2 decimal places
+	averageHouseholdSize = averageHouseholdSize.toFixed(2);
+
+	// put the data in an object
+	stats = {
+		totalEgos: totalEgos,
+		distinctEgos: distinctEgos,
+		firstYear: firstYear,
+		lastYear: lastYear,
+		span: span,
+		averageHouseholdSize: averageHouseholdSize
 	}
-	// if the household exists in the year
-	if (ego_df[parseInt(years[years.length-1])] && ego_df[parseInt(years[years.length-1])][parseInt(vil_id)] && ego_df[parseInt(years[years.length-1])][parseInt(vil_id)][parseInt(hhid)]) {
-		// get the last year
-		lastYear = years[years.length-1];
-	}
-	// if the first year is the same as the last year
-	if (firstYear === lastYear) {
-		// set the years to the first year
-		years = firstYear;
-	} else {
-		// set the years to the first year to the last year
-		years = firstYear + ' to ' + lastYear;
-	}
+
+	// return the stats in a div
 
 	// create a div for the stats
-	stats = document.createElement('div');
-	stats.className = 'stats';
-	// add the years to the stats
-	stats.innerHTML = 'years: '+years;
+	statsDiv = document.createElement('div');
+	statsDiv.className = 'stats';
+	// add the stats to the div, all in one line
+	statsDiv.innerHTML = 'Total Egos: '+totalEgos+' | Distinct Egos: '+distinctEgos+' | First Year: '+firstYear+' | Last Year: '+lastYear+' | Span: '+span+' | Average Household Size: '+averageHouseholdSize;
 
-	// add the total number of egos to the stats
-	stats.innerHTML = '<br>total: '+total+' egos';
-	// add the number of distinct egos to the stats
-	stats.innerHTML += '<br>distinct: '+distinct+' egos';
 
-	return stats;
+	
+	return statsDiv;
 
 
 }
