@@ -47,14 +47,22 @@ caption {
 
 
 
-<a href="../../" target="_blank"><img src="../../images/XaViz.gif"></a>
+<a href="../../" target="_blank"><img src="../../images/XaViz.jpg"></a>
 
-→ [../../](../../)
+→ [Go to XaViz](../../)
 
 
 What did a household look like for common people in early modern Japan? Were there multiple generations living under one roof? Who assumes the role of household head, how often did people from outside their village come to live with them, and how many servants did each household have?
 
 These questions, and many more, are revealed through **XaViz**, a visualization of a rare digital collection of *Shumon-aratame-cho (SAC)* and *Ninbetsu-aratame-cho (NAC)*, which are the two major sources for the research of historical demography in Japan. XaViz is an interactive visualization tool for longitudinal and comparative inspection, applied to the records of thousands of lives of people. Its intuitive interface will allow us to gain new insights on our history and the resilience of people to socioeconomic and environmental changes.
+
+<!-- ## The family tree
+
+Who are we? The quest to know who we are through our lived histories and those before us through blood relationships has long been a source of intrigue. While modern DNA based analysis has conjured up ideological services such as ancestry.com, the effective visualization of archival written records has been a conundrum that has baffled genealogy studies for quite some time. Genealogy visualizations are centered around the concept of a family tree, prioritizing a single stem—usually represented by an individual and their spouses—and the relationships that are weaved from that genealogical root (Borges, 2019). Such visual approaches begin with an ego, and traverse it's lineage through time. 
+
+We take a different approach by prioritizing the household above the individual. In fact, we consider the village as the top level hierarchy, followed by the household, and then the ego. Doing so adds a spatial dimension allowing us to visualize in/out family migration patterns, compare household structures between and within villages, all through interactive visual representations.
+
+*TBD (Literature review)* -->
 
 ## It's not what it looks like: The origins of the data named "Shumon-aratame-cho"
 
@@ -123,6 +131,9 @@ For the purposes of XaViz, the data for these two villages were extracted from t
 | Niita   |        68,682       |340|3,875|4.24|[33](../../?vil_id=5010130&hhid=6330000)|
 | Shimomoriya |      50,197     |207|2,382|4.46|[23](../../?vil_id=5040310&hhid=4600000)|
 
+## Visual people
+
+How do we convert people represented by calligraphy into modern parlance?
 
 ## Mini-timelines
 
@@ -243,3 +254,4 @@ Cornell, L. L., & Hayami, A. (1986). The Shumon Aratame Cho: Japan’s Populatio
 Kurosu, S., Takahashi, M., & Dong, H. (2021). Thank You, Akira Hayami! The Xavier Database of
 Historical Japan. Historical Life Course Studies, 11, 112–131. https://doi.org/10.51964/hlcs11113
 
+Borges, J. (2019). A contextual family tree visualization design. Information Visualization, 18(4), 439-454. https://doi.org/10.1177/1473871619845095
