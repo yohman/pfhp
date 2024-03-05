@@ -330,6 +330,8 @@ function createHouseholdMiniTimeline(vil_id,hhid) {
 	const years = getYearsByVillage(vil_id);
 	const minitimeline 		= document.createElement('div');
 	const minititle 		= document.createElement('div');
+	// get url parameters
+	urlParams = new URLSearchParams(window.location.search);
 
 	minitimeline.className 	= 'mini-timeline';
 	minititle.className 	= 'mini-title';
@@ -345,6 +347,10 @@ function createHouseholdMiniTimeline(vil_id,hhid) {
 	// // initialize tooltip
 	// initializeTooltips();
 
+	// if this is the household page, show the household stats
+	if (urlParams.has('hhid')) {
+		minititle.appendChild(householdStats(vil_id,hhid));
+	}
 	minitimeline.appendChild(minititle);
 
 
@@ -1049,6 +1055,10 @@ function householdStats(vil_id,hhid){
 	let firstYear = 0;
 	let lastYear = 0;
 	let span = 0;
+	let maleEgoIDs = [];
+	let femaleEgoIDs = [];
+	let nonStemKinEgoIDs = [];
+	let servantEgoIDs = [];
 
 	// loop through the years
 	for (const year of years) {
@@ -1064,6 +1074,21 @@ function householdStats(vil_id,hhid){
 			// loop through egos and put the ego in the egoIDs array
 			for (const ego of egos) {
 				egoIDs.push(ego.ego);
+				// count male and female egos
+				if (ego.nsex === 'M') {
+					maleEgoIDs.push(ego.ego);
+				} else if (ego.nsex === 'F') {
+					femaleEgoIDs.push(ego.ego);
+				}
+				// count non-stem kin
+				if (ego.rel === 4) {
+					nonStemKinEgoIDs.push(ego.ego);
+				}
+				// count servants and non kin
+				if (ego.rel === 5 || ego.rel === 6) {
+					servantEgoIDs.push(ego.ego);
+				}
+
 			}
 
 			// if this is the first year, set the first year
@@ -1079,6 +1104,10 @@ function householdStats(vil_id,hhid){
 
 	// get distinctEgos egoIDs
 	distinctEgos = [...new Set(egoIDs)].length;
+	distinctMaleEgos = [...new Set(maleEgoIDs)].length;
+	distinctFemaleEgos = [...new Set(femaleEgoIDs)].length;
+	distinctNonStemKinEgos = [...new Set(nonStemKinEgoIDs)].length;
+	distinctServantEgos = [...new Set(servantEgoIDs)].length;
 
 	// span of years
 	span = lastYear - firstYear;
@@ -1092,6 +1121,8 @@ function householdStats(vil_id,hhid){
 	stats = {
 		totalEgos: totalEgos,
 		distinctEgos: distinctEgos,
+		distinctMaleEgos: distinctMaleEgos,
+		distinctFemaleEgos: distinctFemaleEgos,
 		firstYear: firstYear,
 		lastYear: lastYear,
 		span: span,
@@ -1104,7 +1135,11 @@ function householdStats(vil_id,hhid){
 	statsDiv = document.createElement('div');
 	statsDiv.className = 'stats';
 	// add the stats to the div, all in one line
-	statsDiv.innerHTML = 'Total Egos: '+totalEgos+' | Distinct Egos: '+distinctEgos+' | First Year: '+firstYear+' | Last Year: '+lastYear+' | Span: '+span+' | Average Household Size: '+averageHouseholdSize;
+	statsDiv.innerHTML = '<span class="legend-key">Total Egos</span>: <span class="legend-value">'+totalEgos+'</span> | <span class="legend-key">Distinct Egos</span>: <span class="legend-value">'+distinctEgos+'</span> | <span class="legend-key">First Year</span>: <span class="legend-value">'+firstYear+'</span> | <span class="legend-key">Last Year</span>: <span class="legend-value">'+lastYear+'</span> | <span class="legend-key">Span:</span> <span class="legend-value">'+span+'</span> | <span class="legend-key">Average Household Size</span>: <span class="legend-value">'+averageHouseholdSize+'</span>';
+
+	// add more stats
+	statsDiv.innerHTML += '<br><img src="images/box-male.jpg" width=15> <span class="legend-value">'+distinctMaleEgos+'</span> <img src="images/box-female.jpg" width=15> <span class="legend-value">'+distinctFemaleEgos;
+	statsDiv.innerHTML += ' <img src="images/box-non-stem-kin.jpg" width=15> <span class="legend-value">'+distinctNonStemKinEgos+'</span> <img src="images/box-servant.jpg" width=15> <span class="legend-value">'+distinctServantEgos;
 
 
 	

@@ -105,6 +105,24 @@ line-height: 20px; /* Center text vertically */
 .star{
 
 }
+.legend-key{
+    font-size: 0.6rem;
+    color: #777;
+}
+.legend-value{
+    font-size: 0.8rem;
+    color: #333;
+    font-weight: bolder;
+}
+.stats{
+    font-size: 0.6rem;
+    /* font-family: 'Courier New', Courier, monospace; */
+    margin: 10px;
+    border-radius: 2px;
+    padding: 5px;
+    background-color: #f0f0f0;
+    line-height: 25px;
+}
 .lifespan{
     font-size: 0.5rem;
     font-weight: bolder;
