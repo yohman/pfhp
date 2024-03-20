@@ -81,7 +81,7 @@ While the original intent of these documents was to abolish Christianity, it is 
 
 ## Original Paper → Microfilm → Digital → Visualization (kind of)
 
-The process of converting analog information into digital data is never easy, often necessitating a painstaking phase of arduous manual data input. While modern technologies like OCR make automation possible, the nature of historical documents in their calligraphic state make this particular collection impossible for machine learning and automation. Fortunately, this archive was handled and digitized by a group of dedicated historians, led by Akira Hayami, founder of historical Japanese demography whose group collected, transcribed, and coded this registry into digital form. 
+The process of converting analog information into digital data is never easy, often necessitating a painstaking phase of arduous manual data input. While modern technologies like OCR make automation possible, the nature of historical documents in their calligraphic state make this particular collection impossible for machine learning and automation. Fortunately, this archive was handled and digitized by a group of historical demographers, led by Akira Hayami, whose group collected, transcribed, and coded this registry into digital form. 
 
 ![alt text](<../images/original shumon 112.jpg>)
 
@@ -245,7 +245,7 @@ Visualizing history through interactive platforms adds dimensions that are not p
 
 ## Acknowledgements
 
-This project is being developed at the [Population and Family History Center](https://www.pfhp-japan.info/) at [Reitaku University](https://www.reitaku-u.ac.jp/), Japan.
+This project is being developed at the [Population and Family History Project](https://www.fl.reitaku-u.ac.jp/pfhp/index-e.html) at [Reitaku University](https://www.reitaku-u.ac.jp/), Japan.
 
 ## Bibliography
 

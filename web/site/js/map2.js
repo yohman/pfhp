@@ -469,7 +469,14 @@ function getVillageInfo(vil_id) {
 		{
 			village_map_html = '';
 		}
-		return '<span style="font-size:1rem">'+from_village.Mura+' '+from_village.Gun+' '+from_village.Kuni+'<br>'+village_map_html+'</span>';
+
+		// translate Mura to english
+		if (from_village.Mura === '仁井田村') {
+			from_village.Mura = 'Niita Village';
+		} else if (from_village.Mura === '下守屋村') {
+			from_village.Mura = 'Shimomoriya Village';
+		}
+		return '<span style="font-size:1rem">'+from_village.Mura+'<br>'+village_map_html+'</span>';
 	}
 }
 
@@ -1135,7 +1142,7 @@ function householdStats(vil_id,hhid){
 	statsDiv = document.createElement('div');
 	statsDiv.className = 'stats';
 	// add the stats to the div, all in one line
-	statsDiv.innerHTML = '<span class="legend-key">Total Egos</span>: <span class="legend-value">'+totalEgos+'</span> | <span class="legend-key">Distinct Egos</span>: <span class="legend-value">'+distinctEgos+'</span> | <span class="legend-key">First Year</span>: <span class="legend-value">'+firstYear+'</span> | <span class="legend-key">Last Year</span>: <span class="legend-value">'+lastYear+'</span> | <span class="legend-key">Span:</span> <span class="legend-value">'+span+'</span> | <span class="legend-key">Average Household Size</span>: <span class="legend-value">'+averageHouseholdSize+'</span>';
+	statsDiv.innerHTML = '<span class="legend-key">Total Egos</span>: <span class="legend-value">'+totalEgos+'</span> <span class="legend-key">Distinct Egos</span>: <span class="legend-value">'+distinctEgos+'</span> <span class="legend-key">First Year</span>: <span class="legend-value">'+firstYear+'</span> <span class="legend-key">Last Year</span>: <span class="legend-value">'+lastYear+'</span> <span class="legend-key">Span:</span> <span class="legend-value">'+span+'</span> <span class="legend-key">Average Household Size</span>: <span class="legend-value">'+averageHouseholdSize+'</span>';
 
 	// add more stats
 	statsDiv.innerHTML += '<br><img src="images/box-male.jpg" width=15> <span class="legend-value">'+distinctMaleEgos+'</span> <img src="images/box-female.jpg" width=15> <span class="legend-value">'+distinctFemaleEgos;
